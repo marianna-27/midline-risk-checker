@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ミッドライン合流リスクチェッカー (3経路対応)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; }
+    </style>
+</head>
+
+<body class="bg-slate-100 text-slate-800 p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-6">
+        
+        <!-- ヘッダー -->
+        <header class="bg-white p-6 rounded-xl shadow-md border-l-8 border-indigo-600">
+            <h1 class="text-2xl font-bold text-indigo-900">🩺 ミッドライン合流リスクチェッカー (3経路対応)</h1>
+            <p class="text-sm text-slate-500 mt-1">メイン輸液と側管2系統（原液・希釈）の合流部における pH・浸透圧変化を計算します。</p>
+        </header>
+
+        <!-- 入力エリア (3カラム) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- メイン輸液設定 -->
+            <div class="bg-white p-6 rounded-xl shadow-md space-y-4 border-t-4 border-blue-400">
+                <h2 class="text-lg font-bold text-slate-700 border-b pb-2">💧 メイン輸液設定</h2>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">投与速度 (mL/h)</label>
+                    <input type="number" id="mainFlow" value="100" min="0" class="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">メイン液 pH</label>
+                    <input type="number" id="mainPh" value="6.0" step="0.1" class="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                    <span class="text-xs text-slate-400">※生食・5%ブドウ糖液 は約 6.0</span>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">メイン液 浸透圧比</label>
+                    <input type="number" id="mainOsm" value="1.0" step="0.1" class="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+            </div>
+
+            <!-- 側管1設定 -->
+            <div class="bg-white p-6 rounded-xl shadow-md space-y-4 border-t-4 border-purple-400">
+                <h2 class="text-lg font-bold text-slate-700 border-b pb-2">💉 側管 1</h2>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">薬剤選択</label>
+                    <select id="drugSelect1" class="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500 outline-none bg-white text-sm"></select>
+                </div>
+                
+                <div id="sideDetail1" class="space-y-4 transition-all">
+                    <div class="p-3 bg-purple-50/50 rounded-lg border border-purple-100 space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-purple-900">溶解・希釈液</label>
+                            <select id="diluentSelect1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-purple-500 outline-none bg-white text-xs">
+                                <option value="none" selected>なし（原液）</option>
+                                <option value="saline">生理食塩液 (pH 6.0/浸透圧比 1.0)</option>
+                                <option value="glucose5">5%ブドウ糖 (pH 4.5/浸透圧比 1.0)</option>
+                                <option value="water">注射用水 (pH 6.0/浸透圧比 0.0)</option>
+                            </select>
+                        </div>
+                        <div id="dilutionAmountArea1" class="grid grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="block text-slate-600 font-medium">薬剤原液 (mL)</label>
+                                <input type="number" id="drugVol1" value="10" min="0.1" step="0.1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-purple-500 outline-none bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 font-medium">希釈液 (mL)</label>
+                                <input type="number" id="diluentVol1" value="90" min="0" step="1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-purple-500 outline-none bg-white">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600">投与速度 (mL/h)</label>
+                        <input type="number" id="sideFlow1" value="0" min="0" class="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500 outline-none">
+                    </div>
+                </div>
+                <div id="drugSingleInfo1" class="p-2 bg-slate-50 rounded text-[11px] space-y-1 text-slate-600 border">なし（未選択）</div>
+            </div>
+
+            <!-- 側管2設定 -->
+            <div class="bg-white p-6 rounded-xl shadow-md space-y-4 border-t-4 border-emerald-400">
+                <div class="flex justify-between items-center border-b pb-2">
+                    <h2 class="text-lg font-bold text-slate-700">💉 側管 2</h2>
+                    <div class="text-xs text-slate-500">※未使用時は「なし」</div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">薬剤選択</label>
+                    <select id="drugSelect2" class="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white text-sm"></select>
+                </div>
+                
+                <div id="sideDetail2" class="space-y-4 transition-all">
+                    <div class="p-3 bg-emerald-50/50 rounded-lg border border-emerald-100 space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-emerald-900">溶解・希釈液</label>
+                            <select id="diluentSelect2" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-emerald-500 outline-none bg-white text-xs">
+                                <option value="none" selected>なし（原液）</option>
+                                <option value="saline">生理食塩液 (pH 6.0/浸透圧比 1.0)</option>
+                                <option value="glucose5">5%ブドウ糖 (pH 4.5/浸透圧比 1.0)</option>
+                                <option value="water">注射用水 (pH 6.0/浸透圧比 0.0)</option>
+                            </select>
+                        </div>
+                        <div id="dilutionAmountArea2" class="grid grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="block text-slate-600 font-medium">薬剤原液 (mL)</label>
+                                <input type="number" id="drugVol2" value="5" min="0.1" step="0.1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 font-medium">希釈液 (mL)</label>
+                                <input type="number" id="diluentVol2" value="45" min="0" step="1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600">投与速度 (mL/h)</label>
+                        <input type="number" id="sideFlow2" value="0" min="0" class="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                    </div>
+                </div>
+                <div id="drugSingleInfo2" class="p-2 bg-slate-50 rounded text-[11px] space-y-1 text-slate-600 border">なし（未選択）</div>
+            </div>
+
+        </div>
+
+        <!-- 判定・シグナル表示エリア -->
+        <div id="riskCard" class="bg-white p-6 rounded-xl shadow-md transition-all duration-300">
+            <div class="flex items-center justify-between border-b pb-4">
+                <div>
+                    <span class="text-xs text-slate-400 font-bold tracking-wider uppercase">3経路 合流部リスク判定</span>
+                    <h3 id="riskTitle" class="text-2xl font-black mt-1">--</h3>
+                </div>
+                <div id="riskBadge" class="px-4 py-2 rounded-full text-lg font-bold text-white bg-slate-400">判定中</div>
+            </div>
+            
+            <p id="riskDescription" class="mt-3 text-sm text-slate-600">--</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <!-- pHカード -->
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <div class="text-xs text-slate-500 font-medium">合流部 予測 pH</div>
+                    <div id="phResult" class="text-3xl font-extrabold text-slate-800 mt-1">--</div>
+                    <div class="text-xs text-slate-400 mt-1">基準域: 4.1 ～ 9.0</div>
+                </div>
+
+                <!-- 浸透圧カード -->
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <div class="text-xs text-slate-500 font-medium">合流部 予測 浸透圧比</div>
+                    <div id="osmResult" class="text-3xl font-extrabold text-slate-800 mt-1">--</div>
+                    <div class="text-xs text-slate-400 mt-1">基準値: 3.0 以下</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 薬剤データ
+        const drugData = [
+          {"id_name": "(ビタミンC)アスコルビン酸注[500mg_5mL]", "ph_raw": "5.6～7.4", "ph_min": 5.6, "ph_max": 7.4, "osm_raw": "3.5", "osm_val": 3.5, "default_vol": 5},
+          {"id_name": "(小児)アセリオ静注液[1000mg_100mL]", "ph_raw": "5.0~6.0", "ph_min": 5.0, "ph_max": 6.0, "osm_raw": "1.0", "osm_val": 1.0, "default_vol": 100},
+          {"id_name": "(小児)アルプロスタジル注[5μg_1mL]", "ph_min": 4.5, "ph_max": 6.0, "ph_raw": "4.5~6.0", "osm_val": 1.0, "osm_raw": "1.0", "default_vol": 1},
+          {"id_name": "(小児)アレビアチン注[250mg_5mL]", "ph_raw": "12.0", "ph_min": 12.0, "ph_max": 12.0, "osm_raw": "29.0", "osm_val": 29.0, "default_vol": 5},
+          {"id_name": "(小児)ドパミン点滴静注[100mg_5mL]【DOA】", "ph_raw": "3.0〜5.0", "ph_min": 3.0, "ph_max": 5.0, "osm_raw": "0.7", "osm_val": 0.7, "default_vol": 5},
+          {"id_name": "(小児)ドブタミン点滴静注[100mg_5mL]【DOB】", "ph_raw": "2.5～3.5", "ph_min": 2.5, "ph_max": 3.5, "osm_raw": "0.75", "osm_val": 0.75, "default_vol": 5},
+          {"id_name": "(小児)ニカルジピン注射液[10mg_10mL]", "ph_min": 3.0, "ph_max": 4.5, "ph_raw": "3.0～4.5", "osm_val": 1.0, "osm_raw": "1.0", "default_vol": 10},
+          {"id_name": "(小児)ニカルジピン注射液[2mg_2mL]", "ph_raw": "3.0〜4.5", "ph_min": 3.0, "ph_max": 4.5, "osm_raw": "1.0", "osm_val": 1.0, "default_vol": 2},
+          {"id_name": "(小児)フロセミド注[20mg_2mL]", "ph_min": 8.6, "ph_max": 9.6, "ph_raw": "8.6～9.6", "osm_val": 1.0, "osm_raw": "1.0", "default_vol": 2},
+          {"id_name": "(小児)ミダゾラム注射液[10mg_2mL]", "ph_min": 2.8, "ph_max": 3.8, "ph_raw": "2.8～3.8", "osm_val": 1.0, "osm_raw": "1.0", "default_vol": 2}
+        ];
+
+        const DILUENT_SPECS = {
+            none: { name: "なし", ph: null, osm: null },
+            saline: { name: "生食", ph: 6.0, osm: 1.0 },
+            glucose5: { name: "5%ツッカー", ph: 4.5, osm: 1.0 },
+            water: { name: "注水", ph: 6.0, osm: 0.0 }
+        };
+
+        // セレクトボックスの初期化（デフォルトは「なし」）
+        function initSelect(selectElement) {
+            const noneOption = document.createElement('option');
+            noneOption.value = "none";
+            noneOption.textContent = "なし（未選択）";
+            noneOption.selected = true;
+            selectElement.appendChild(noneOption);
+
+            drugData.forEach((drug, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = drug.id_name.split('[')[0].replace('(小児)', '👶 ');
+                selectElement.appendChild(option);
+            });
+        }
+
+        initSelect(document.getElementById('drugSelect1'));
+        initSelect(document.getElementById('drugSelect2'));
+
+        // DOM要素の取得ヘルパー
+        function getSideElements(idx) {
+            return {
+                drugSel: document.getElementById(`drugSelect${idx}`),
+                dilSel: document.getElementById(`diluentSelect${idx}`),
+                drugVol: document.getElementById(`drugVol${idx}`),
+                dilVol: document.getElementById(`diluentVol${idx}`),
+                flow: document.getElementById(`sideFlow${idx}`),
+                info: document.getElementById(`drugSingleInfo${idx}`),
+                area: document.getElementById(`dilutionAmountArea${idx}`),
+                detailArea: document.getElementById(`sideDetail${idx}`)
+            };
+        }
+
+        const side1 = getSideElements(1);
+        const side2 = getSideElements(2);
+        const mainFlowInput = document.getElementById('mainFlow');
+        const mainPhInput = document.getElementById('mainPh');
+        const mainOsmInput = document.getElementById('mainOsm');
+
+        // UI切り替えとイベント設定
+        [side1, side2].forEach(side => {
+            const updateUIState = () => {
+                const isNoneDrug = side.drugSel.value === 'none';
+                // 薬剤が「なし」の場合、側管設定全体をグレーアウト
+                side.detailArea.classList.toggle('opacity-40', isNoneDrug);
+                side.detailArea.classList.toggle('pointer-events-none', isNoneDrug);
+
+                // 溶解・希釈液が「なし」の場合、原液・希釈量領域をグレーアウト
+                const isNoneDiluent = side.dilSel.value === 'none';
+                side.area.classList.toggle('opacity-40', isNoneDiluent);
+                side.area.classList.toggle('pointer-events-none', isNoneDiluent);
+            };
+
+            side.drugSel.addEventListener('change', () => {
+                if (side.drugSel.value !== 'none') {
+                    side.drugVol.value = drugData[side.drugSel.value].default_vol;
+                    if (parseFloat(side.flow.value) === 0) {
+                        side.flow.value = 10; // 薬剤選択時に投与速度の初期値を適量セット
+                    }
+                } else {
+                    side.flow.value = 0;
+                }
+                updateUIState();
+                updateCalculation();
+            });
+
+            side.dilSel.addEventListener('change', () => {
+                updateUIState();
+                updateCalculation();
+            });
+
+            [side.drugVol, side.dilVol, side.flow].forEach(input => input.addEventListener('input', updateCalculation));
+            
+            updateUIState();
+        });
+
+        [mainFlowInput, mainPhInput, mainOsmInput].forEach(i => i.addEventListener('input', updateCalculation));
+
+        // 側管1系統分の計算関数
+        function calcSideSpecs(side) {
+            if (side.drugSel.value === 'none') {
+                return { flow: 0 };
+            }
+
+            const flow = parseFloat(side.flow.value) || 0;
+            if (flow === 0) return { flow: 0 };
+
+            const drug = drugData[side.drugSel.value];
+            const dilKey = side.dilSel.value;
+            const dilSpec = DILUENT_SPECS[dilKey];
+            const drugVol = parseFloat(side.drugVol.value) || 0;
+            const dilVol = (dilKey === 'none') ? 0 : (parseFloat(side.dilVol.value) || 0);
+            const totalVol = drugVol + dilVol;
+
+            if (totalVol === 0) return { flow: 0 };
+
+            let phMin, phMax, osm, hMin, hMax;
+
+            if (dilKey === 'none' || dilVol === 0) {
+                phMin = drug.ph_min; phMax = drug.ph_max; osm = drug.osm_val;
+                hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax);
+                side.info.innerHTML = `<strong>原液:</strong> pH ${drug.ph_raw} | 浸透圧比 ${drug.osm_raw}`;
+            } else {
+                const hDrugMin = Math.pow(10, -drug.ph_min);
+                const hDrugMax = Math.pow(10, -drug.ph_max);
+                const hDil = Math.pow(10, -dilSpec.ph);
+
+                const hMixMax = (hDrugMin * drugVol + hDil * dilVol) / totalVol;
+                const hMixMin = (hDrugMax * drugVol + hDil * dilVol) / totalVol;
+                
+                phMin = Math.min(-Math.log10(hMixMax), -Math.log10(hMixMin));
+                phMax = Math.max(-Math.log10(hMixMax), -Math.log10(hMixMin));
+                hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax);
+                osm = (drug.osm_val * drugVol + dilSpec.osm * dilVol) / totalVol;
+
+                side.info.innerHTML = `
+                    <div><strong>原液:</strong> pH ${drug.ph_raw} | 浸透圧比 ${drug.osm_raw}</div>
+                    <div class="mt-1 pt-1 border-t border-slate-200 text-indigo-800">
+                        希釈後予測: pH <strong>${phMin.toFixed(2)} ～ ${phMax.toFixed(2)}</strong> | 浸透圧比 <strong>${osm.toFixed(2)}</strong>
+                    </div>`;
+            }
+            return { flow, hMin, hMax, osm };
+        }
+
+        // メイン計算処理
+        function updateCalculation() {
+            const mainFlow = parseFloat(mainFlowInput.value) || 0;
+            const mainPh = parseFloat(mainPhInput.value) || 6.0;
+            const mainOsm = parseFloat(mainOsmInput.value) || 1.0;
+            const hMain = Math.pow(10, -mainPh);
+
+            const s1 = calcSideSpecs(side1);
+            if (side1.drugSel.value === 'none') {
+                side1.info.innerHTML = "なし（未選択）";
+            } else if (s1.flow === 0) {
+                side1.info.innerHTML = "停止中 (流量 0)";
+            }
+            
+            const s2 = calcSideSpecs(side2);
+            if (side2.drugSel.value === 'none') {
+                side2.info.innerHTML = "なし（未選択）";
+            } else if (s2.flow === 0) {
+                side2.info.innerHTML = "停止中 (流量 0)";
+            }
+
+            const totalFlow = mainFlow + s1.flow + s2.flow;
+
+            if (totalFlow === 0) {
+                document.getElementById('phResult').textContent = "--";
+                document.getElementById('osmResult').textContent = "--";
+                return;
+            }
+
+            // 合流部の [H+] 加重平均 (3経路)
+            let totalHMixMax = (hMain * mainFlow);
+            let totalHMixMin = (hMain * mainFlow);
+            let totalOsmMix = (mainOsm * mainFlow);
+
+            if (s1.flow > 0) {
+                totalHMixMax += (s1.hMin * s1.flow);
+                totalHMixMin += (s1.hMax * s1.flow);
+                totalOsmMix += (s1.osm * s1.flow);
+            }
+            if (s2.flow > 0) {
+                totalHMixMax += (s2.hMin * s2.flow);
+                totalHMixMin += (s2.hMax * s2.flow);
+                totalOsmMix += (s2.osm * s2.flow);
+            }
+
+            const mixPhWorst = -Math.log10(totalHMixMax / totalFlow);
+            const mixPhBest = -Math.log10(totalHMixMin / totalFlow);
+            
+            const finalPhMin = Math.min(mixPhWorst, mixPhBest);
+            const finalPhMax = Math.max(mixPhWorst, mixPhBest);
+            const finalOsm = totalOsmMix / totalFlow;
+
+            // 画面反映
+            const phStr = (finalPhMin.toFixed(2) === finalPhMax.toFixed(2)) ? finalPhMin.toFixed(2) : `${finalPhMin.toFixed(2)} ～ ${finalPhMax.toFixed(2)}`;
+            document.getElementById('phResult').textContent = phStr;
+            document.getElementById('osmResult').textContent = finalOsm.toFixed(2);
+
+            // リスク判定
+            const riskTitle = document.getElementById('riskTitle');
+            const riskBadge = document.getElementById('riskBadge');
+            const riskDesc = document.getElementById('riskDescription');
+            const riskCard = document.getElementById('riskCard');
+
+            let reasons = [];
+            let isDanger = false, isWarning = false;
+
+            if (finalPhMin < 4.1) { isDanger = true; reasons.push(`強酸性 (${finalPhMin.toFixed(2)})`); }
+            if (finalPhMax > 9.0) { isDanger = true; reasons.push(`強アルカリ (${finalPhMax.toFixed(2)})`); }
+            if (finalOsm > 3.0) { isDanger = true; reasons.push(`高浸透圧 (${finalOsm.toFixed(2)})`); }
+
+            if (!isDanger) {
+                if (finalPhMin < 5.0 || finalPhMax > 8.0 || finalOsm > 2.0) {
+                    isWarning = true; reasons.push("適正領域（pH 5.0〜8.0 / 浸透圧比 2.0以下）外");
+                }
+            }
+
+            if (isDanger) {
+                riskTitle.textContent = "🔴 【警告】血管障害リスク：高";
+                riskTitle.className = "text-2xl font-black mt-1 text-rose-600";
+                riskBadge.textContent = "🔴 警告"; riskBadge.className = "px-4 py-2 rounded-full text-sm font-bold text-white bg-rose-600";
+                riskDesc.innerHTML = `<span class='font-bold text-rose-800'>ミッドライン/末梢投与は非推奨。</span> 理由: ${reasons.join(", ")}`;
+                riskCard.className = "bg-white p-6 rounded-xl shadow-md border-2 border-rose-300";
+            } else if (isWarning) {
+                riskTitle.textContent = "🟡 【注意】血管障害リスク：あり";
+                riskTitle.className = "text-2xl font-black mt-1 text-amber-600";
+                riskBadge.textContent = "🟡 注意"; riskBadge.className = "px-4 py-2 rounded-full text-sm font-bold text-white bg-amber-500";
+                riskDesc.innerHTML = `<span class='font-bold text-amber-800'>慎重投与。局所観察を強化。</span> 理由: ${reasons.join(", ")}`;
+                riskCard.className = "bg-white p-6 rounded-xl shadow-md border-2 border-amber-300";
+            } else {
+                riskTitle.textContent = "🔵 安全域内";
+                riskTitle.className = "text-2xl font-black mt-1 text-emerald-600";
+                riskBadge.textContent = "🔵 安全"; riskBadge.className = "px-4 py-2 rounded-full text-sm font-bold text-white bg-emerald-600";
+                riskDesc.textContent = "3経路合流後の予測pH・浸透圧は安全域内です。";
+                riskCard.className = "bg-white p-6 rounded-xl shadow-md border-2 border-emerald-300";
+            }
+        }
+
+        // 初期計算実行
+        updateCalculation();
+    </script>
+</body>
+</html>
