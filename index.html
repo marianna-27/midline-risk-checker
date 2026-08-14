@@ -180,7 +180,7 @@
             }
         }
 
-        // セレクトボックスの初期化（デフォルトは「なし」）
+        // セレクトボックスの初期化（エクセルの完全表記を維持）
         function initSelect(selectElement) {
             selectElement.innerHTML = ""; // 初期化
             const noneOption = document.createElement('option');
@@ -192,7 +192,8 @@
             drugData.forEach((drug, index) => {
                 const option = document.createElement('option');
                 option.value = index;
-                option.textContent = drug.id_name.split('[')[0].replace('(小児)', '👶 ');
+                // ✅ 文字列カットせずエクセルのフル表記をそのまま表示
+                option.textContent = drug.id_name;
                 selectElement.appendChild(option);
             });
         }
