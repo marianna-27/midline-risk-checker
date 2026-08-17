@@ -351,6 +351,240 @@
     "default_vol": 5.0
   },
   {
+    "id_name": "ACD-A液［500ｍL］",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "ALS用ラジカット点滴静注バッグ[30mg_100mL]-科限定-",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "A型インフルエンザHAワクチン H1N1｢S北研｣シリンジ[0.5mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "A型インフルエンザHAワクチン H1N1｢ビケン｣[1mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "A型インフルエンザHAワクチン H1N1｢化血研｣[10mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "A型インフルエンザHAワクチン H1N1｢北研｣[1mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "A型インフルエンザHAワクチン H1N1｢生研｣[1mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "DTビック(沈降ジフテリア破傷風混合トキソイド)[0.1mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "Dドライ透析剤2.75S",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "EOB･プリモビスト注シリンジ[10mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "HMG注射用｢F｣[150単位]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "HMG注射用｢F｣[75単位]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "JCOG2101Cアブラキサン点滴静注用[100mg]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "KCL注キット「テルモ」[20mEq_20mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "LH－RH注｢ニプロ｣[0.1mg_1mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "uFSH注用｢あすか｣[150単位]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "uFSH注用｢あすか｣[75単位]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "【禁静注】フェノバール注射液[100mg_1mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "【禁髄腔内】エクザール[10mg]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "【禁髄腔内】オンコビン注射用[1mg]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "【禁髄腔内】ロゼウス静注液[10mg_1mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "【禁髄腔内】ロゼウス静注液[40mg_4mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "【禁髄腔内】注射用フィルデシン[1mg]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "【禁髄腔内】注射用フィルデシン[3mg]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "【要希釈】アスパラギン酸カリウム注キット｢テルモ｣[10mEq_10mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "【要希釈】リン酸Na補正液[10mmol_20mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
     "id_name": "アレンドロン酸点滴静注バッグ｢HK｣[900μg_100mL]",
     "ph_raw": "6.0",
     "ph_min": 6.0,
