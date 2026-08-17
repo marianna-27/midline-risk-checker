@@ -585,6 +585,15 @@
     "default_vol": 5.0
   },
   {
+    "id_name": "【要希釈】塩化ナトリウム[10%20mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
     "id_name": "アレンドロン酸点滴静注バッグ｢HK｣[900μg_100mL]",
     "ph_raw": "6.0",
     "ph_min": 6.0,
