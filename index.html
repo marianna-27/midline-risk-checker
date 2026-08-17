@@ -149,11 +149,36 @@
                     <div class="text-xs text-slate-400 mt-1">基準値: 3.0 以下</div>
                 </div>
             </div>
+
+            <!-- 計算過程を見るボタン -->
+            <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end">
+                <button id="openCalcModal" class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-sm rounded-lg transition-colors flex items-center space-x-2">
+                    <span>📊 計算過程・内訳の詳細を見る</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ポップアップ（モーダル） -->
+    <div id="calcModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden">
+            <!-- モーダルヘッダー -->
+            <div class="p-4 bg-slate-800 text-white flex justify-between items-center">
+                <h3 class="font-bold text-lg flex items-center gap-2">📊 合流部 pH・浸透圧 計算過程</h3>
+                <button id="closeCalcModal" class="text-slate-400 hover:text-white text-2xl font-bold px-2">&times;</button>
+            </div>
+            <!-- モーダルコンテンツ -->
+            <div id="calcModalContent" class="p-6 overflow-y-auto space-y-6 text-sm text-slate-700">
+                <!-- JSで動的に追加されます -->
+            </div>
+            <!-- モーダルフッター -->
+            <div class="p-4 bg-slate-50 border-t text-right">
+                <button id="closeCalcModalBtn" class="px-5 py-2 bg-slate-600 hover:bg-slate-700 text-white font-bold rounded-lg text-sm">閉じる</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // 薬剤データを保持する配列
         let drugData = [];
 
         const DILUENT_SPECS = {
@@ -163,29 +188,25 @@
             water: { name: "注水", ph: 6.0, osm: 0.0 }
         };
 
-        // 外部の drugs_data.json を自動で読み込む関数
         async function loadDrugData() {
             try {
-                // 【修正箇所】キャッシュ対策：URLの末尾にタイムスタンプを付与して常に最新のJSONを読み込む
                 const cacheBuster = new Date().getTime();
                 const response = await fetch(`drugs_data.json?t=${cacheBuster}`);
                 
                 if (!response.ok) throw new Error('Network response was not ok');
                 drugData = await response.json();
                 
-                // ドロップダウンリストを初期化
                 initSelect(document.getElementById('drugSelect1'));
                 initSelect(document.getElementById('drugSelect2'));
                 updateCalculation();
             } catch (error) {
                 console.error('薬剤データの読み込みに失敗しました:', error);
-                alert('drugs_data.json の読み込みに失敗しました。GitHub上にファイルが存在するか確認してください。');
+                alert('drugs_data.json の読み込みに失敗しました。');
             }
         }
 
-        // セレクトボックスの初期化（エクセルの完全表記を維持）
         function initSelect(selectElement) {
-            selectElement.innerHTML = ""; // 初期化
+            selectElement.innerHTML = "";
             const noneOption = document.createElement('option');
             noneOption.value = "none";
             noneOption.textContent = "なし（未選択）";
@@ -200,7 +221,6 @@
             });
         }
 
-        // DOM要素の取得ヘルパー
         function getSideElements(idx) {
             return {
                 drugSel: document.getElementById(`drugSelect${idx}`),
@@ -220,7 +240,12 @@
         const mainPhInput = document.getElementById('mainPh');
         const mainOsmInput = document.getElementById('mainOsm');
 
-        // UI切り替えとイベント設定
+        // モーダルの開閉イベント
+        const calcModal = document.getElementById('calcModal');
+        document.getElementById('openCalcModal').addEventListener('click', () => calcModal.classList.remove('hidden'));
+        document.getElementById('closeCalcModal').addEventListener('click', () => calcModal.classList.add('hidden'));
+        document.getElementById('closeCalcModalBtn').addEventListener('click', () => calcModal.classList.add('hidden'));
+
         [side1, side2].forEach(side => {
             const updateUIState = () => {
                 const isNoneDrug = side.drugSel.value === 'none';
@@ -234,11 +259,8 @@
 
             side.drugSel.addEventListener('change', () => {
                 if (side.drugSel.value !== 'none') {
-                    // データ欠損時も考慮して default_vol が無ければ 10 をセット
                     side.drugVol.value = drugData[side.drugSel.value].default_vol || 10;
-                    if (parseFloat(side.flow.value) === 0) {
-                        side.flow.value = 10;
-                    }
+                    if (parseFloat(side.flow.value) === 0) side.flow.value = 10;
                 } else {
                     side.flow.value = 0;
                 }
@@ -252,20 +274,16 @@
             });
 
             [side.drugVol, side.dilVol, side.flow].forEach(input => input.addEventListener('input', updateCalculation));
-            
             updateUIState();
         });
 
         [mainFlowInput, mainPhInput, mainOsmInput].forEach(i => i.addEventListener('input', updateCalculation));
 
-        // 側管1系統分の計算関数
         function calcSideSpecs(side) {
-            if (side.drugSel.value === 'none' || drugData.length === 0) {
-                return { flow: 0 };
-            }
+            if (side.drugSel.value === 'none' || drugData.length === 0) return { flow: 0, name: "未選択" };
 
             const flow = parseFloat(side.flow.value) || 0;
-            if (flow === 0) return { flow: 0 };
+            if (flow === 0) return { flow: 0, name: drugData[side.drugSel.value].id_name };
 
             const drug = drugData[side.drugSel.value];
             const dilKey = side.dilSel.value;
@@ -274,11 +292,9 @@
             const dilVol = (dilKey === 'none') ? 0 : (parseFloat(side.dilVol.value) || 0);
             const totalVol = drugVol + dilVol;
 
-            if (totalVol === 0) return { flow: 0 };
+            if (totalVol === 0) return { flow: 0, name: drug.id_name };
 
             let phMin, phMax, osm, hMin, hMax;
-            
-            // 安全対策：JSONデータが欠損している場合のフォールバック値
             const dPhMin = drug.ph_min || 6.0;
             const dPhMax = drug.ph_max || 6.0;
             const dOsm = drug.osm_val || 1.0;
@@ -308,10 +324,9 @@
                         希釈後予測: pH <strong>${phMin.toFixed(2)} ～ ${phMax.toFixed(2)}</strong> | 浸透圧比 <strong>${osm.toFixed(2)}</strong>
                     </div>`;
             }
-            return { flow, hMin, hMax, osm };
+            return { flow, phMin, phMax, hMin, hMax, osm, name: drug.id_name, isDiluted: (dilKey !== 'none' && dilVol > 0) };
         }
 
-        // メイン計算処理
         function updateCalculation() {
             const mainFlow = parseFloat(mainFlowInput.value) || 0;
             const mainPh = parseFloat(mainPhInput.value) || 6.0;
@@ -319,18 +334,12 @@
             const hMain = Math.pow(10, -mainPh);
 
             const s1 = calcSideSpecs(side1);
-            if (side1.drugSel.value === 'none') {
-                side1.info.innerHTML = "なし（未選択）";
-            } else if (s1.flow === 0) {
-                side1.info.innerHTML = "停止中 (流量 0)";
-            }
-            
+            if (side1.drugSel.value === 'none') side1.info.innerHTML = "なし（未選択）";
+            else if (s1.flow === 0) side1.info.innerHTML = "停止中 (流量 0)";
+
             const s2 = calcSideSpecs(side2);
-            if (side2.drugSel.value === 'none') {
-                side2.info.innerHTML = "なし（未選択）";
-            } else if (s2.flow === 0) {
-                side2.info.innerHTML = "停止中 (流量 0)";
-            }
+            if (side2.drugSel.value === 'none') side2.info.innerHTML = "なし（未選択）";
+            else if (s2.flow === 0) side2.info.innerHTML = "停止中 (流量 0)";
 
             const totalFlow = mainFlow + s1.flow + s2.flow;
 
@@ -340,7 +349,6 @@
                 return;
             }
 
-            // 合流部の [H+] 加重平均 (3経路)
             let totalHMixMax = (hMain * mainFlow);
             let totalHMixMin = (hMain * mainFlow);
             let totalOsmMix = (mainOsm * mainFlow);
@@ -363,7 +371,7 @@
             const finalPhMax = Math.max(mixPhWorst, mixPhBest);
             const finalOsm = totalOsmMix / totalFlow;
 
-            // 画面反映
+            // 画面表示
             const phStr = (finalPhMin.toFixed(2) === finalPhMax.toFixed(2)) ? finalPhMin.toFixed(2) : `${finalPhMin.toFixed(2)} ～ ${finalPhMax.toFixed(2)}`;
             document.getElementById('phResult').textContent = phStr;
             document.getElementById('osmResult').textContent = finalOsm.toFixed(2);
@@ -383,7 +391,7 @@
 
             if (!isDanger) {
                 if (finalPhMin < 5.0 || finalPhMax > 8.0 || finalOsm > 2.0) {
-                    isWarning = true; reasons.push("適正領域（pH 5.0〜8.0 / 浸透圧比 2.0以下）外");
+                    isWarning = true; reasons.push("適正領域外");
                 }
             }
 
@@ -406,9 +414,52 @@
                 riskDesc.textContent = "3経路合流後の予測pH・浸透圧は安全域内です。";
                 riskCard.className = "bg-white p-6 rounded-xl shadow-md border-2 border-emerald-300";
             }
+
+            // モーダル（ポップアップ）内のコンテンツ生成
+            renderModalDetails({ mainFlow, mainPh, mainOsm, s1, s2, totalFlow, finalPhMin, finalPhMax, finalOsm });
         }
 
-        // ページロード時に JSON データを読み込む
+        // 計算詳細をポップアップ内に描画する関数
+        function renderModalDetails(data) {
+            const container = document.getElementById('calcModalContent');
+            
+            let html = `
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                    <div class="font-bold text-blue-900 border-b pb-1 mb-2">1. 各系統の流出スペック</div>
+                    <ul class="space-y-1 text-xs">
+                        <li><strong>メイン輸液:</strong> 流量 ${data.mainFlow} mL/h | pH ${data.mainPh} | 浸透圧比 ${data.mainOsm}</li>
+                        <li><strong>側管 1 (${data.s1.name}):</strong> ${data.s1.flow > 0 ? `流量 ${data.s1.flow} mL/h | pH ${data.s1.phMin.toFixed(2)}～${data.s1.phMax.toFixed(2)} | 浸透圧比 ${data.s1.osm.toFixed(2)} ${data.s1.isDiluted ? '(※希釈後)' : ''}` : '停止/未使用'}</li>
+                        <li><strong>側管 2 (${data.s2.name}):</strong> ${data.s2.flow > 0 ? `流量 ${data.s2.flow} mL/h | pH ${data.s2.phMin.toFixed(2)}～${data.s2.phMax.toFixed(2)} | 浸透圧比 ${data.s2.osm.toFixed(2)} ${data.s2.isDiluted ? '(※希釈後)' : ''}` : '停止/未使用'}</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-2">
+                    <div class="font-bold text-slate-800 border-b pb-1">2. 合流部 全流量の計算</div>
+                    <div class="text-xs">
+                        全流量 $V_{\\text{total}} = ${data.mainFlow} + ${data.s1.flow} + ${data.s2.flow} = \\mathbf{${data.totalFlow}\\text{ mL/h}}$
+                    </div>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200 space-y-2">
+                    <div class="font-bold text-purple-900 border-b pb-1">3. pH（水素イオン濃度加重平均）の計算原理</div>
+                    <p class="text-xs text-purple-800">pHは算術平均（単純な足し算の平均）ができません。水素イオン濃度 $[H^+] = 10^{-\\text{pH}}$ を求め、流量で重み付けした加重平均を行ってから $-\\log_{10}$ でpHに戻します。</p>
+                    <div class="p-2 bg-white rounded border text-xs font-mono space-y-1">
+                        <div>合流部 pH 予測結果: <strong>${data.finalPhMin.toFixed(2)} ～ ${data.finalPhMax.toFixed(2)}</strong></div>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-200 space-y-2">
+                    <div class="font-bold text-emerald-900 border-b pb-1">4. 浸透圧比の加重平均計算</div>
+                    <div class="text-xs text-emerald-800">浸透圧は各液体の浸透圧比と流量の掛け合わせで直接加重平均を算出します。</div>
+                    <div class="p-2 bg-white rounded border text-xs font-mono">
+                        合流部 浸透圧比: <strong>${data.finalOsm.toFixed(2)}</strong>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
         window.addEventListener('DOMContentLoaded', loadDrugData);
     </script>
 </body>
