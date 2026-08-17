@@ -166,7 +166,10 @@
         // 外部の drugs_data.json を自動で読み込む関数
         async function loadDrugData() {
             try {
-                const response = await fetch('drugs_data.json');
+                // 【修正箇所】キャッシュ対策：URLの末尾にタイムスタンプを付与して常に最新のJSONを読み込む
+                const cacheBuster = new Date().getTime();
+                const response = await fetch(`drugs_data.json?t=${cacheBuster}`);
+                
                 if (!response.ok) throw new Error('Network response was not ok');
                 drugData = await response.json();
                 
@@ -192,7 +195,6 @@
             drugData.forEach((drug, index) => {
                 const option = document.createElement('option');
                 option.value = index;
-                // ✅ 文字列カットせずエクセルのフル表記をそのまま表示
                 option.textContent = drug.id_name;
                 selectElement.appendChild(option);
             });
@@ -232,7 +234,8 @@
 
             side.drugSel.addEventListener('change', () => {
                 if (side.drugSel.value !== 'none') {
-                    side.drugVol.value = drugData[side.drugSel.value].default_vol;
+                    // データ欠損時も考慮して default_vol が無ければ 10 をセット
+                    side.drugVol.value = drugData[side.drugSel.value].default_vol || 10;
                     if (parseFloat(side.flow.value) === 0) {
                         side.flow.value = 10;
                     }
@@ -274,14 +277,21 @@
             if (totalVol === 0) return { flow: 0 };
 
             let phMin, phMax, osm, hMin, hMax;
+            
+            // 安全対策：JSONデータが欠損している場合のフォールバック値
+            const dPhMin = drug.ph_min || 6.0;
+            const dPhMax = drug.ph_max || 6.0;
+            const dOsm = drug.osm_val || 1.0;
+            const dPhRaw = drug.ph_raw || String(dPhMin);
+            const dOsmRaw = drug.osm_raw || String(dOsm);
 
             if (dilKey === 'none' || dilVol === 0) {
-                phMin = drug.ph_min; phMax = drug.ph_max; osm = drug.osm_val;
+                phMin = dPhMin; phMax = dPhMax; osm = dOsm;
                 hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax);
-                side.info.innerHTML = `<strong>原液:</strong> pH ${drug.ph_raw} | 浸透圧比 ${drug.osm_raw}`;
+                side.info.innerHTML = `<strong>原液:</strong> pH ${dPhRaw} | 浸透圧比 ${dOsmRaw}`;
             } else {
-                const hDrugMin = Math.pow(10, -drug.ph_min);
-                const hDrugMax = Math.pow(10, -drug.ph_max);
+                const hDrugMin = Math.pow(10, -dPhMin);
+                const hDrugMax = Math.pow(10, -dPhMax);
                 const hDil = Math.pow(10, -dilSpec.ph);
 
                 const hMixMax = (hDrugMin * drugVol + hDil * dilVol) / totalVol;
@@ -290,10 +300,10 @@
                 phMin = Math.min(-Math.log10(hMixMax), -Math.log10(hMixMin));
                 phMax = Math.max(-Math.log10(hMixMax), -Math.log10(hMixMin));
                 hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax);
-                osm = (drug.osm_val * drugVol + dilSpec.osm * dilVol) / totalVol;
+                osm = (dOsm * drugVol + dilSpec.osm * dilVol) / totalVol;
 
                 side.info.innerHTML = `
-                    <div><strong>原液:</strong> pH ${drug.ph_raw} | 浸透圧比 ${drug.osm_raw}</div>
+                    <div><strong>原液:</strong> pH ${dPhRaw} | 浸透圧比 ${dOsmRaw}</div>
                     <div class="mt-1 pt-1 border-t border-slate-200 text-indigo-800">
                         希釈後予測: pH <strong>${phMin.toFixed(2)} ～ ${phMax.toFixed(2)}</strong> | 浸透圧比 <strong>${osm.toFixed(2)}</strong>
                     </div>`;
