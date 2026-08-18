@@ -594,6 +594,402 @@
     "default_vol": 20.0
   },
   {
+    "id_name": "【要希釈】硫酸Mg補正液[20mEq_20mL]",
+    "ph_raw": "5.5~7.0",
+    "ph_min": 5.5,
+    "ph_max": 7.0,
+    "osm_raw": "2",
+    "osm_val": 2.0,
+    "default_vol": 20.0
+  },
+  {
+    "id_name": "アイマービー点滴静注[300mg_1.62mL]",
+    "ph_raw": "5.5~6.5",
+    "ph_min": 5.5,
+    "ph_max": 6.5,
+    "osm_raw": "2.5",
+    "osm_val": 2.5,
+    "default_vol": 100.0
+  },
+  {
+    "id_name": "アイマービー点滴静注［1200mg_6.5mL］",
+    "ph_raw": "5.5〜6.5",
+    "ph_min": 5.5,
+    "ph_max": 6.5,
+    "osm_raw": "2.5",
+    "osm_val": 2.5,
+    "default_vol": 100.0
+  },
+  {
+    "id_name": "アイモビーグ皮下注ペン[70mg_1mL]",
+    "ph_raw": "5.2",
+    "ph_min": 5.2,
+    "ph_max": 5.2,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アイリーア8mg硝子体内注射液[114.3mg_mL]",
+    "ph_raw": "5.5~6.1",
+    "ph_min": 5.5,
+    "ph_max": 6.1,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アイリーア8mg硝子体内注射用キット[114.3mg_mL]",
+    "ph_raw": "5.5~6.1",
+    "ph_min": 5.5,
+    "ph_max": 6.1,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アイリーア硝子体内注射用キット[40mg_mL]",
+    "ph_raw": "5.9~6.5",
+    "ph_min": 5.9,
+    "ph_max": 6.5,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アガルシダーゼ ベータBS点滴静注「JCR」[35mg_7mL]",
+    "ph_raw": "5.5~6.1",
+    "ph_min": 5.5,
+    "ph_max": 6.1,
+    "osm_raw": "0.9",
+    "osm_val": 0.9,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アガルシダーゼ ベータBS点滴静注「JCR」[5mg_1mL]",
+    "ph_raw": "5.5~6.1",
+    "ph_min": 5.5,
+    "ph_max": 6.1,
+    "osm_raw": "0.9",
+    "osm_val": 0.9,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アキネトン注射液[5mg_1mL]",
+    "ph_raw": "5",
+    "ph_min": 5.0,
+    "ph_max": 5.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アキャルックス点滴静注[250mg_50mL]",
+    "ph_raw": "7.1",
+    "ph_min": 7.1,
+    "ph_max": 7.1,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 50.0
+  },
+  {
+    "id_name": "アキュミン静注",
+    "ph_raw": "2.8~4.8",
+    "ph_min": 2.8,
+    "ph_max": 4.8,
+    "osm_raw": "1.4",
+    "osm_val": 1.4,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アクテムラ点滴静注用[400mg_20mL]",
+    "ph_raw": "6.3~6.7",
+    "ph_min": 6.3,
+    "ph_max": 6.7,
+    "osm_raw": "0.5",
+    "osm_val": 0.5,
+    "default_vol": 250.0
+  },
+  {
+    "id_name": "アクテムラ点滴静注用[80mg_4mL]",
+    "ph_raw": "6.3~6.7",
+    "ph_min": 6.3,
+    "ph_max": 6.7,
+    "osm_raw": "0.5",
+    "osm_val": 0.5,
+    "default_vol": 250.0
+  },
+  {
+    "id_name": "アクテムラ皮下注オートインジェクター[162mg_0.9mL]",
+    "ph_raw": "5.5~6.5",
+    "ph_min": 5.5,
+    "ph_max": 6.5,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 0.9
+  },
+  {
+    "id_name": "アクプラ静注用[10mg]",
+    "ph_raw": "0.02",
+    "ph_min": 0.02,
+    "ph_max": 0.02,
+    "osm_raw": "0.02",
+    "osm_val": 0.02,
+    "default_vol": 300.0
+  },
+  {
+    "id_name": "アクプラ静注用[50mg]",
+    "ph_raw": "6.5~7.5",
+    "ph_min": 6.5,
+    "ph_max": 7.5,
+    "osm_raw": "0.1",
+    "osm_val": 0.1,
+    "default_vol": 300.0
+  },
+  {
+    "id_name": "アクメインD輸液[500mL]",
+    "ph_raw": "4.0~6.0",
+    "ph_min": 4.0,
+    "ph_max": 6.0,
+    "osm_raw": "2",
+    "osm_val": 2.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アクラシノン注射用[20mg]",
+    "ph_raw": "5.0~6.5",
+    "ph_min": 5.0,
+    "ph_max": 6.5,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 10.0
+  },
+  {
+    "id_name": "アコアラン静注用[1800単位]",
+    "ph_raw": "7.0〜8.0",
+    "ph_min": 7.0,
+    "ph_max": 8.0,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アコアラン静注用[600単位] -小児科限定-",
+    "ph_raw": "7.0~8.0",
+    "ph_min": 7.0,
+    "ph_max": 8.0,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アザクタム注射用[1g]",
+    "ph_raw": "4.5~7.0",
+    "ph_min": 4.5,
+    "ph_max": 7.0,
+    "osm_raw": "1.6",
+    "osm_val": 1.6,
+    "default_vol": 3.0
+  },
+  {
+    "id_name": "アザシチジン注射用「サワイ」[100mg] -点滴静注用-",
+    "ph_raw": "1",
+    "ph_min": 1.0,
+    "ph_max": 1.0,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 50.0
+  },
+  {
+    "id_name": "アザシチジン注射用「サワイ」[100mg] -皮下注用-",
+    "ph_raw": "1",
+    "ph_min": 1.0,
+    "ph_max": 1.0,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 50.0
+  },
+  {
+    "id_name": "アシクロビル点滴静注液｢トーワ｣[250mg_10mL]",
+    "ph_raw": "10.0~11.0",
+    "ph_min": 10.0,
+    "ph_max": 11.0,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 100.0
+  },
+  {
+    "id_name": "アジョビ皮下注オートインジェクター[225mg_1.5mL]",
+    "ph_raw": "5.2~5.8",
+    "ph_min": 5.2,
+    "ph_max": 5.8,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 1.5
+  },
+  {
+    "id_name": "アジョビ皮下注シリンジ[225mg_1.5mL]",
+    "ph_raw": "5.2~5.8",
+    "ph_min": 5.2,
+    "ph_max": 5.8,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 1.5
+  },
+  {
+    "id_name": "アセテート維持液3G｢HK｣[500mL]",
+    "ph_raw": "4.3~6.3",
+    "ph_min": 4.3,
+    "ph_max": 6.3,
+    "osm_raw": "1.4",
+    "osm_val": 1.4,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アセリオ静注液バッグ[1000mg_100mL]",
+    "ph_raw": "5.0~6.0",
+    "ph_min": 5.0,
+    "ph_max": 6.0,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 100.0
+  },
+  {
+    "id_name": "アセレンド注[100μg_2mL]",
+    "ph_raw": "6.6~8.0",
+    "ph_min": 6.6,
+    "ph_max": 8.0,
+    "osm_raw": "0.9",
+    "osm_val": 0.9,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "アタラックスP注射液[25mg_1mL]　◆",
+    "ph_raw": "3.0〜5.0",
+    "ph_min": 3.0,
+    "ph_max": 5.0,
+    "osm_raw": "25",
+    "osm_val": 25.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アタラックスP注射液[50mg_1mL]　◆",
+    "ph_raw": "25",
+    "ph_min": 25.0,
+    "ph_max": 25.0,
+    "osm_raw": "25",
+    "osm_val": 25.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アダリムマブBS皮下注シリンジ「CTNK」[40mg_0.4mL］",
+    "ph_raw": "5.0~5.4",
+    "ph_min": 5.0,
+    "ph_max": 5.4,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 0.8
+  },
+  {
+    "id_name": "アダリムマブBS皮下注ペン「CTNK」[40mg_0.4mL］",
+    "ph_raw": "5.0~5.4",
+    "ph_min": 5.0,
+    "ph_max": 5.4,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 0.8
+  },
+  {
+    "id_name": "アダリムマブBS皮下注ペン「CTNK」[80mg_0.8mL］",
+    "ph_raw": "5.0~5.4",
+    "ph_min": 5.0,
+    "ph_max": 5.4,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 0.8
+  },
+  {
+    "id_name": "アダリムマブBS皮下注ペン｢FKB｣[40mg_0.8mL]",
+    "ph_raw": "4.9~5.5",
+    "ph_min": 4.9,
+    "ph_max": 5.5,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 0.8
+  },
+  {
+    "id_name": "アディノベイト静注用キット[1000単位]",
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "1.2",
+    "osm_val": 1.2,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アディノベイト静注用キット[1500単位]",
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "1.2",
+    "osm_val": 1.2,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アディノベイト静注用キット[2000単位]",
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "1.2",
+    "osm_val": 1.2,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アディノベイト静注用キット[3000単位]",
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "1.2",
+    "osm_val": 1.2,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アディノベイト静注用キット[500単位]",
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "1.2",
+    "osm_val": 1.2,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アデノシン負荷用静注シリンジ｢FRI｣[60mg_20mL]",
+    "ph_raw": "4.5~7.5",
+    "ph_min": 4.5,
+    "ph_max": 7.5,
+    "osm_raw": "1",
+    "osm_val": 1.0,
+    "default_vol": 20.0
+  },
+  {
+    "id_name": "アデホス－Lコーワ注[40mg_2mL]",
+    "ph_raw": "8.5~9.5",
+    "ph_min": 8.5,
+    "ph_max": 9.5,
+    "osm_raw": "10",
+    "osm_val": 10.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アトガム点滴静注液[250mg_5mL]",
+    "ph_raw": "6.4~7.2",
+    "ph_min": 6.4,
+    "ph_max": 7.2,
+    "osm_raw": "1.2",
+    "osm_val": 1.2,
+    "default_vol": 5.0
+  },
+  {
     "id_name": "アレンドロン酸点滴静注バッグ｢HK｣[900μg_100mL]",
     "ph_raw": "5.5~6.5",
     "ph_min": 5.5,
