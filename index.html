@@ -115,11 +115,11 @@
                         <div id="dilutionAmountArea1" class="grid grid-cols-2 gap-3 text-xs">
                             <div>
                                 <label class="block text-slate-600 font-medium">薬剤原液 (mL)</label>
-                                <input type="number" id="drugVol1" value="10" min="0.1" step="0.1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-purple-500 outline-none bg-white">
+                                <input type="number" id="drugVol1" value="1" min="0.1" step="0.1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-purple-500 outline-none bg-white">
                             </div>
                             <div>
                                 <label class="block text-slate-600 font-medium">希釈液 (mL)</label>
-                                <input type="number" id="diluentVol1" value="90" min="0" step="1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-purple-500 outline-none bg-white">
+                                <input type="number" id="diluentVol1" value="0" min="0" step="1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-purple-500 outline-none bg-white">
                             </div>
                         </div>
                     </div>
@@ -156,11 +156,11 @@
                         <div id="dilutionAmountArea2" class="grid grid-cols-2 gap-3 text-xs">
                             <div>
                                 <label class="block text-slate-600 font-medium">薬剤原液 (mL)</label>
-                                <input type="number" id="drugVol2" value="5" min="0.1" step="0.1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                                <input type="number" id="drugVol2" value="1" min="0.1" step="0.1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
                             </div>
                             <div>
                                 <label class="block text-slate-600 font-medium">希釈液 (mL)</label>
-                                <input type="number" id="diluentVol2" value="45" min="0" step="1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                                <input type="number" id="diluentVol2" value="0" min="0" step="1" class="mt-1 w-full p-1.5 border rounded focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
                             </div>
                         </div>
                     </div>
@@ -278,17 +278,18 @@
             });
         }
 
-        // 薬剤名やデータから原液量(mL)を判別・自動抽出するヘルパー関数
+        // 薬剤名（[5μg_1mL], [2mg_2mL], [1000mg_100mL]等）から正確な規格容量(mL)を優先抽出
         function getDrugDefaultVol(drug) {
-            if (drug && drug.default_vol) return drug.default_vol;
-            // 薬剤名（例: "...[5μg_1mL]" や "...[1000mg_100mL]"）から mLの数値を自動抽出
-            if (drug && drug.id_name) {
-                const match = drug.id_name.match(/(\d+(?:\.\d+)?)\s*mL/i);
-                if (match && match[1]) {
-                    return parseFloat(match[1]);
-                }
+            if (!drug) return 1;
+            const drugName = drug.id_name || drug.name || '';
+            const match = drugName.match(/(\d+(?:\.\d+)?)\s*mL/i);
+            if (match && match[1]) {
+                return parseFloat(match[1]);
             }
-            return 1; // 抽出できない場合のデフォルト
+            if (drug.default_vol !== undefined && drug.default_vol !== null) {
+                return drug.default_vol;
+            }
+            return 1;
         }
 
         function getSideElements(idx) {
@@ -325,12 +326,20 @@
                 const isNoneDiluent = side.dilSel.value === 'none';
                 side.area.classList.toggle('opacity-40', isNoneDiluent);
                 side.area.classList.toggle('pointer-events-none', isNoneDiluent);
+
+                // 「なし（原液）」選択時は希釈液(mL)を0にリセット＆無効化
+                if (isNoneDiluent) {
+                    side.dilVol.value = 0;
+                    side.dilVol.disabled = true;
+                } else {
+                    side.dilVol.disabled = false;
+                }
             };
 
             side.drugSel.addEventListener('change', () => {
                 if (side.drugSel.value !== 'none') {
                     const drug = drugData[side.drugSel.value];
-                    // スマート自動抽出した容量をセット
+                    // 薬剤の規格(mL)を正確に反映（1mL, 2mL, 100mL等）
                     side.drugVol.value = getDrugDefaultVol(drug);
                     if (parseFloat(side.flow.value) === 0) side.flow.value = 10;
                 } else {
