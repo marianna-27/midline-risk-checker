@@ -265,8 +265,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "約5",
-    "osm_val": 5.0,
+    "osm_raw": "約4",
+    "osm_val": 4.0,
     "default_vol": 20.0
   },
   {
@@ -328,8 +328,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "約20",
-    "osm_val": 20.0,
+    "osm_raw": "約11",
+    "osm_val": 11.0,
     "default_vol": 20.0
   },
   {
