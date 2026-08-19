@@ -278,6 +278,19 @@
             });
         }
 
+        // 薬剤名やデータから原液量(mL)を判別・自動抽出するヘルパー関数
+        function getDrugDefaultVol(drug) {
+            if (drug && drug.default_vol) return drug.default_vol;
+            // 薬剤名（例: "...[5μg_1mL]" や "...[1000mg_100mL]"）から mLの数値を自動抽出
+            if (drug && drug.id_name) {
+                const match = drug.id_name.match(/(\d+(?:\.\d+)?)\s*mL/i);
+                if (match && match[1]) {
+                    return parseFloat(match[1]);
+                }
+            }
+            return 1; // 抽出できない場合のデフォルト
+        }
+
         function getSideElements(idx) {
             return {
                 drugSel: document.getElementById(`drugSelect${idx}`),
@@ -316,7 +329,9 @@
 
             side.drugSel.addEventListener('change', () => {
                 if (side.drugSel.value !== 'none') {
-                    side.drugVol.value = drugData[side.drugSel.value].default_vol || 10;
+                    const drug = drugData[side.drugSel.value];
+                    // スマート自動抽出した容量をセット
+                    side.drugVol.value = getDrugDefaultVol(drug);
                     if (parseFloat(side.flow.value) === 0) side.flow.value = 10;
                 } else {
                     side.flow.value = 0;
@@ -476,22 +491,19 @@
             renderModalDetails({ mainFlow, mainPh, mainOsm, hMain, s1, s2, totalFlow, finalPhMin, finalPhMax, finalOsm, totalHMixMax, totalHMixMin });
         }
 
-        // 計算詳細をポップアップ内に描画する関数（途中式完全展開UI）
+        // 計算詳細をポップアップ内に描画する関数
         function renderModalDetails(data) {
             const container = document.getElementById('calcModalContent');
             
-            // 全流量の式
             const flowTerms = [data.mainFlow];
             if (data.s1.flow > 0) flowTerms.push(data.s1.flow);
             if (data.s2.flow > 0) flowTerms.push(data.s2.flow);
             const flowFormula = flowTerms.join(" + ");
 
-            // 浸透圧比の代入式
             const osmTerms = [`(${data.mainFlow} × ${data.mainOsm})`];
             if (data.s1.flow > 0) osmTerms.push(`(${data.s1.flow} × ${data.s1.osm.toFixed(2)})`);
             if (data.s2.flow > 0) osmTerms.push(`(${data.s2.flow} × ${data.s2.osm.toFixed(2)})`);
 
-            // pH(最小・最大) の代入式組み立て
             const phMinTerms = [`${data.mainFlow} × 10<sup>-${data.mainPh}</sup>`];
             const phMaxTerms = [`${data.mainFlow} × 10<sup>-${data.mainPh}</sup>`];
 
@@ -547,14 +559,13 @@
                     </div>
                 </div>
 
-                <!-- STEP 3: pH (水素イオン濃度加重平均) -->
+                <!-- STEP 3: pH -->
                 <div class="calc-card gradient-border-purple">
                     <div class="card-step-badge purple">STEP 3</div>
                     <h4 class="font-bold text-purple-300 text-sm mb-1">pH (水素イオン濃度加重平均) の詳細解析</h4>
                     <p class="text-xs text-slate-400 mb-3">※ pHは対数軸のため単純平均できません。[H<sup>+</sup>] = 10<sup>-pH</sup> に換算後、流量重み付け平均を行い、-log<sub>10</sub> でpHへ復元します。</p>
                     
                     <div class="ph-split-grid">
-                        <!-- pH 最小値の展開 -->
                         <div class="ph-calc-card">
                             <div class="text-xs font-bold text-purple-300 mb-2">【pH 最小値 試算】</div>
                             <div class="text-xs font-mono mb-2">
@@ -570,7 +581,6 @@
                             </div>
                         </div>
 
-                        <!-- pH 最大値の展開 -->
                         <div class="ph-calc-card">
                             <div class="text-xs font-bold text-purple-300 mb-2">【pH 最大値 試算】</div>
                             <div class="text-xs font-mono mb-2">
@@ -592,7 +602,7 @@
                     </div>
                 </div>
 
-                <!-- STEP 4: 浸透圧比 加重平均 -->
+                <!-- STEP 4: 浸透圧比 -->
                 <div class="calc-card gradient-border-green">
                     <div class="card-step-badge green">STEP 4</div>
                     <h4 class="font-bold text-emerald-300 text-sm mb-1">浸透圧比の加重平均算出</h4>
