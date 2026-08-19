@@ -4,7 +4,7 @@
     "ph_raw": "5.6~7.4",
     "ph_min": 5.6,
     "ph_max": 7.4,
-    "osm_raw": "3.5",
+    "osm_raw": "約3.5",
     "osm_val": 3.5,
     "default_vol": 5.0
   },
@@ -13,7 +13,7 @@
     "ph_raw": "5.0~6.0",
     "ph_min": 5.0,
     "ph_max": 6.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 100.0
   },
@@ -22,16 +22,16 @@
     "ph_raw": "4.5~6.0",
     "ph_min": 4.5,
     "ph_max": 6.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 10.0
+    "default_vol": 1.0
   },
   {
     "id_name": "(小児)アレビアチン注[250mg_5mL]",
     "ph_raw": "2.",
     "ph_min": 2.0,
     "ph_max": 2.0,
-    "osm_raw": "29",
+    "osm_raw": "約29",
     "osm_val": 29.0,
     "default_vol": 5.0
   },
@@ -40,16 +40,16 @@
     "ph_raw": "2.8~3.5",
     "ph_min": 2.8,
     "ph_max": 3.5,
-    "osm_raw": "0.04",
-    "osm_val": 0.04,
-    "default_vol": 20.0
+    "osm_raw": "約0.92",
+    "osm_val": 0.92,
+    "default_vol": 2.0
   },
   {
     "id_name": "(小児)エスポー注射液[750単位_0.5mL]",
     "ph_raw": "5.5~6.5",
     "ph_min": 5.5,
     "ph_max": 6.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 0.5
   },
@@ -58,7 +58,7 @@
     "ph_raw": "6.0〜8.0",
     "ph_min": 6.0,
     "ph_max": 8.0,
-    "osm_raw": "3",
+    "osm_raw": "約3",
     "osm_val": 3.0,
     "default_vol": 2.0
   },
@@ -67,7 +67,7 @@
     "ph_raw": "10",
     "ph_min": 10.0,
     "ph_max": 10.0,
-    "osm_raw": "0.8",
+    "osm_raw": "約0.8",
     "osm_val": 0.8,
     "default_vol": 10.0
   },
@@ -76,7 +76,7 @@
     "ph_raw": "6.0~7.0",
     "ph_min": 6.0,
     "ph_max": 7.0,
-    "osm_raw": "30",
+    "osm_raw": "約30",
     "osm_val": 30.0,
     "default_vol": 1.0
   },
@@ -85,7 +85,7 @@
     "ph_raw": "6.5",
     "ph_min": 6.5,
     "ph_max": 6.5,
-    "osm_raw": "4.",
+    "osm_raw": "約4.",
     "osm_val": 4.0,
     "default_vol": 1.0
   },
@@ -94,7 +94,7 @@
     "ph_raw": "7.0~8.5",
     "ph_min": 7.0,
     "ph_max": 8.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 0.5
   },
@@ -103,7 +103,7 @@
     "ph_raw": "3.0〜5.0",
     "ph_min": 3.0,
     "ph_max": 5.0,
-    "osm_raw": "0.7",
+    "osm_raw": "約0.7",
     "osm_val": 0.7,
     "default_vol": 5.0
   },
@@ -112,7 +112,7 @@
     "ph_raw": "2.5~3.5",
     "ph_min": 2.5,
     "ph_max": 3.5,
-    "osm_raw": "0.75",
+    "osm_raw": "約0.75",
     "osm_val": 0.75,
     "default_vol": 5.0
   },
@@ -121,7 +121,7 @@
     "ph_raw": "2.9~4.4",
     "ph_min": 2.9,
     "ph_max": 4.4,
-    "osm_raw": "0.3",
+    "osm_raw": "約0.3",
     "osm_val": 0.3,
     "default_vol": 20.0
   },
@@ -130,25 +130,25 @@
     "ph_raw": "3.0~4.5",
     "ph_min": 3.0,
     "ph_max": 4.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 1.0
+    "default_vol": 10.0
   },
   {
     "id_name": "(小児)ニカルジピン塩酸塩注射液[2mg_2mL]",
     "ph_raw": "3.0〜4.5",
     "ph_min": 3.0,
     "ph_max": 4.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 1.0
+    "default_vol": 2.0
   },
   {
     "id_name": "(小児)ネオフィリン注[250mg_10mL]",
     "ph_raw": "8.0~10.0",
     "ph_min": 8.0,
     "ph_max": 10.0,
-    "osm_raw": "0.4",
+    "osm_raw": "約0.4",
     "osm_val": 0.4,
     "default_vol": 10.0
   },
@@ -157,16 +157,16 @@
     "ph_raw": "7.0~7.8",
     "ph_min": 7.0,
     "ph_max": 7.8,
-    "osm_raw": "0.65",
+    "osm_raw": "約0.65",
     "osm_val": 0.65,
-    "default_vol": 1.0
+    "default_vol": 10.0
   },
   {
     "id_name": "(小児)フロセミド注｢NIG｣[20mg_2mL]",
     "ph_raw": "8.6~9.6",
     "ph_min": 8.6,
     "ph_max": 9.6,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 2.0
   },
@@ -175,25 +175,25 @@
     "ph_raw": "3.5~5.0",
     "ph_min": 3.5,
     "ph_max": 5.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 20.0
+    "default_vol": 1.0
   },
   {
     "id_name": "(小児)ボスミン注[1mg_1mL]",
     "ph_raw": "2.3~5.0",
     "ph_min": 2.3,
     "ph_max": 5.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 10.0
+    "default_vol": 1.0
   },
   {
     "id_name": "(小児)ミダゾラム注射液｢NIG｣[10mg_2mL]",
     "ph_raw": "2.8~3.8",
     "ph_min": 2.8,
     "ph_max": 3.8,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 2.0
   },
@@ -202,16 +202,16 @@
     "ph_raw": "5.2~5.8",
     "ph_min": 5.2,
     "ph_max": 5.8,
-    "osm_raw": "265",
-    "osm_val": 265.0,
-    "default_vol": 0.02
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 0.05
   },
   {
     "id_name": "(小児)ロラピタ静注[2mg_1mL]",
     "ph_raw": "3.",
     "ph_min": 3.0,
     "ph_max": 3.0,
-    "osm_raw": "4.",
+    "osm_raw": "約4.",
     "osm_val": 4.0,
     "default_vol": 1.0
   },
@@ -220,16 +220,16 @@
     "ph_raw": "4.5~7.0",
     "ph_min": 4.5,
     "ph_max": 7.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 50.0
+    "default_vol": 2.0
   },
   {
     "id_name": "1%ディプリバン注キット[500mg_50mL]",
     "ph_raw": "7.0~8.5",
     "ph_min": 7.0,
     "ph_max": 8.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 50.0
   },
@@ -238,35 +238,35 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
-    "default_vol": 500.0
+    "osm_raw": "約20",
+    "osm_val": 20.0,
+    "default_vol": 20.0
   },
   {
     "id_name": "10%ブドウ糖液[500mL]",
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
-    "default_vol": 100.0
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 500.0
   },
   {
     "id_name": "10％デヒドロコール酸注[1000mg_10mL]",
     "ph_raw": "9~11",
     "ph_min": 9.0,
     "ph_max": 11.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 30.0
+    "default_vol": 10.0
   },
   {
     "id_name": "20%ブドウ糖液[20mL]",
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
+    "osm_raw": "約20",
+    "osm_val": 20.0,
     "default_vol": 20.0
   },
   {
@@ -274,8 +274,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
     "default_vol": 100.0
   },
   {
@@ -283,62 +283,62 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
-    "default_vol": 500.0
+    "osm_raw": "約20",
+    "osm_val": 20.0,
+    "default_vol": 20.0
   },
   {
     "id_name": "5%ブドウ糖液[250mL]",
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
-    "default_vol": 500.0
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 250.0
   },
   {
     "id_name": "5%ブドウ糖液[500mL]",
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
-    "default_vol": 100.0
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 500.0
   },
   {
     "id_name": "5%ブドウ糖液[50mL]",
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
-    "default_vol": 500.0
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 50.0
   },
   {
     "id_name": "50%ブドウ糖液[200mL]",
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
-    "default_vol": 100.0
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 200.0
   },
   {
     "id_name": "50%ブドウ糖液[20mL]",
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
-    "default_vol": 500.0
+    "osm_raw": "約20",
+    "osm_val": 20.0,
+    "default_vol": 20.0
   },
   {
     "id_name": "50%ブドウ糖液[500mL]",
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
     "default_vol": 500.0
   },
   {
@@ -346,25 +346,25 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "5",
-    "osm_val": 5.0,
-    "default_vol": 100.0
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 350.0
   },
   {
     "id_name": "ACD-A液［500ｍL］",
     "ph_raw": "4.5~5.5",
     "ph_min": 4.5,
     "ph_max": 5.5,
-    "osm_raw": "4.",
+    "osm_raw": "約4.",
     "osm_val": 4.0,
-    "default_vol": 15.0
+    "default_vol": 500.0
   },
   {
     "id_name": "ALS用ラジカット点滴静注バッグ[30mg_100mL]-科限定-",
     "ph_raw": "3.5~5.0",
     "ph_min": 3.5,
     "ph_max": 5.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 100.0
   },
@@ -373,25 +373,25 @@
     "ph_raw": "3.",
     "ph_min": 3.0,
     "ph_max": 3.0,
-    "osm_raw": "4.",
+    "osm_raw": "約4.",
     "osm_val": 4.0,
-    "default_vol": 1.0
+    "default_vol": 0.5
   },
   {
     "id_name": "A型インフルエンザHAワクチン H1N1｢ビケン｣[1mL]",
     "ph_raw": "6.8~8.0",
     "ph_min": 6.8,
     "ph_max": 8.0,
-    "osm_raw": "1.0",
+    "osm_raw": "約1.0",
     "osm_val": 1.0,
-    "default_vol": 0.5
+    "default_vol": 1.0
   },
   {
     "id_name": "A型インフルエンザHAワクチン H1N1｢化血研｣[10mL]",
     "ph_raw": "6.8~8.0",
     "ph_min": 6.8,
     "ph_max": 8.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 10.0
   },
@@ -400,7 +400,7 @@
     "ph_raw": "3.",
     "ph_min": 3.0,
     "ph_max": 3.0,
-    "osm_raw": "4.",
+    "osm_raw": "約4.",
     "osm_val": 4.0,
     "default_vol": 1.0
   },
@@ -409,7 +409,7 @@
     "ph_raw": "6.8~8.0",
     "ph_min": 6.8,
     "ph_max": 8.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 1.0
   },
@@ -418,7 +418,7 @@
     "ph_raw": "5.4~7.4",
     "ph_min": 5.4,
     "ph_max": 7.4,
-    "osm_raw": "1.0",
+    "osm_raw": "約1.0",
     "osm_val": 1.0,
     "default_vol": 0.1
   },
@@ -427,16 +427,16 @@
     "ph_raw": "7.2~7.4",
     "ph_min": 7.2,
     "ph_max": 7.4,
-    "osm_raw": "286",
-    "osm_val": 286.0,
-    "default_vol": 5.0
+    "osm_raw": "約0.9",
+    "osm_val": 0.9,
+    "default_vol": 500.0
   },
   {
     "id_name": "EOB･プリモビスト注シリンジ[10mL]",
     "ph_raw": "6.8~8.0",
     "ph_min": 6.8,
     "ph_max": 8.0,
-    "osm_raw": "2",
+    "osm_raw": "約2",
     "osm_val": 2.0,
     "default_vol": 10.0
   },
@@ -445,25 +445,25 @@
     "ph_raw": "5.5~6.5",
     "ph_min": 5.5,
     "ph_max": 6.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 2.0
+    "default_vol": 1.0
   },
   {
     "id_name": "HMG注射用｢F｣[75単位]",
     "ph_raw": "5.5~6.5",
     "ph_min": 5.5,
     "ph_max": 6.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 2.0
+    "default_vol": 1.0
   },
   {
     "id_name": "JCOG2101Cアブラキサン点滴静注用[100mg]",
     "ph_raw": "6.0~7.5",
     "ph_min": 6.0,
     "ph_max": 7.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 20.0
   },
@@ -472,7 +472,7 @@
     "ph_raw": "5.0~6.5",
     "ph_min": 5.0,
     "ph_max": 6.5,
-    "osm_raw": "6",
+    "osm_raw": "約6",
     "osm_val": 6.0,
     "default_vol": 20.0
   },
@@ -481,34 +481,34 @@
     "ph_raw": "4.0〜5.0",
     "ph_min": 4.0,
     "ph_max": 5.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 10.0
+    "default_vol": 1.0
   },
   {
     "id_name": "uFSH注用｢あすか｣[150単位]",
     "ph_raw": "6.0~7.0",
     "ph_min": 6.0,
     "ph_max": 7.0,
-    "osm_raw": "0.9",
+    "osm_raw": "約0.9",
     "osm_val": 0.9,
-    "default_vol": 2.0
+    "default_vol": 1.0
   },
   {
     "id_name": "uFSH注用｢あすか｣[75単位]",
     "ph_raw": "6.0~7.0",
     "ph_min": 6.0,
     "ph_max": 7.0,
-    "osm_raw": "0.9",
+    "osm_raw": "約0.9",
     "osm_val": 0.9,
-    "default_vol": 2.0
+    "default_vol": 1.0
   },
   {
     "id_name": "【禁静注】フェノバール注射液[100mg_1mL]",
     "ph_raw": "7.5〜9.4",
     "ph_min": 7.5,
     "ph_max": 9.4,
-    "osm_raw": "19",
+    "osm_raw": "約19",
     "osm_val": 19.0,
     "default_vol": 1.0
   },
@@ -517,16 +517,16 @@
     "ph_raw": "3.5~5.0",
     "ph_min": 3.5,
     "ph_max": 5.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 1.0
+    "default_vol": 10.0
   },
   {
     "id_name": "【禁髄腔内】オンコビン注射用[1mg]",
     "ph_raw": "4.0~6.0",
     "ph_min": 4.0,
     "ph_max": 6.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 10.0
   },
@@ -535,25 +535,25 @@
     "ph_raw": "3.3〜3.8",
     "ph_min": 3.3,
     "ph_max": 3.8,
-    "osm_raw": "0.1",
+    "osm_raw": "約0.1",
     "osm_val": 0.1,
-    "default_vol": 50.0
+    "default_vol": 1.0
   },
   {
     "id_name": "【禁髄腔内】ロゼウス静注液[40mg_4mL]",
     "ph_raw": "3.3~3.8",
     "ph_min": 3.3,
     "ph_max": 3.8,
-    "osm_raw": "0.1",
+    "osm_raw": "約0.1",
     "osm_val": 0.1,
-    "default_vol": 50.0
+    "default_vol": 4.0
   },
   {
     "id_name": "【禁髄腔内】注射用フィルデシン[1mg]",
     "ph_raw": "3.5~5.5",
     "ph_min": 3.5,
     "ph_max": 5.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 1.0
   },
@@ -562,7 +562,7 @@
     "ph_raw": "3.5~5.5",
     "ph_min": 3.5,
     "ph_max": 5.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 1.0
   },
@@ -571,16 +571,16 @@
     "ph_raw": "6.0〜7.0",
     "ph_min": 6.0,
     "ph_max": 7.0,
-    "osm_raw": "6",
+    "osm_raw": "約6",
     "osm_val": 6.0,
-    "default_vol": 8.0
+    "default_vol": 10.0
   },
   {
     "id_name": "【要希釈】リン酸Na補正液[10mmol_20mL]",
     "ph_raw": "6.2~6.8",
     "ph_min": 6.2,
     "ph_max": 6.8,
-    "osm_raw": "3",
+    "osm_raw": "約3",
     "osm_val": 3.0,
     "default_vol": 20.0
   },
@@ -589,8 +589,8 @@
     "ph_raw": "5.0~7.0",
     "ph_min": 5.0,
     "ph_max": 7.0,
-    "osm_raw": "11",
-    "osm_val": 11.0,
+    "osm_raw": "約20",
+    "osm_val": 20.0,
     "default_vol": 20.0
   },
   {
@@ -598,7 +598,7 @@
     "ph_raw": "5.5~7.0",
     "ph_min": 5.5,
     "ph_max": 7.0,
-    "osm_raw": "2",
+    "osm_raw": "約2",
     "osm_val": 2.0,
     "default_vol": 20.0
   },
@@ -607,25 +607,25 @@
     "ph_raw": "5.5~6.5",
     "ph_min": 5.5,
     "ph_max": 6.5,
-    "osm_raw": "2.5",
+    "osm_raw": "約2.5",
     "osm_val": 2.5,
-    "default_vol": 100.0
+    "default_vol": 1.62
   },
   {
     "id_name": "アイマービー点滴静注［1200mg_6.5mL］",
     "ph_raw": "5.5〜6.5",
     "ph_min": 5.5,
     "ph_max": 6.5,
-    "osm_raw": "2.5",
+    "osm_raw": "約2.5",
     "osm_val": 2.5,
-    "default_vol": 100.0
+    "default_vol": 6.5
   },
   {
     "id_name": "アイモビーグ皮下注ペン[70mg_1mL]",
     "ph_raw": "5.2",
     "ph_min": 5.2,
     "ph_max": 5.2,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 1.0
   },
@@ -634,52 +634,52 @@
     "ph_raw": "5.5~6.1",
     "ph_min": 5.5,
     "ph_max": 6.1,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 5.0
+    "default_vol": 500.0
   },
   {
     "id_name": "アイリーア8mg硝子体内注射用キット[114.3mg_mL]",
     "ph_raw": "5.5~6.1",
     "ph_min": 5.5,
     "ph_max": 6.1,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 5.0
+    "default_vol": 500.0
   },
   {
     "id_name": "アイリーア硝子体内注射用キット[40mg_mL]",
     "ph_raw": "5.9~6.5",
     "ph_min": 5.9,
     "ph_max": 6.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 5.0
+    "default_vol": 500.0
   },
   {
     "id_name": "アガルシダーゼ ベータBS点滴静注「JCR」[35mg_7mL]",
     "ph_raw": "5.5~6.1",
     "ph_min": 5.5,
     "ph_max": 6.1,
-    "osm_raw": "0.9",
+    "osm_raw": "約0.9",
     "osm_val": 0.9,
-    "default_vol": 500.0
+    "default_vol": 7.0
   },
   {
     "id_name": "アガルシダーゼ ベータBS点滴静注「JCR」[5mg_1mL]",
     "ph_raw": "5.5~6.1",
     "ph_min": 5.5,
     "ph_max": 6.1,
-    "osm_raw": "0.9",
+    "osm_raw": "約0.9",
     "osm_val": 0.9,
-    "default_vol": 500.0
+    "default_vol": 1.0
   },
   {
     "id_name": "アキネトン注射液[5mg_1mL]",
     "ph_raw": "5",
     "ph_min": 5.0,
     "ph_max": 5.0,
-    "osm_raw": "1.0",
+    "osm_raw": "約1.0",
     "osm_val": 1.0,
     "default_vol": 1.0
   },
@@ -688,7 +688,7 @@
     "ph_raw": "7.1",
     "ph_min": 7.1,
     "ph_max": 7.1,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 50.0
   },
@@ -697,34 +697,34 @@
     "ph_raw": "2.8~4.8",
     "ph_min": 2.8,
     "ph_max": 4.8,
-    "osm_raw": "1.4",
+    "osm_raw": "約1.4",
     "osm_val": 1.4,
-    "default_vol": 5.0
+    "default_vol": 500.0
   },
   {
     "id_name": "アクテムラ点滴静注用[400mg_20mL]",
     "ph_raw": "6.3~6.7",
     "ph_min": 6.3,
     "ph_max": 6.7,
-    "osm_raw": "0.5",
+    "osm_raw": "約0.5",
     "osm_val": 0.5,
-    "default_vol": 250.0
+    "default_vol": 20.0
   },
   {
     "id_name": "アクテムラ点滴静注用[80mg_4mL]",
     "ph_raw": "6.3~6.7",
     "ph_min": 6.3,
     "ph_max": 6.7,
-    "osm_raw": "0.5",
+    "osm_raw": "約0.5",
     "osm_val": 0.5,
-    "default_vol": 250.0
+    "default_vol": 4.0
   },
   {
     "id_name": "アクテムラ皮下注オートインジェクター[162mg_0.9mL]",
     "ph_raw": "5.5~6.5",
     "ph_min": 5.5,
     "ph_max": 6.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 0.9
   },
@@ -733,8 +733,8 @@
     "ph_raw": "0.02",
     "ph_min": 0.02,
     "ph_max": 0.02,
-    "osm_raw": "0.02",
-    "osm_val": 0.02,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
     "default_vol": 300.0
   },
   {
@@ -742,7 +742,7 @@
     "ph_raw": "6.5~7.5",
     "ph_min": 6.5,
     "ph_max": 7.5,
-    "osm_raw": "0.1",
+    "osm_raw": "約0.1",
     "osm_val": 0.1,
     "default_vol": 300.0
   },
@@ -751,7 +751,7 @@
     "ph_raw": "4.0~6.0",
     "ph_min": 4.0,
     "ph_max": 6.0,
-    "osm_raw": "2",
+    "osm_raw": "約2",
     "osm_val": 2.0,
     "default_vol": 500.0
   },
@@ -760,7 +760,7 @@
     "ph_raw": "5.0~6.5",
     "ph_min": 5.0,
     "ph_max": 6.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 10.0
   },
@@ -769,7 +769,7 @@
     "ph_raw": "7.0〜8.0",
     "ph_min": 7.0,
     "ph_max": 8.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 1.0
   },
@@ -778,7 +778,7 @@
     "ph_raw": "7.0~8.0",
     "ph_min": 7.0,
     "ph_max": 8.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 1.0
   },
@@ -787,43 +787,43 @@
     "ph_raw": "4.5~7.0",
     "ph_min": 4.5,
     "ph_max": 7.0,
-    "osm_raw": "1.6",
+    "osm_raw": "約1.6",
     "osm_val": 1.6,
-    "default_vol": 3.0
+    "default_vol": 10.0
   },
   {
     "id_name": "アザシチジン注射用「サワイ」[100mg] -点滴静注用-",
     "ph_raw": "1",
     "ph_min": 1.0,
     "ph_max": 1.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 50.0
+    "default_vol": 4.0
   },
   {
     "id_name": "アザシチジン注射用「サワイ」[100mg] -皮下注用-",
     "ph_raw": "1",
     "ph_min": 1.0,
     "ph_max": 1.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 50.0
+    "default_vol": 4.0
   },
   {
     "id_name": "アシクロビル点滴静注液｢トーワ｣[250mg_10mL]",
     "ph_raw": "10.0~11.0",
     "ph_min": 10.0,
     "ph_max": 11.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 100.0
+    "default_vol": 10.0
   },
   {
     "id_name": "アジョビ皮下注オートインジェクター[225mg_1.5mL]",
     "ph_raw": "5.2~5.8",
     "ph_min": 5.2,
     "ph_max": 5.8,
-    "osm_raw": "1.0",
+    "osm_raw": "約1.0",
     "osm_val": 1.0,
     "default_vol": 1.5
   },
@@ -832,7 +832,7 @@
     "ph_raw": "5.2~5.8",
     "ph_min": 5.2,
     "ph_max": 5.8,
-    "osm_raw": "1.0",
+    "osm_raw": "約1.0",
     "osm_val": 1.0,
     "default_vol": 1.5
   },
@@ -841,7 +841,7 @@
     "ph_raw": "4.3~6.3",
     "ph_min": 4.3,
     "ph_max": 6.3,
-    "osm_raw": "1.4",
+    "osm_raw": "約1.4",
     "osm_val": 1.4,
     "default_vol": 500.0
   },
@@ -850,7 +850,7 @@
     "ph_raw": "5.0~6.0",
     "ph_min": 5.0,
     "ph_max": 6.0,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 100.0
   },
@@ -859,7 +859,7 @@
     "ph_raw": "6.6~8.0",
     "ph_min": 6.6,
     "ph_max": 8.0,
-    "osm_raw": "0.9",
+    "osm_raw": "約0.9",
     "osm_val": 0.9,
     "default_vol": 2.0
   },
@@ -868,8 +868,8 @@
     "ph_raw": "3.0〜5.0",
     "ph_min": 3.0,
     "ph_max": 5.0,
-    "osm_raw": "25",
-    "osm_val": 25.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
     "default_vol": 1.0
   },
   {
@@ -877,8 +877,8 @@
     "ph_raw": "25",
     "ph_min": 25.0,
     "ph_max": 25.0,
-    "osm_raw": "25",
-    "osm_val": 25.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
     "default_vol": 1.0
   },
   {
@@ -886,25 +886,25 @@
     "ph_raw": "5.0~5.4",
     "ph_min": 5.0,
     "ph_max": 5.4,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 0.8
+    "default_vol": 0.4
   },
   {
     "id_name": "アダリムマブBS皮下注ペン「CTNK」[40mg_0.4mL］",
     "ph_raw": "5.0~5.4",
     "ph_min": 5.0,
     "ph_max": 5.4,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
-    "default_vol": 0.8
+    "default_vol": 0.4
   },
   {
     "id_name": "アダリムマブBS皮下注ペン「CTNK」[80mg_0.8mL］",
     "ph_raw": "5.0~5.4",
     "ph_min": 5.0,
     "ph_max": 5.4,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 0.8
   },
@@ -913,7 +913,7 @@
     "ph_raw": "4.9~5.5",
     "ph_min": 4.9,
     "ph_max": 5.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 0.8
   },
@@ -922,52 +922,52 @@
     "ph_raw": "6.7~7.3",
     "ph_min": 6.7,
     "ph_max": 7.3,
-    "osm_raw": "1.2",
+    "osm_raw": "約1.2",
     "osm_val": 1.2,
-    "default_vol": 5.0
+    "default_vol": 10.0
   },
   {
     "id_name": "アディノベイト静注用キット[1500単位]",
     "ph_raw": "6.7~7.3",
     "ph_min": 6.7,
     "ph_max": 7.3,
-    "osm_raw": "1.2",
+    "osm_raw": "約1.2",
     "osm_val": 1.2,
-    "default_vol": 5.0
+    "default_vol": 10.0
   },
   {
     "id_name": "アディノベイト静注用キット[2000単位]",
     "ph_raw": "6.7~7.3",
     "ph_min": 6.7,
     "ph_max": 7.3,
-    "osm_raw": "1.2",
+    "osm_raw": "約1.2",
     "osm_val": 1.2,
-    "default_vol": 5.0
+    "default_vol": 10.0
   },
   {
     "id_name": "アディノベイト静注用キット[3000単位]",
     "ph_raw": "6.7~7.3",
     "ph_min": 6.7,
     "ph_max": 7.3,
-    "osm_raw": "1.2",
+    "osm_raw": "約1.2",
     "osm_val": 1.2,
-    "default_vol": 5.0
+    "default_vol": 10.0
   },
   {
     "id_name": "アディノベイト静注用キット[500単位]",
     "ph_raw": "6.7~7.3",
     "ph_min": 6.7,
     "ph_max": 7.3,
-    "osm_raw": "1.2",
+    "osm_raw": "約1.2",
     "osm_val": 1.2,
-    "default_vol": 5.0
+    "default_vol": 10.0
   },
   {
     "id_name": "アデノシン負荷用静注シリンジ｢FRI｣[60mg_20mL]",
     "ph_raw": "4.5~7.5",
     "ph_min": 4.5,
     "ph_max": 7.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 20.0
   },
@@ -976,16 +976,16 @@
     "ph_raw": "8.5~9.5",
     "ph_min": 8.5,
     "ph_max": 9.5,
-    "osm_raw": "10",
-    "osm_val": 10.0,
-    "default_vol": 500.0
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 2.0
   },
   {
     "id_name": "アトガム点滴静注液[250mg_5mL]",
     "ph_raw": "6.4~7.2",
     "ph_min": 6.4,
     "ph_max": 7.2,
-    "osm_raw": "1.2",
+    "osm_raw": "約1.2",
     "osm_val": 1.2,
     "default_vol": 5.0
   },
@@ -994,7 +994,7 @@
     "ph_raw": "5.5~6.5",
     "ph_min": 5.5,
     "ph_max": 6.5,
-    "osm_raw": "1",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 100.0
   }
