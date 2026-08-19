@@ -184,8 +184,8 @@
     "ph_raw": "2.3~5.0",
     "ph_min": 2.3,
     "ph_max": 5.0,
-    "osm_raw": "約1",
-    "osm_val": 1.0,
+    "osm_raw": "約2.",
+    "osm_val": 2.0,
     "default_vol": 1.0
   },
   {
@@ -202,8 +202,8 @@
     "ph_raw": "5.2~5.8",
     "ph_min": 5.2,
     "ph_max": 5.8,
-    "osm_raw": "1.0",
-    "osm_val": 1.0,
+    "osm_raw": "約4.",
+    "osm_val": 4.0,
     "default_vol": 0.05
   },
   {
@@ -238,8 +238,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "約20",
-    "osm_val": 20.0,
+    "osm_raw": "約2",
+    "osm_val": 2.0,
     "default_vol": 20.0
   },
   {
@@ -247,8 +247,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "1.0",
-    "osm_val": 1.0,
+    "osm_raw": "約2",
+    "osm_val": 2.0,
     "default_vol": 500.0
   },
   {
@@ -265,8 +265,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "約20",
-    "osm_val": 20.0,
+    "osm_raw": "約5",
+    "osm_val": 5.0,
     "default_vol": 20.0
   },
   {
@@ -274,7 +274,7 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "1.0",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 100.0
   },
@@ -283,8 +283,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "約20",
-    "osm_val": 20.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
     "default_vol": 20.0
   },
   {
@@ -292,7 +292,7 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "1.0",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 250.0
   },
@@ -301,7 +301,7 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "1.0",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 500.0
   },
@@ -310,7 +310,7 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "1.0",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 50.0
   },
@@ -319,8 +319,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "1.0",
-    "osm_val": 1.0,
+    "osm_raw": "約11",
+    "osm_val": 11.0,
     "default_vol": 200.0
   },
   {
@@ -337,8 +337,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "1.0",
-    "osm_val": 1.0,
+    "osm_raw": "約11",
+    "osm_val": 11.0,
     "default_vol": 500.0
   },
   {
@@ -346,8 +346,8 @@
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
-    "osm_raw": "1.0",
-    "osm_val": 1.0,
+    "osm_raw": "約16",
+    "osm_val": 16.0,
     "default_vol": 350.0
   },
   {
@@ -382,7 +382,7 @@
     "ph_raw": "6.8~8.0",
     "ph_min": 6.8,
     "ph_max": 8.0,
-    "osm_raw": "約1.0",
+    "osm_raw": "1.0",
     "osm_val": 1.0,
     "default_vol": 1.0
   },
@@ -589,8 +589,8 @@
     "ph_raw": "5.0~7.0",
     "ph_min": 5.0,
     "ph_max": 7.0,
-    "osm_raw": "約20",
-    "osm_val": 20.0,
+    "osm_raw": "約11",
+    "osm_val": 11.0,
     "default_vol": 20.0
   },
   {
@@ -733,8 +733,8 @@
     "ph_raw": "0.02",
     "ph_min": 0.02,
     "ph_max": 0.02,
-    "osm_raw": "1.0",
-    "osm_val": 1.0,
+    "osm_raw": "約0.1",
+    "osm_val": 0.1,
     "default_vol": 300.0
   },
   {
@@ -868,8 +868,8 @@
     "ph_raw": "3.0〜5.0",
     "ph_min": 3.0,
     "ph_max": 5.0,
-    "osm_raw": "1.0",
-    "osm_val": 1.0,
+    "osm_raw": "約0.8",
+    "osm_val": 0.8,
     "default_vol": 1.0
   },
   {
@@ -877,8 +877,8 @@
     "ph_raw": "25",
     "ph_min": 25.0,
     "ph_max": 25.0,
-    "osm_raw": "1.0",
-    "osm_val": 1.0,
+    "osm_raw": "約0.8",
+    "osm_val": 0.8,
     "default_vol": 1.0
   },
   {
