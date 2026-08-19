@@ -59,6 +59,24 @@
             background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #a7f3d0;
             padding: 10px 16px; border-radius: 20px; font-weight: 700;
         }
+
+        /* 50音タブスタイル */
+        .tab-btn {
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { background-color: #e2e8f0; }
+        .tab-btn.active {
+            background-color: #4f46e5;
+            color: #ffffff;
+            border-color: #4338ca;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -96,11 +114,29 @@
             <!-- 側管1設定 -->
             <div class="bg-white p-6 rounded-xl shadow-md space-y-4 border-t-4 border-purple-400">
                 <h2 class="text-lg font-bold text-slate-700 border-b pb-2">💉 側管 1</h2>
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">薬剤選択</label>
-                    <select id="drugSelect1" class="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500 outline-none bg-white text-sm"></select>
-                </div>
                 
+                <!-- 薬剤選択コンポーネント (側管1) -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-slate-600">薬剤選択</label>
+                    <input type="text" id="drugSearchInput1" placeholder="3文字以上で検索 (例: あせり)" oninput="filterDrugs(1)" class="w-full p-2 text-xs border rounded-lg focus:ring-2 focus:ring-purple-500 outline-none">
+                    
+                    <div class="flex flex-wrap gap-1" id="tabContainer1">
+                        <button class="tab-btn active" onclick="switchTab(1, 'all', this)">すべて</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'ア', this)">ア</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'カ', this)">カ</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'サ', this)">サ</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'タ', this)">タ</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'ナ', this)">ナ</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'ハ', this)">ハ</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'マ', this)">マ</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'ヤ', this)">ヤ</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'ラ', this)">ラ</button>
+                        <button class="tab-btn" onclick="switchTab(1, 'ワ', this)">ワ</button>
+                    </div>
+
+                    <select id="drugSelect1" onchange="onDrugChange(1)" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-purple-500 outline-none bg-white text-sm"></select>
+                </div>
+
                 <div id="sideDetail1" class="space-y-4 transition-all">
                     <div class="p-3 bg-purple-50/50 rounded-lg border border-purple-100 space-y-3">
                         <div>
@@ -137,11 +173,29 @@
                     <h2 class="text-lg font-bold text-slate-700">💉 側管 2</h2>
                     <div class="text-xs text-slate-500">※未使用時は「なし」</div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">薬剤選択</label>
-                    <select id="drugSelect2" class="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white text-sm"></select>
-                </div>
                 
+                <!-- 薬剤選択コンポーネント (側管2) -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-slate-600">薬剤選択</label>
+                    <input type="text" id="drugSearchInput2" placeholder="3文字以上で検索 (例: あせり)" oninput="filterDrugs(2)" class="w-full p-2 text-xs border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none">
+                    
+                    <div class="flex flex-wrap gap-1" id="tabContainer2">
+                        <button class="tab-btn active" onclick="switchTab(2, 'all', this)">すべて</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'ア', this)">ア</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'カ', this)">カ</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'サ', this)">サ</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'タ', this)">タ</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'ナ', this)">ナ</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'ハ', this)">ハ</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'マ', this)">マ</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'ヤ', this)">ヤ</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'ラ', this)">ラ</button>
+                        <button class="tab-btn" onclick="switchTab(2, 'ワ', this)">ワ</button>
+                    </div>
+
+                    <select id="drugSelect2" onchange="onDrugChange(2)" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none bg-white text-sm"></select>
+                </div>
+
                 <div id="sideDetail2" class="space-y-4 transition-all">
                     <div class="p-3 bg-emerald-50/50 rounded-lg border border-emerald-100 space-y-3">
                         <div>
@@ -226,7 +280,7 @@
             </div>
             <!-- モーダルコンテンツ -->
             <div id="calcModalContent" class="p-6 overflow-y-auto space-y-5 text-sm text-slate-300">
-                <!-- JSで動的に追加されます -->
+                <!-- JSで動的に追加 -->
             </div>
             <!-- モーダルフッター -->
             <div class="p-4 bg-slate-900 border-t border-slate-800 text-right">
@@ -236,7 +290,8 @@
     </div>
 
     <script>
-        let drugData = [];
+        let allDrugsData = [];
+        let currentTab = { 1: 'all', 2: 'all' };
 
         const DILUENT_SPECS = {
             none: { name: "なし", ph: null, osm: null },
@@ -245,16 +300,40 @@
             water: { name: "注水", ph: 6.0, osm: 0.0 }
         };
 
-        async function loadDrugData() {
+        // かな変換ユーティリティ
+        function hiraToKata(str) {
+            return str.replace(/[\u3041-\u3096]/g, ch => String.fromCharCode(ch.charCodeAt(0) + 0x60));
+        }
+        function kataToHira(str) {
+            return str.replace(/[\u30a1-\u30f6]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60));
+        }
+
+        // 50音行判定
+        function isCharInGroup(char, group) {
+            const groups = {
+                'ア': ['ア','イ','ウ','エ','オ','ァ','ィ','ゥ','ェ','ォ'],
+                'カ': ['カ','キ','ク','ケ','コ','ガ','ギ','グ','ゲ','ゴ'],
+                'サ': ['サ','シ','ス','セ','ソ','ザ','ジ','ズ','ゼ','ゾ'],
+                'タ': ['タ','チ','ツ','テ','ト','ダ','ヂ','ヅ','デ','ド'],
+                'ナ': ['ナ','ニ','ヌ','ネ','ノ'],
+                'ハ': ['ハ','ヒ','フ','ヘ','ホ','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ'],
+                'マ': ['マ','ミ','ム','メ','モ'],
+                'ヤ': ['ヤ','ユ','ヨ','ャ','ュ','ョ'],
+                'ラ': ['ラ','リ','ル','レ','ロ'],
+                'ワ': ['ワ','ヲ','ン']
+            };
+            return groups[group] ? groups[group].includes(char) : false;
+        }
+
+        async function loadDrugsData() {
             try {
                 const cacheBuster = new Date().getTime();
                 const response = await fetch(`drugs_data.json?t=${cacheBuster}`);
+                if (!response.ok) throw new Error('データ読み込みエラー');
+                allDrugsData = await response.json();
                 
-                if (!response.ok) throw new Error('Network response was not ok');
-                drugData = await response.json();
-                
-                initSelect(document.getElementById('drugSelect1'));
-                initSelect(document.getElementById('drugSelect2'));
+                renderDrugOptions(1, allDrugsData);
+                renderDrugOptions(2, allDrugsData);
                 updateCalculation();
             } catch (error) {
                 console.error('薬剤データの読み込みに失敗しました:', error);
@@ -262,57 +341,107 @@
             }
         }
 
-        function initSelect(selectElement) {
-            selectElement.innerHTML = "";
-            const noneOption = document.createElement('option');
-            noneOption.value = "none";
-            noneOption.textContent = "なし（未選択）";
-            noneOption.selected = true;
-            selectElement.appendChild(noneOption);
+        // 3文字検索・フィルター処理
+        function filterDrugs(sideIdx) {
+            const queryRaw = document.getElementById(`drugSearchInput${sideIdx}`).value.trim();
+            const queryNormalized = queryRaw.normalize('NFKC');
 
-            drugData.forEach((drug, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.textContent = drug.id_name;
-                selectElement.appendChild(option);
-            });
+            if (queryNormalized.length >= 3) {
+                const queryKata = hiraToKata(queryNormalized).toLowerCase();
+                const queryHira = kataToHira(queryNormalized).toLowerCase();
+
+                const filtered = allDrugsData.filter(drug => {
+                    const name = drug.id_name.normalize('NFKC').toLowerCase();
+                    const nameKata = hiraToKata(name);
+                    const nameHira = kataToHira(name);
+                    return name.includes(queryNormalized.toLowerCase()) || nameKata.includes(queryKata) || nameHira.includes(queryHira);
+                });
+
+                renderDrugOptions(sideIdx, filtered);
+                return;
+            }
+
+            applyTabFilter(sideIdx);
         }
 
-        /**
-         * 汎用関数: 薬剤オブジェクトから規格容量(mL)を自動パース/取得
-         */
+        function switchTab(sideIdx, group, btnElement) {
+            currentTab[sideIdx] = group;
+            const container = document.getElementById(`tabContainer${sideIdx}`);
+            container.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+
+            document.getElementById(`drugSearchInput${sideIdx}`).value = '';
+            applyTabFilter(sideIdx);
+        }
+
+        function applyTabFilter(sideIdx) {
+            const tabGroup = currentTab[sideIdx];
+            if (tabGroup === 'all') {
+                renderDrugOptions(sideIdx, allDrugsData);
+                return;
+            }
+
+            const filtered = allDrugsData.filter(drug => {
+                const cleanName = drug.id_name.replace(/^[（\(].*?[）\)]/, '').trim();
+                const firstChar = hiraToKata(cleanName.charAt(0));
+                return isCharInGroup(firstChar, tabGroup);
+            });
+
+            renderDrugOptions(sideIdx, filtered);
+        }
+
+        function renderDrugOptions(sideIdx, drugs) {
+            const selectEl = document.getElementById(`drugSelect${sideIdx}`);
+            const currentVal = selectEl.value;
+            selectEl.innerHTML = '<option value="none">なし（未選択）</option>';
+
+            drugs.forEach(drug => {
+                const opt = document.createElement('option');
+                opt.value = drug.id_name;
+                opt.textContent = drug.id_name;
+                selectEl.appendChild(opt);
+            });
+
+            if (drugs.some(d => d.id_name === currentVal)) {
+                selectEl.value = currentVal;
+            } else if (currentVal === 'none') {
+                selectEl.value = 'none';
+            }
+        }
+
+        function onDrugChange(sideIdx) {
+            const side = getSideElements(sideIdx);
+            const selectedName = side.drugSel.value;
+
+            if (selectedName !== 'none') {
+                const drug = allDrugsData.find(d => d.id_name === selectedName);
+                if (drug) {
+                    side.drugVol.value = getDrugDefaultVol(drug);
+                    if (parseFloat(side.flow.value) === 0) side.flow.value = 10;
+                }
+            } else {
+                side.flow.value = 0;
+            }
+
+            updateUIState(sideIdx);
+            updateCalculation();
+        }
+
         function getDrugDefaultVol(drug) {
             if (!drug) return 1;
-            
             if (drug.default_vol !== undefined && drug.default_vol !== null && !isNaN(drug.default_vol)) {
                 return parseFloat(drug.default_vol);
             }
-            
-            const drugName = drug.id_name || drug.name || '';
-            const match = drugName.match(/(\d+(?:\.\d+)?)\s*mL/i);
-            if (match && match[1]) {
-                return parseFloat(match[1]);
-            }
-            
-            return 1;
+            const match = (drug.id_name || '').match(/(\d+(?:\.\d+)?)\s*mL/i);
+            return match ? parseFloat(match[1]) : 1;
         }
 
-        /**
-         * 汎用関数: 薬剤オブジェクトから浸透圧比スペックを取得
-         */
         function getDrugOsmSpec(drug) {
             if (!drug) return { osmVal: 1.0, osmRaw: "1.0", isMissing: true };
-
             const hasOsm = (drug.osm_val !== undefined && drug.osm_val !== null && !isNaN(drug.osm_val));
             const osmVal = hasOsm ? parseFloat(drug.osm_val) : 1.0;
-            
             const osmRaw = drug.osm_raw ? String(drug.osm_raw) : (hasOsm ? String(osmVal) : "1.0 (未登録)");
-
-            return {
-                osmVal: osmVal,
-                osmRaw: osmRaw,
-                isMissing: !hasOsm
-            };
+            return { osmVal, osmRaw, isMissing: !hasOsm };
         }
 
         function getSideElements(idx) {
@@ -328,66 +457,54 @@
             };
         }
 
+        function updateUIState(idx) {
+            const side = getSideElements(idx);
+            const isNoneDrug = side.drugSel.value === 'none';
+            side.detailArea.classList.toggle('opacity-40', isNoneDrug);
+            side.detailArea.classList.toggle('pointer-events-none', isNoneDrug);
+
+            const isNoneDiluent = side.dilSel.value === 'none';
+            side.area.classList.toggle('opacity-40', isNoneDiluent);
+            side.area.classList.toggle('pointer-events-none', isNoneDiluent);
+
+            if (isNoneDiluent) {
+                side.dilVol.value = 0;
+                side.dilVol.disabled = true;
+            } else {
+                side.dilVol.disabled = false;
+            }
+        }
+
         const side1 = getSideElements(1);
         const side2 = getSideElements(2);
         const mainFlowInput = document.getElementById('mainFlow');
         const mainPhInput = document.getElementById('mainPh');
         const mainOsmInput = document.getElementById('mainOsm');
 
-        // モーダルの開閉イベント
+        // モーダルイベント
         const calcModal = document.getElementById('calcModal');
         document.getElementById('openCalcModal').addEventListener('click', () => calcModal.classList.remove('hidden'));
         document.getElementById('closeCalcModal').addEventListener('click', () => calcModal.classList.add('hidden'));
         document.getElementById('closeCalcModalBtn').addEventListener('click', () => calcModal.classList.add('hidden'));
 
-        [side1, side2].forEach(side => {
-            const updateUIState = () => {
-                const isNoneDrug = side.drugSel.value === 'none';
-                side.detailArea.classList.toggle('opacity-40', isNoneDrug);
-                side.detailArea.classList.toggle('pointer-events-none', isNoneDrug);
-
-                const isNoneDiluent = side.dilSel.value === 'none';
-                side.area.classList.toggle('opacity-40', isNoneDiluent);
-                side.area.classList.toggle('pointer-events-none', isNoneDiluent);
-
-                if (isNoneDiluent) {
-                    side.dilVol.value = 0;
-                    side.dilVol.disabled = true;
-                } else {
-                    side.dilVol.disabled = false;
-                }
-            };
-
-            side.drugSel.addEventListener('change', () => {
-                if (side.drugSel.value !== 'none') {
-                    const drug = drugData[side.drugSel.value];
-                    side.drugVol.value = getDrugDefaultVol(drug);
-                    if (parseFloat(side.flow.value) === 0) side.flow.value = 10;
-                } else {
-                    side.flow.value = 0;
-                }
-                updateUIState();
-                updateCalculation();
-            });
-
-            side.dilSel.addEventListener('change', () => {
-                updateUIState();
-                updateCalculation();
-            });
-
+        [1, 2].forEach(idx => {
+            const side = getSideElements(idx);
+            side.dilSel.addEventListener('change', () => { updateUIState(idx); updateCalculation(); });
             [side.drugVol, side.dilVol, side.flow].forEach(input => input.addEventListener('input', updateCalculation));
-            updateUIState();
+            updateUIState(idx);
         });
 
         [mainFlowInput, mainPhInput, mainOsmInput].forEach(i => i.addEventListener('input', updateCalculation));
 
         function calcSideSpecs(side) {
-            if (side.drugSel.value === 'none' || drugData.length === 0) return { flow: 0, name: "未選択" };
+            if (side.drugSel.value === 'none' || allDrugsData.length === 0) return { flow: 0, name: "未選択" };
+
+            const drug = allDrugsData.find(d => d.id_name === side.drugSel.value);
+            if (!drug) return { flow: 0, name: "未選択" };
 
             const flow = parseFloat(side.flow.value) || 0;
-            if (flow === 0) return { flow: 0, name: drugData[side.drugSel.value].id_name };
+            if (flow === 0) return { flow: 0, name: drug.id_name };
 
-            const drug = drugData[side.drugSel.value];
             const dilKey = side.dilSel.value;
             const dilSpec = DILUENT_SPECS[dilKey];
             const drugVol = parseFloat(side.drugVol.value) || 0;
@@ -404,7 +521,6 @@
             const osmSpec = getDrugOsmSpec(drug);
             const dOsm = osmSpec.osmVal;
             const dOsmRaw = osmSpec.osmRaw;
-
             const missingTag = osmSpec.isMissing ? ' <span class="text-rose-500 font-bold">(※浸透圧比未定義: 1.0で試算)</span>' : '';
 
             if (dilKey === 'none' || dilVol === 0) {
@@ -477,7 +593,6 @@
             const finalPhMax = Math.max(mixPhWorst, mixPhBest);
             const finalOsm = totalOsmMix / totalFlow;
 
-            // 画面表示
             const phStr = (finalPhMin.toFixed(2) === finalPhMax.toFixed(2)) ? finalPhMin.toFixed(2) : `${finalPhMin.toFixed(2)} ～ ${finalPhMax.toFixed(2)}`;
             document.getElementById('phResult').textContent = phStr;
             document.getElementById('osmResult').textContent = finalOsm.toFixed(2);
@@ -521,11 +636,9 @@
                 riskCard.className = "bg-white p-6 rounded-xl shadow-md border-2 border-emerald-300";
             }
 
-            // モーダル（ポップアップ）内のコンテンツ生成
             renderModalDetails({ mainFlow, mainPh, mainOsm, hMain, s1, s2, totalFlow, finalPhMin, finalPhMax, finalOsm, totalHMixMax, totalHMixMin });
         }
 
-        // 計算詳細をポップアップ内に描画する関数
         function renderModalDetails(data) {
             const container = document.getElementById('calcModalContent');
             
@@ -554,7 +667,6 @@
             const avgHMinExp = (data.totalHMixMin / data.totalFlow).toExponential(3);
 
             let html = `
-                <!-- STEP 1: 各系統スペック -->
                 <div class="calc-card">
                     <div class="card-step-badge">STEP 1</div>
                     <h4 class="font-bold text-sky-300 text-sm mb-3">各系統の流出スペック一覧</h4>
@@ -584,7 +696,6 @@
                     </div>
                 </div>
 
-                <!-- STEP 2: 全流量 -->
                 <div class="calc-card">
                     <div class="card-step-badge">STEP 2</div>
                     <h4 class="font-bold text-sky-300 text-sm mb-2">合流部 全流量の算出</h4>
@@ -593,7 +704,6 @@
                     </div>
                 </div>
 
-                <!-- STEP 3: 浸透圧比の加重平均 -->
                 <div class="calc-card gradient-border-purple">
                     <div class="card-step-badge purple">STEP 3</div>
                     <h4 class="font-bold text-purple-300 text-sm mb-2">浸透圧比の加重平均算出</h4>
@@ -606,11 +716,10 @@
                     </div>
                 </div>
 
-                <!-- STEP 4: pH予測の計算過程 -->
                 <div class="calc-card gradient-border-green">
                     <div class="card-step-badge green">STEP 4</div>
                     <h4 class="font-bold text-emerald-300 text-sm mb-2">水素イオン濃度 ([H⁺]) 加重平均と pH 変換</h4>
-                    <p class="text-xs text-slate-400 mb-3">※pHは対数スケールのため、[H⁺] = 10⁻ᵖᴴ でイオン濃度に換算した後に加重平均を算出し、-log₁₀([H⁺]<sub>avg</sub>) でpHに戻します。</p>
+                    <p class="text-xs text-slate-400 mb-3">※pHは対数スケールのため、[H⁺] = 10⁻ᵖᴴ で換算した後に加重平均を計算し、-log₁₀([H⁺]<sub>avg</sub>) でpHに戻します。</p>
                     
                     <div class="ph-split-grid mb-3">
                         <div class="ph-calc-card">
@@ -636,7 +745,7 @@
             container.innerHTML = html;
         }
 
-        window.addEventListener('DOMContentLoaded', loadDrugData);
+        window.addEventListener('DOMContentLoaded', loadDrugsData);
     </script>
 </body>
 </html>
