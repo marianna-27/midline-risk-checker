@@ -278,18 +278,46 @@
             });
         }
 
-        // 薬剤名（[5μg_1mL], [2mg_2mL], [1000mg_100mL]等）から正確な規格容量(mL)を優先抽出
+        /**
+         * 汎用関数: 薬剤オブジェクトから規格容量(mL)を自動パース/取得
+         */
         function getDrugDefaultVol(drug) {
             if (!drug) return 1;
+            
+            // 1. JSON内に default_vol が明示されていれば優先
+            if (drug.default_vol !== undefined && drug.default_vol !== null && !isNaN(drug.default_vol)) {
+                return parseFloat(drug.default_vol);
+            }
+            
+            // 2. 薬剤名 (例: "...[500mL]") から数値抽出を試みる
             const drugName = drug.id_name || drug.name || '';
             const match = drugName.match(/(\d+(?:\.\d+)?)\s*mL/i);
             if (match && match[1]) {
                 return parseFloat(match[1]);
             }
-            if (drug.default_vol !== undefined && drug.default_vol !== null) {
-                return drug.default_vol;
-            }
+            
+            // 3. 全て失敗した場合は 1 mL をデフォルトとする
             return 1;
+        }
+
+        /**
+         * 汎用関数: 薬剤オブジェクトから浸透圧比スペックを取得 (例外処理・条件分岐全廃)
+         */
+        function getDrugOsmSpec(drug) {
+            if (!drug) return { osmVal: 1.0, osmRaw: "1.0", isMissing: true };
+
+            // JSONに設定されている浸透圧比（数値）を取得。未設定の場合は 1.0 をフォールバック
+            const hasOsm = (drug.osm_val !== undefined && drug.osm_val !== null && !isNaN(drug.osm_val));
+            const osmVal = hasOsm ? parseFloat(drug.osm_val) : 1.0;
+            
+            // 表示用文字列。未設定時は数値から自動生成し注意標記を付与
+            const osmRaw = drug.osm_raw ? String(drug.osm_raw) : (hasOsm ? String(osmVal) : "1.0 (未登録)");
+
+            return {
+                osmVal: osmVal,
+                osmRaw: osmRaw,
+                isMissing: !hasOsm
+            };
         }
 
         function getSideElements(idx) {
@@ -339,7 +367,7 @@
             side.drugSel.addEventListener('change', () => {
                 if (side.drugSel.value !== 'none') {
                     const drug = drugData[side.drugSel.value];
-                    // 薬剤の規格(mL)を正確に反映（1mL, 2mL, 100mL等）
+                    // 薬剤の規格(mL)を自動取得・反映
                     side.drugVol.value = getDrugDefaultVol(drug);
                     if (parseFloat(side.flow.value) === 0) side.flow.value = 10;
                 } else {
@@ -376,16 +404,21 @@
             if (totalVol === 0) return { flow: 0, name: drug.id_name };
 
             let phMin, phMax, osm, hMin, hMax;
-            const dPhMin = drug.ph_min || 6.0;
-            const dPhMax = drug.ph_max || 6.0;
-            const dOsm = drug.osm_val || 1.0;
-            const dPhRaw = drug.ph_raw || String(dPhMin);
-            const dOsmRaw = drug.osm_raw || String(dOsm);
+            const dPhMin = drug.ph_min !== undefined ? parseFloat(drug.ph_min) : 6.0;
+            const dPhMax = drug.ph_max !== undefined ? parseFloat(drug.ph_max) : 6.0;
+            const dPhRaw = drug.ph_raw ? String(drug.ph_raw) : `${dPhMin}～${dPhMax}`;
+
+            // 完全汎用の浸透圧比取得
+            const osmSpec = getDrugOsmSpec(drug);
+            const dOsm = osmSpec.osmVal;
+            const dOsmRaw = osmSpec.osmRaw;
+
+            const missingTag = osmSpec.isMissing ? ' <span class="text-rose-500 font-bold">(※浸透圧比未定義: 1.0で試算)</span>' : '';
 
             if (dilKey === 'none' || dilVol === 0) {
                 phMin = dPhMin; phMax = dPhMax; osm = dOsm;
                 hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax);
-                side.info.innerHTML = `<strong>原液:</strong> pH ${dPhRaw} | 浸透圧比 ${dOsmRaw}`;
+                side.info.innerHTML = `<strong>原液:</strong> pH ${dPhRaw} | 浸透圧比 ${dOsmRaw}${missingTag}`;
             } else {
                 const hDrugMin = Math.pow(10, -dPhMin);
                 const hDrugMax = Math.pow(10, -dPhMax);
@@ -400,7 +433,7 @@
                 osm = (dOsm * drugVol + dilSpec.osm * dilVol) / totalVol;
 
                 side.info.innerHTML = `
-                    <div><strong>原液:</strong> pH ${dPhRaw} | 浸透圧比 ${dOsmRaw}</div>
+                    <div><strong>原液:</strong> pH ${dPhRaw} | 浸透圧比 ${dOsmRaw}${missingTag}</div>
                     <div class="mt-1 pt-1 border-t border-slate-200 text-indigo-800">
                         希釈後予測: pH <strong>${phMin.toFixed(2)} ～ ${phMax.toFixed(2)}</strong> | 浸透圧比 <strong>${osm.toFixed(2)}</strong>
                     </div>`;
