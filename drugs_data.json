@@ -1449,10 +1449,37 @@
     "default_vol": 2.0
   },
   {
+    "id_name": "アレルゲンハウス",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
     "id_name": "アレルゲン対照",
     "ph_raw": "5.5~7.5",
     "ph_min": 5.5,
     "ph_max": 7.5,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アレルゲン希釈",
+    "ph_raw": "4.0~7.0",
+    "ph_min": 4.0,
+    "ph_max": 7.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アレルゲン治療",
+    "ph_raw": "4.0~7.0",
+    "ph_min": 4.0,
+    "ph_max": 7.0,
     "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 500.0
@@ -1464,6 +1491,24 @@
     "ph_max": 6.5,
     "osm_raw": "約1",
     "osm_val": 1.0,
+    "default_vol": 100.0
+  },
+  {
+    "id_name": "アンチレクス静注[10mg_1mL]",
+    "ph_raw": "6.5~8.0",
+    "ph_min": 6.5,
+    "ph_max": 8.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "イオメロン300注[100mL]",
+    "ph_raw": "6.5~7.5",
+    "ph_min": 6.5,
+    "ph_max": 7.5,
+    "osm_raw": "約2",
+    "osm_val": 2.0,
     "default_vol": 100.0
   }
 ]
