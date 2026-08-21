@@ -990,6 +990,474 @@
     "default_vol": 5.0
   },
   {
+    "id_name": "アトニン－O注[5単位_1mL]",
+    "ph_raw": "2.5~4.5",
+    "ph_min": 2.5,
+    "ph_max": 4.5,
+    "osm_raw": "約0.1",
+    "osm_val": 0.1,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アトロピン注0.05%シリンジ｢テルモ｣[0.5mg_1mL]",
+    "ph_raw": "4.0~6.0",
+    "ph_min": 4.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アトロピン硫酸塩注｢ニプロ｣[0.5mg_1mL]",
+    "ph_raw": "4.0~6.0",
+    "ph_min": 4.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アドセトリス点滴静注用[50mg]",
+    "ph_raw": "6.6~10.5",
+    "ph_min": 6.6,
+    "ph_max": 10.5,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アドトラーザ皮下注シリンジ[150mg_1mL]",
+    "ph_raw": "5.0~5.8",
+    "ph_min": 5.0,
+    "ph_max": 5.8,
+    "osm_raw": "約0.9",
+    "osm_val": 0.9,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アドトラーザ皮下注ペン[300mg_2mL]",
+    "ph_raw": "5.0~5.8",
+    "ph_min": 5.0,
+    "ph_max": 5.8,
+    "osm_raw": "約0.9",
+    "osm_val": 0.9,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "アドベイト静注用キット[1000単位]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アドベイト静注用キット[2000単位]",
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "約1.2",
+    "osm_val": 1.2,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アドベイト静注用キット[250単位]",
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "約1.2",
+    "osm_val": 1.2,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アドベイト静注用キット[3000単位]",
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "約1.2",
+    "osm_val": 1.2,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アドベイト静注用キット[500単位]",
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "約1.2",
+    "osm_val": 1.2,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アドレナリン(エピネフリン)注0.1%シリンジ｢テルモ｣[1mg_1mL]",
+    "ph_raw": "2.3~5.0",
+    "ph_min": 2.3,
+    "ph_max": 5.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アナエブリ皮下注ペン[200mg_1.2mL]",
+    "ph_raw": "5.7~6.3",
+    "ph_min": 5.7,
+    "ph_max": 6.3,
+    "osm_raw": "約1.6",
+    "osm_val": 1.6,
+    "default_vol": 1.2
+  },
+  {
+    "id_name": "アナフラニール点滴静注液[25mg_2mL]",
+    "ph_raw": "4.1~5.1",
+    "ph_min": 4.1,
+    "ph_max": 5.1,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "アネメトロ点滴静注液[500mg_100mL]",
+    "ph_raw": "4.5~6.0",
+    "ph_min": 4.5,
+    "ph_max": 6.0,
+    "osm_raw": "約1.0",
+    "osm_val": 1.0,
+    "default_vol": 100.0
+  },
+  {
+    "id_name": "アネレム静注用20mg",
+    "ph_raw": "2.9~20.0",
+    "ph_min": 2.9,
+    "ph_max": 20.0,
+    "osm_raw": "約1.1",
+    "osm_val": 1.1,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アネレム静注用[50mg]",
+    "ph_raw": "2.9~50.0",
+    "ph_min": 2.9,
+    "ph_max": 50.0,
+    "osm_raw": "約1.2",
+    "osm_val": 1.2,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アバスチン点滴静注用[100mg_4mL]",
+    "ph_raw": "5.9~6.3",
+    "ph_min": 5.9,
+    "ph_max": 6.3,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 4.0
+  },
+  {
+    "id_name": "アバスチン点滴静注用[400mg_16mL]",
+    "ph_raw": "5.9~6.3",
+    "ph_min": 5.9,
+    "ph_max": 6.3,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 16.0
+  },
+  {
+    "id_name": "アバスチン硝子体内注射[0.05mL_本]",
+    "ph_raw": "5.3~5.8",
+    "ph_min": 5.3,
+    "ph_max": 5.8,
+    "osm_raw": "約0.9",
+    "osm_val": 0.9,
+    "default_vol": 0.05
+  },
+  {
+    "id_name": "アフリベルセプト硝子体内注射用キット「バイエル」[40mg_mL]",
+    "ph_raw": "5.9~6.5",
+    "ph_min": 5.9,
+    "ph_max": 6.5,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アブラキサン点滴静注用[100mg]",
+    "ph_raw": "6.0~7.5",
+    "ph_min": 6.0,
+    "ph_max": 7.5,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アブリスボ筋注用",
+    "ph_raw": "6.9~7.7",
+    "ph_min": 6.9,
+    "ph_max": 7.7,
+    "osm_raw": "約1.4",
+    "osm_val": 1.4,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アミオダロン塩酸塩静注｢TE｣[150mg_3mL]",
+    "ph_raw": "2.0~3.0",
+    "ph_min": 2.0,
+    "ph_max": 3.0,
+    "osm_raw": "約0.6",
+    "osm_val": 0.6,
+    "default_vol": 3.0
+  },
+  {
+    "id_name": "アミカシン硫酸塩注射液｢SW｣[200mg_2mL]",
+    "ph_raw": "6.0~7.5",
+    "ph_min": 6.0,
+    "ph_max": 7.5,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "アミサリン注[100mg_1mL]",
+    "ph_raw": "4.0~6.0",
+    "ph_min": 4.0,
+    "ph_max": 6.0,
+    "osm_raw": "約2",
+    "osm_val": 2.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アミニック輸液[200mL]",
+    "ph_raw": "6.8~7.8",
+    "ph_min": 6.8,
+    "ph_max": 7.8,
+    "osm_raw": "約3",
+    "osm_val": 3.0,
+    "default_vol": 200.0
+  },
+  {
+    "id_name": "アミノレバン点滴静注[500mL]",
+    "ph_raw": "5.5~6.5",
+    "ph_min": 5.5,
+    "ph_max": 6.5,
+    "osm_raw": "約3",
+    "osm_val": 3.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アミヴィッド静注",
+    "ph_raw": "5.5~8.0",
+    "ph_min": 5.5,
+    "ph_max": 8.0,
+    "osm_raw": "約6",
+    "osm_val": 6.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アムビゾーム点滴静注用[50mg]",
+    "ph_raw": "5.0~6.0",
+    "ph_min": 5.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アムヴトラ皮下注シリンジ[25mg_0.5mL]",
+    "ph_raw": "6.0~8.0",
+    "ph_min": 6.0,
+    "ph_max": 8.0,
+    "osm_raw": "約1.0",
+    "osm_val": 1.0,
+    "default_vol": 0.5
+  },
+  {
+    "id_name": "アラセナ－A点滴静注用[300mg]",
+    "ph_raw": "3.0~3.7",
+    "ph_min": 3.0,
+    "ph_max": 3.7,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アラノンジー静注用［250mg_50ｍL］",
+    "ph_raw": "5.0~7.0",
+    "ph_min": 5.0,
+    "ph_max": 7.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 50.0
+  },
+  {
+    "id_name": "アリクストラ皮下注[2.5mg_0.5mL](予防用)",
+    "ph_raw": "5.0~8.0",
+    "ph_min": 5.0,
+    "ph_max": 8.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 0.5
+  },
+  {
+    "id_name": "アリナミンF注[10mg_2mL]",
+    "ph_raw": "3.0~4.3",
+    "ph_min": 3.0,
+    "ph_max": 4.3,
+    "osm_raw": "約4",
+    "osm_val": 4.0,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "アルガトロバン注射液｢サワイ｣[10mg_20mL]",
+    "ph_raw": "5.2~7.2",
+    "ph_min": 5.2,
+    "ph_max": 7.2,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 20.0
+  },
+  {
+    "id_name": "アルギU点滴静注[20g_200mL]",
+    "ph_raw": "5.0~6.0",
+    "ph_min": 5.0,
+    "ph_max": 6.0,
+    "osm_raw": "約3",
+    "osm_val": 3.0,
+    "default_vol": 200.0
+  },
+  {
+    "id_name": "アルケラン注[50mg]",
+    "ph_raw": "6.0~7.0",
+    "ph_min": 6.0,
+    "ph_max": 7.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アルブミナ－25%静注[12.5g_50mL]",
+    "ph_raw": "6.4~7.4",
+    "ph_min": 6.4,
+    "ph_max": 7.4,
+    "osm_raw": "約1.0",
+    "osm_val": 1.0,
+    "default_vol": 50.0
+  },
+  {
+    "id_name": "アルブミナ－5%静注[12.5g_250mL]",
+    "ph_raw": "6.4~7.4",
+    "ph_min": 6.4,
+    "ph_max": 7.4,
+    "osm_raw": "約0.9",
+    "osm_val": 0.9,
+    "default_vol": 250.0
+  },
+  {
+    "id_name": "アルプロスタジルアルファデクス注射用｢タカタ｣[20μg]",
+    "ph_raw": "4.0~6.5",
+    "ph_min": 4.0,
+    "ph_max": 6.5,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アルプロスタジルアルファデクス点滴静注用｢タカタ｣[500μg]",
+    "ph_raw": "4.0~6.5",
+    "ph_min": 4.0,
+    "ph_max": 6.5,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アルプロスタジル注シリンジ｢サワイ｣[10μg_2mL]",
+    "ph_raw": "4.5~6.0",
+    "ph_min": 4.5,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "アルプロスタジル注｢サワイ｣[5μg_1mL]",
+    "ph_raw": "4.5~6.0",
+    "ph_min": 4.5,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "アレックスビー筋注用",
+    "ph_raw": "6.3",
+    "ph_min": 6.3,
+    "ph_max": 6.3,
+    "osm_raw": "約1.5",
+    "osm_val": 1.5,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アレビアチン注[250mg_5mL]",
+    "ph_raw": "12.0",
+    "ph_min": 12.0,
+    "ph_max": 12.0,
+    "osm_raw": "約29",
+    "osm_val": 29.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "アレルゲンエキスハウスダスト｢トリイ｣希釈1_10万",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アレルゲンエキスハウスダスト｢トリイ｣希釈1_1万",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アレルゲンエキス｢トリイ｣ハウスダスト 1_1000",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アレルゲンスクラッチエキス対照液｢トリイ｣",
+    "ph_raw": "5.5~6.5",
+    "ph_min": 5.5,
+    "ph_max": 6.5,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "アレルゲンスクラッチエキス陽性対照液｢トリイ｣ ヒスタミン二塩酸塩[2mL]",
+    "ph_raw": "5.3~6.3",
+    "ph_min": 5.3,
+    "ph_max": 6.3,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "アレルゲン対照",
+    "ph_raw": "5.5~7.5",
+    "ph_min": 5.5,
+    "ph_max": 7.5,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
     "id_name": "アレンドロン酸点滴静注バッグ｢HK｣[900μg_100mL]",
     "ph_raw": "5.5~6.5",
     "ph_min": 5.5,
