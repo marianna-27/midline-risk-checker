@@ -481,9 +481,15 @@
             if (s1.flow > 0) { tHMax += s1.hMin * s1.flow; tHMin += s1.hMax * s1.flow; tOsm += s1.osm * s1.flow; }
             if (s2.flow > 0) { tHMax += s2.hMin * s2.flow; tHMin += s2.hMax * s2.flow; tOsm += s2.osm * s2.flow; }
 
-            const finalPhMin = Math.min(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow));
-            const finalPhMax = Math.max(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow));
-            const finalOsm = tOsm / totalFlow;
+            // === 修正部分：一度生の計算値を出す ===
+            const rawPhMin = Math.min(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow));
+            const rawPhMax = Math.max(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow));
+            const rawOsm = tOsm / totalFlow;
+
+            // === 修正部分：画面表示と同じ基準（小数第2位）で丸めた数値を判定用の値とする ===
+            const finalPhMin = Number(rawPhMin.toFixed(2));
+            const finalPhMax = Number(rawPhMax.toFixed(2));
+            const finalOsm = Number(rawOsm.toFixed(2));
 
             // pHと浸透圧のそれぞれのリスク判定
             let phDanger = finalPhMin < 4.1 || finalPhMax > 9.0;
