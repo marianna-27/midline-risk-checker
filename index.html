@@ -243,34 +243,40 @@
 
         </div>
 
-        <!-- 判定・シグナル表示エリア (Drastically changed) -->
-        <div id="riskCard" class="glass-card p-8 rounded-3xl transition-all duration-500 mt-10">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200/50 pb-6 mb-6 gap-4">
+        <!-- 判定・シグナル表示エリア -->
+        <div id="riskCard" class="glass-card p-8 rounded-3xl transition-all duration-500 mt-10 shadow-2xl bg-white/80 border border-slate-200">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b border-slate-200/50 pb-6">
                 <div>
-                    <span class="text-xs font-bold tracking-widest text-slate-400 uppercase">Analysis Result</span>
-                    <h3 id="riskTitle" class="text-3xl font-black mt-1">--</h3>
-                    <p id="riskDescription" class="mt-2 text-sm font-medium">--</p>
+                    <div class="text-xs font-bold text-slate-400 tracking-widest mb-1 uppercase">Analysis Result</div>
+                    <h2 id="riskTitle" class="text-3xl font-black mt-1 text-slate-700">判定中...</h2>
+                    <p id="riskDescription" class="mt-2 text-sm text-slate-600">データを入力して計算を実行してください。</p>
                 </div>
-                <div id="riskBadge" class="px-6 py-3 rounded-2xl text-lg font-black shadow-lg text-center min-w-[120px]">判定中</div>
+                <div id="riskBadge" class="px-6 py-3 rounded-2xl text-lg font-black shadow-lg text-center min-w-[120px] bg-slate-200 text-slate-500">
+                    -
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <!-- pHカード -->
-                <div class="bg-white/80 p-6 rounded-2xl border border-white shadow-sm flex flex-col justify-center items-center text-center">
+                <div id="phBox" class="bg-white/80 p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
                     <div class="text-sm text-slate-500 font-bold tracking-wider mb-2">合流部予測 pH</div>
-                    <div id="phResult" class="text-5xl font-black text-slate-800 tracking-tighter">--</div>
-                    <div class="text-xs text-slate-400 font-medium mt-3 bg-slate-100 px-3 py-1 rounded-full">基準域: 4.1 ～ 9.0</div>
+                    <div id="phResult" class="text-5xl font-black text-slate-800 tracking-tighter transition-colors duration-300">--</div>
+                    <div class="text-xs text-slate-400 font-medium mt-3 bg-slate-100 px-3 py-1 rounded-full">
+                        推奨: 5.0～8.0 (限界 4.1～9.0)
+                    </div>
                 </div>
 
                 <!-- 浸透圧カード -->
-                <div class="bg-white/80 p-6 rounded-2xl border border-white shadow-sm flex flex-col justify-center items-center text-center">
+                <div id="osmBox" class="bg-white/80 p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
                     <div class="text-sm text-slate-500 font-bold tracking-wider mb-2">合流部予測 浸透圧比</div>
-                    <div id="osmResult" class="text-5xl font-black text-slate-800 tracking-tighter">--</div>
-                    <div class="text-xs text-slate-400 font-medium mt-3 bg-slate-100 px-3 py-1 rounded-full">基準値: 3.0 以下</div>
+                    <div id="osmResult" class="text-5xl font-black text-slate-800 tracking-tighter transition-colors duration-300">--</div>
+                    <div class="text-xs text-slate-400 font-medium mt-3 bg-slate-100 px-3 py-1 rounded-full">
+                        推奨: 2.0以下 (限界 3.0以下)
+                    </div>
                 </div>
             </div>
 
-            <div class="mt-8 flex justify-center md:justify-end">
+            <div class="flex justify-center md:justify-end">
                 <button id="openCalcModal" class="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-xl transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 flex items-center space-x-2">
                     <span>📊 計算過程・内訳の詳細を見る</span>
                 </button>
@@ -479,19 +485,35 @@
             const finalPhMax = Math.max(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow));
             const finalOsm = tOsm / totalFlow;
 
+            // pHと浸透圧のそれぞれのリスク判定
+            let phDanger = finalPhMin < 4.1 || finalPhMax > 9.0;
+            let phWarning = !phDanger && (finalPhMin < 5.0 || finalPhMax > 8.0);
+            
+            let osmDanger = finalOsm > 3.0;
+            let osmWarning = !osmDanger && finalOsm > 2.0;
+
+            // 総合リスク判定
+            let isD = phDanger || osmDanger;
+            let isW = (!isD) && (phWarning || osmWarning);
+
+            let reasons = [];
+            if (phDanger) {
+                if (finalPhMin < 4.1) reasons.push(`強酸性 (${finalPhMin.toFixed(2)})`);
+                if (finalPhMax > 9.0) reasons.push(`強アルカリ (${finalPhMax.toFixed(2)})`);
+            } else if (phWarning) {
+                reasons.push("pH適正外");
+            }
+            if (osmDanger) reasons.push(`高浸透圧 (${finalOsm.toFixed(2)})`);
+            else if (osmWarning) reasons.push("浸透圧適正外");
+
+            // テキストの更新
             document.getElementById('phResult').textContent = (finalPhMin.toFixed(2) === finalPhMax.toFixed(2)) ? finalPhMin.toFixed(2) : `${finalPhMin.toFixed(2)} ～ ${finalPhMax.toFixed(2)}`;
             document.getElementById('osmResult').textContent = finalOsm.toFixed(2);
 
+            // リスクカード全体の更新
             const rTitle = document.getElementById('riskTitle'), rBadge = document.getElementById('riskBadge'), rDesc = document.getElementById('riskDescription'), rCard = document.getElementById('riskCard');
-            let reasons = [], isD = false, isW = false;
-
-            if (finalPhMin < 4.1) { isD = true; reasons.push(`強酸性 (${finalPhMin.toFixed(2)})`); }
-            if (finalPhMax > 9.0) { isD = true; reasons.push(`強アルカリ (${finalPhMax.toFixed(2)})`); }
-            if (finalOsm > 3.0) { isD = true; reasons.push(`高浸透圧 (${finalOsm.toFixed(2)})`); }
-            if (!isD && (finalPhMin < 5.0 || finalPhMax > 8.0 || finalOsm > 2.0)) { isW = true; reasons.push("適正領域外"); }
-
-            // Drastic Style Update based on Risk
             rCard.className = "glass-card p-8 rounded-3xl transition-all duration-500 mt-10 shadow-2xl ";
+            
             if (isD) {
                 rTitle.textContent = "血管障害リスク：高"; rTitle.className = "text-3xl font-black mt-1 text-rose-700";
                 rBadge.textContent = "⚠️ 警告"; rBadge.className = "px-6 py-3 rounded-2xl text-lg font-black shadow-lg text-center min-w-[120px] bg-rose-500 text-white";
@@ -508,11 +530,41 @@
                 rDesc.textContent = "3経路合流後の予測pH・浸透圧は安全基準をクリアしています。";
                 rCard.className += "bg-gradient-to-br from-emerald-50 to-teal-100/80 border-emerald-300";
             }
+
+            // 個別ボックス（pH, 浸透圧）の背景・文字色ダイナミック更新
+            const phBox = document.getElementById('phBox');
+            const phText = document.getElementById('phResult');
+            const osmBox = document.getElementById('osmBox');
+            const osmText = document.getElementById('osmResult');
+
+            // pHボックスの色設定
+            if (phDanger) {
+                phText.className = "text-5xl font-black tracking-tighter text-rose-600";
+                phBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-rose-50/90 border-rose-200 shadow-inner";
+            } else if (phWarning) {
+                phText.className = "text-5xl font-black tracking-tighter text-amber-600";
+                phBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-amber-50/90 border-amber-200 shadow-inner";
+            } else {
+                phText.className = "text-5xl font-black tracking-tighter text-emerald-600";
+                phBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-emerald-50/50 border-emerald-100";
+            }
+
+            // 浸透圧ボックスの色設定
+            if (osmDanger) {
+                osmText.className = "text-5xl font-black tracking-tighter text-rose-600";
+                osmBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-rose-50/90 border-rose-200 shadow-inner";
+            } else if (osmWarning) {
+                osmText.className = "text-5xl font-black tracking-tighter text-amber-600";
+                osmBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-amber-50/90 border-amber-200 shadow-inner";
+            } else {
+                osmText.className = "text-5xl font-black tracking-tighter text-emerald-600";
+                osmBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-emerald-50/50 border-emerald-100";
+            }
+
             renderModalDetails({ mainFlow, mainPh, mainOsm, hMain, s1, s2, totalFlow, finalPhMin, finalPhMax, finalOsm, totalHMixMax: tHMax, totalHMixMin: tHMin });
         }
 
         function renderModalDetails(data) {
-            // （モーダルの描画ロジックは既存のものを完全流用していますので省略せずそのまま維持しています）
             const container = document.getElementById('calcModalContent');
             const flowTerms = [data.mainFlow];
             if (data.s1.flow > 0) flowTerms.push(data.s1.flow);
