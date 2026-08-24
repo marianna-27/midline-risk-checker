@@ -424,10 +424,10 @@
   },
   {
     "id_name": "Dドライ透析剤2.75S",
-    "ph_raw": "7.2~7.4",
-    "ph_min": 7.2,
-    "ph_max": 7.4,
-    "osm_raw": "1.0",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 500.0
   },
@@ -451,9 +451,9 @@
   },
   {
     "id_name": "HMG注射用｢F｣[75単位]",
-    "ph_raw": "5.5~6.5",
-    "ph_min": 5.5,
-    "ph_max": 6.5,
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
     "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 500.0
@@ -496,11 +496,11 @@
   },
   {
     "id_name": "uFSH注用｢あすか｣[75単位]",
-    "ph_raw": "6.0~7.0",
+    "ph_raw": "6.0",
     "ph_min": 6.0,
-    "ph_max": 7.0,
-    "osm_raw": "約0.9",
-    "osm_val": 0.9,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
     "default_vol": 500.0
   },
   {
@@ -550,9 +550,9 @@
   },
   {
     "id_name": "【禁髄腔内】注射用フィルデシン[1mg]",
-    "ph_raw": "3.5~5.5",
-    "ph_min": 3.5,
-    "ph_max": 5.5,
+    "ph_raw": "1.0",
+    "ph_min": 1.0,
+    "ph_max": 1.0,
     "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 500.0
@@ -730,9 +730,9 @@
   },
   {
     "id_name": "アクプラ静注用[10mg]",
-    "ph_raw": "0.02~6.5",
-    "ph_min": 0.02,
-    "ph_max": 6.5,
+    "ph_raw": "6.5~7.5",
+    "ph_min": 6.5,
+    "ph_max": 7.5,
     "osm_raw": "約0.1",
     "osm_val": 0.1,
     "default_vol": 500.0
@@ -787,24 +787,24 @@
     "ph_raw": "1.0~10.0",
     "ph_min": 1.0,
     "ph_max": 10.0,
-    "osm_raw": "約1",
-    "osm_val": 1.0,
+    "osm_raw": "約1.6",
+    "osm_val": 1.6,
     "default_vol": 500.0
   },
   {
     "id_name": "アザシチジン注射用「サワイ」[100mg] -点滴静注用-",
-    "ph_raw": "1.0~4.0",
-    "ph_min": 1.0,
-    "ph_max": 4.0,
-    "osm_raw": "約1",
-    "osm_val": 1.0,
+    "ph_raw": "5.5~8.0",
+    "ph_min": 5.5,
+    "ph_max": 8.0,
+    "osm_raw": "約0.7",
+    "osm_val": 0.7,
     "default_vol": 500.0
   },
   {
     "id_name": "アザシチジン注射用「サワイ」[100mg] -皮下注用-",
-    "ph_raw": "1.0~5.5",
-    "ph_min": 1.0,
-    "ph_max": 5.5,
+    "ph_raw": "5.5~8.0",
+    "ph_min": 5.5,
+    "ph_max": 8.0,
     "osm_raw": "約0.7",
     "osm_val": 0.7,
     "default_vol": 500.0
