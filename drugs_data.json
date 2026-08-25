@@ -955,11 +955,11 @@
   },
   {
     "id_name": "アディノベイト静注用キット[500単位]",
-    "ph_raw": "6.7~7.3",
-    "ph_min": 6.7,
-    "ph_max": 7.3,
-    "osm_raw": "約1.2",
-    "osm_val": 1.2,
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
     "default_vol": 500.0
   },
   {
@@ -1018,9 +1018,9 @@
   },
   {
     "id_name": "アドセトリス点滴静注用[50mg]",
-    "ph_raw": "6.6~10.5",
+    "ph_raw": "6.6",
     "ph_min": 6.6,
-    "ph_max": 10.5,
+    "ph_max": 6.6,
     "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 500.0
@@ -1045,11 +1045,11 @@
   },
   {
     "id_name": "アドベイト静注用キット[1000単位]",
-    "ph_raw": "6.0",
-    "ph_min": 6.0,
-    "ph_max": 6.0,
-    "osm_raw": "約1",
-    "osm_val": 1.0,
+    "ph_raw": "6.7~7.3",
+    "ph_min": 6.7,
+    "ph_max": 7.3,
+    "osm_raw": "約1.2",
+    "osm_val": 1.2,
     "default_vol": 500.0
   },
   {
@@ -1081,11 +1081,11 @@
   },
   {
     "id_name": "アドベイト静注用キット[500単位]",
-    "ph_raw": "6.7~7.3",
-    "ph_min": 6.7,
-    "ph_max": 7.3,
-    "osm_raw": "約1.2",
-    "osm_val": 1.2,
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
     "default_vol": 500.0
   },
   {
@@ -1126,8 +1126,8 @@
   },
   {
     "id_name": "アネレム静注用20mg",
-    "ph_raw": "2.9~20.0",
-    "ph_min": 2.9,
+    "ph_raw": "1.0~20.0",
+    "ph_min": 1.0,
     "ph_max": 20.0,
     "osm_raw": "約1.1",
     "osm_val": 1.1,
@@ -1135,8 +1135,8 @@
   },
   {
     "id_name": "アネレム静注用[50mg]",
-    "ph_raw": "2.9~50.0",
-    "ph_min": 2.9,
+    "ph_raw": "1.0~50.0",
+    "ph_min": 1.0,
     "ph_max": 50.0,
     "osm_raw": "約1.2",
     "osm_val": 1.2,
@@ -1426,7 +1426,7 @@
     "ph_raw": "6.0",
     "ph_min": 6.0,
     "ph_max": 6.0,
-    "osm_raw": "1.0",
+    "osm_raw": "約1",
     "osm_val": 1.0,
     "default_vol": 500.0
   },
