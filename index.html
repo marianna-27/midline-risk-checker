@@ -17,10 +17,10 @@
 
         /* Modern Glass Card */
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(203, 213, 225, 0.8);
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
         }
 
@@ -32,7 +32,7 @@
             border-radius: 9999px;
             background-color: #f1f5f9;
             color: #64748b;
-            border: 1px solid transparent;
+            border: 1px solid #cbd5e1;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .tab-btn:hover { 
@@ -42,13 +42,14 @@
         .tab-btn.active {
             background-color: #3b82f6;
             color: #ffffff;
+            border-color: #3b82f6;
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         /* Custom Input Styling */
         .modern-input {
             background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
+            border: 1.5px solid #cbd5e1;
             transition: all 0.2s;
         }
         .modern-input:focus {
@@ -57,7 +58,7 @@
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
         }
 
-        /* --- 既存のモーダルCSS (変更なし) --- */
+        /* --- モーダルCSS --- */
         .calc-modal-container { background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.15); color: #f8fafc; }
         .calc-card { position: relative; background: #1e293b; border-radius: 12px; padding: 18px; border: 1px solid #334155; }
         .gradient-border-purple { border-left: 4px solid #a855f7; }
@@ -243,9 +244,9 @@
 
         </div>
 
-        <!-- 判定・シグナル表示エリア -->
-        <div id="riskCard" class="glass-card p-8 rounded-3xl transition-all duration-500 mt-10 shadow-2xl bg-white/80 border border-slate-200">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b border-slate-200/50 pb-6">
+        <!-- 判定・シグナル表示エリア (枠線を border-2 に強化) -->
+        <div id="riskCard" class="glass-card p-8 rounded-3xl transition-all duration-500 mt-10 shadow-2xl bg-white/80 border-2 border-slate-300">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b-2 border-slate-200/80 pb-6">
                 <div>
                     <div class="text-xs font-bold text-slate-400 tracking-widest mb-1 uppercase">Analysis Result</div>
                     <h2 id="riskTitle" class="text-3xl font-black mt-1 text-slate-700">判定中...</h2>
@@ -257,20 +258,20 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- pHカード -->
-                <div id="phBox" class="bg-white/80 p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
+                <!-- pHカード (枠線 border-2 化) -->
+                <div id="phBox" class="bg-white/90 p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
                     <div class="text-sm text-slate-500 font-bold tracking-wider mb-2">合流部予測 pH</div>
                     <div id="phResult" class="text-5xl font-black text-slate-800 tracking-tighter transition-colors duration-300">--</div>
-                    <div class="text-xs text-slate-400 font-medium mt-3 bg-slate-100 px-3 py-1 rounded-full">
+                    <div class="text-xs text-slate-500 font-semibold mt-3 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
                         推奨: 5.0～8.0 (限界 4.1～9.0)
                     </div>
                 </div>
 
-                <!-- 浸透圧カード -->
-                <div id="osmBox" class="bg-white/80 p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
+                <!-- 浸透圧カード (枠線 border-2 化) -->
+                <div id="osmBox" class="bg-white/90 p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
                     <div class="text-sm text-slate-500 font-bold tracking-wider mb-2">合流部予測 浸透圧比</div>
                     <div id="osmResult" class="text-5xl font-black text-slate-800 tracking-tighter transition-colors duration-300">--</div>
-                    <div class="text-xs text-slate-400 font-medium mt-3 bg-slate-100 px-3 py-1 rounded-full">
+                    <div class="text-xs text-slate-500 font-semibold mt-3 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
                         推奨: 2.0以下 (限界 3.0以下)
                     </div>
                 </div>
@@ -284,7 +285,7 @@
         </div>
     </div>
 
-    <!-- ポップアップ（モーダル）※変更なし -->
+    <!-- ポップアップ（モーダル） -->
     <div id="calcModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center hidden z-50 p-4">
         <div class="calc-modal-container rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden">
             <div class="p-5 bg-slate-900 border-b border-slate-800 flex justify-between items-center">
@@ -481,12 +482,10 @@
             if (s1.flow > 0) { tHMax += s1.hMin * s1.flow; tHMin += s1.hMax * s1.flow; tOsm += s1.osm * s1.flow; }
             if (s2.flow > 0) { tHMax += s2.hMin * s2.flow; tHMin += s2.hMax * s2.flow; tOsm += s2.osm * s2.flow; }
 
-            // === 修正部分：一度生の計算値を出す ===
             const rawPhMin = Math.min(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow));
             const rawPhMax = Math.max(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow));
             const rawOsm = tOsm / totalFlow;
 
-            // === 修正部分：画面表示と同じ基準（小数第2位）で丸めた数値を判定用の値とする ===
             const finalPhMin = Number(rawPhMin.toFixed(2));
             const finalPhMax = Number(rawPhMax.toFixed(2));
             const finalOsm = Number(rawOsm.toFixed(2));
@@ -516,7 +515,7 @@
             document.getElementById('phResult').textContent = (finalPhMin.toFixed(2) === finalPhMax.toFixed(2)) ? finalPhMin.toFixed(2) : `${finalPhMin.toFixed(2)} ～ ${finalPhMax.toFixed(2)}`;
             document.getElementById('osmResult').textContent = finalOsm.toFixed(2);
 
-            // リスクカード全体の更新
+            // リスクカード全体の更新 (動的な border-2 クラス追加)
             const rTitle = document.getElementById('riskTitle'), rBadge = document.getElementById('riskBadge'), rDesc = document.getElementById('riskDescription'), rCard = document.getElementById('riskCard');
             rCard.className = "glass-card p-8 rounded-3xl transition-all duration-500 mt-10 shadow-2xl ";
             
@@ -524,47 +523,47 @@
                 rTitle.textContent = "血管障害リスク：高"; rTitle.className = "text-3xl font-black mt-1 text-rose-700";
                 rBadge.textContent = "⚠️ 警告"; rBadge.className = "px-6 py-3 rounded-2xl text-lg font-black shadow-lg text-center min-w-[120px] bg-rose-500 text-white";
                 rDesc.innerHTML = `<span class='font-bold text-rose-600'>ミッドライン/末梢投与は非推奨。</span> 理由: ${reasons.join(", ")}`;
-                rCard.className += "bg-gradient-to-br from-rose-50 to-red-100/80 border-rose-300";
+                rCard.className += "bg-gradient-to-br from-rose-50 to-red-100/80 border-2 border-rose-300";
             } else if (isW) {
                 rTitle.textContent = "血管障害リスク：あり"; rTitle.className = "text-3xl font-black mt-1 text-amber-700";
                 rBadge.textContent = "⚡ 注意"; rBadge.className = "px-6 py-3 rounded-2xl text-lg font-black shadow-lg text-center min-w-[120px] bg-amber-500 text-white";
                 rDesc.innerHTML = `<span class='font-bold text-amber-700'>慎重投与。局所観察を強化。</span> 理由: ${reasons.join(", ")}`;
-                rCard.className += "bg-gradient-to-br from-amber-50 to-orange-100/80 border-amber-300";
+                rCard.className += "bg-gradient-to-br from-amber-50 to-orange-100/80 border-2 border-amber-300";
             } else {
                 rTitle.textContent = "安全域内"; rTitle.className = "text-3xl font-black mt-1 text-emerald-700";
                 rBadge.textContent = "✅ 安全"; rBadge.className = "px-6 py-3 rounded-2xl text-lg font-black shadow-lg text-center min-w-[120px] bg-emerald-500 text-white";
                 rDesc.textContent = "3経路合流後の予測pH・浸透圧は安全基準をクリアしています。";
-                rCard.className += "bg-gradient-to-br from-emerald-50 to-teal-100/80 border-emerald-300";
+                rCard.className += "bg-gradient-to-br from-emerald-50 to-teal-100/80 border-2 border-emerald-300";
             }
 
-            // 個別ボックス（pH, 浸透圧）の背景・文字色ダイナミック更新
+            // 個別ボックス（pH, 浸透圧）の背景・枠線・文字色ダイナミック更新
             const phBox = document.getElementById('phBox');
             const phText = document.getElementById('phResult');
             const osmBox = document.getElementById('osmBox');
             const osmText = document.getElementById('osmResult');
 
-            // pHボックスの色設定
+            // pHボックスの色設定 (border-2 と色濃度を均一化)
             if (phDanger) {
                 phText.className = "text-5xl font-black tracking-tighter text-rose-600";
-                phBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-rose-50/90 border-rose-200 shadow-inner";
+                phBox.className = "p-6 rounded-2xl border-2 border-red-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
             } else if (phWarning) {
                 phText.className = "text-5xl font-black tracking-tighter text-amber-600";
-                phBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-amber-50/90 border-amber-200 shadow-inner";
+                phBox.className = "p-6 rounded-2xl border-2 border-amber-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
             } else {
                 phText.className = "text-5xl font-black tracking-tighter text-emerald-600";
-                phBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-emerald-50/50 border-emerald-100";
+                phBox.className = "p-6 rounded-2xl border-2 border-emerald-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
             }
 
-            // 浸透圧ボックスの色設定
+            // 浸透圧ボックスの色設定 (border-2 と色濃度を均一化)
             if (osmDanger) {
                 osmText.className = "text-5xl font-black tracking-tighter text-rose-600";
-                osmBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-rose-50/90 border-rose-200 shadow-inner";
+                osmBox.className = "p-6 rounded-2xl border-2 border-red-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
             } else if (osmWarning) {
                 osmText.className = "text-5xl font-black tracking-tighter text-amber-600";
-                osmBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-amber-50/90 border-amber-200 shadow-inner";
+                osmBox.className = "p-6 rounded-2xl border-2 border-amber-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
             } else {
                 osmText.className = "text-5xl font-black tracking-tighter text-emerald-600";
-                osmBox.className = "p-6 rounded-2xl border flex flex-col justify-center items-center text-center transition-all duration-300 bg-emerald-50/50 border-emerald-100";
+                osmBox.className = "p-6 rounded-2xl border-2 border-emerald-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
             }
 
             renderModalDetails({ mainFlow, mainPh, mainOsm, hMain, s1, s2, totalFlow, finalPhMin, finalPhMax, finalOsm, totalHMixMax: tHMax, totalHMixMin: tHMin });
