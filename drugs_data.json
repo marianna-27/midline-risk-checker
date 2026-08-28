@@ -234,7 +234,7 @@
     "default_vol": 50.0
   },
   {
-    "id_name": "10%ブドウ糖液[20mL]　◆",
+    "id_name": "10%ブドウ糖液[20mL] ◆",
     "ph_raw": "3.5~6.5",
     "ph_min": 3.5,
     "ph_max": 6.5,
@@ -864,7 +864,7 @@
     "default_vol": 2.0
   },
   {
-    "id_name": "アタラックスP注射液[25mg_1mL]　◆",
+    "id_name": "アタラックスP注射液[25mg_1mL] ◆",
     "ph_raw": "3.0~5.0",
     "ph_min": 3.0,
     "ph_max": 5.0,
@@ -873,10 +873,10 @@
     "default_vol": 1.0
   },
   {
-    "id_name": "アタラックスP注射液[50mg_1mL]　◆",
-    "ph_raw": "3.0~50.0",
+    "id_name": "アタラックスP注射液[50mg_1mL] ◆",
+    "ph_raw": "3.0~5.0",
     "ph_min": 3.0,
-    "ph_max": 50.0,
+    "ph_max": 5.0,
     "osm_raw": "約1.0",
     "osm_val": 1.0,
     "default_vol": 1.0
@@ -1126,18 +1126,18 @@
   },
   {
     "id_name": "アネレム静注用20mg",
-    "ph_raw": "1.0~20.0",
+    "ph_raw": "1.0~2.0",
     "ph_min": 1.0,
-    "ph_max": 20.0,
+    "ph_max": 2.0,
     "osm_raw": "約1.1",
     "osm_val": 1.1,
     "default_vol": 500.0
   },
   {
     "id_name": "アネレム静注用[50mg]",
-    "ph_raw": "1.0~50.0",
+    "ph_raw": "1.0~2.0",
     "ph_min": 1.0,
-    "ph_max": 50.0,
+    "ph_max": 2.0,
     "osm_raw": "約1.2",
     "osm_val": 1.2,
     "default_vol": 500.0
@@ -1549,9 +1549,9 @@
   },
   {
     "id_name": "イオパミドール300注｢F｣[100mL]",
-    "ph_raw": "150.0",
-    "ph_min": 150.0,
-    "ph_max": 150.0,
+    "ph_raw": "6.7~7.7",
+    "ph_min": 6.7,
+    "ph_max": 7.7,
     "osm_raw": "約1.2",
     "osm_val": 1.2,
     "default_vol": 100.0
@@ -1567,18 +1567,18 @@
   },
   {
     "id_name": "イオパミドール300注｢F｣[50mL]",
-    "ph_raw": "150.0",
-    "ph_min": 150.0,
-    "ph_max": 150.0,
+    "ph_raw": "6.7~7.7",
+    "ph_min": 6.7,
+    "ph_max": 7.7,
     "osm_raw": "約1.2",
     "osm_val": 1.2,
     "default_vol": 50.0
   },
   {
     "id_name": "イオパミロン注370シリンジ[100mL]",
-    "ph_raw": "3.0~300.0",
-    "ph_min": 3.0,
-    "ph_max": 300.0,
+    "ph_raw": "6.5~7.5",
+    "ph_min": 6.5,
+    "ph_max": 7.5,
     "osm_raw": "約3",
     "osm_val": 3.0,
     "default_vol": 100.0
@@ -1707,7 +1707,7 @@
     "ph_max": 7.0,
     "osm_raw": "約0.1",
     "osm_val": 0.1,
-    "default_vol": 500.0
+    "default_vol": 5.0
   },
   {
     "id_name": "イデルビオン静注用[1000単位]",
