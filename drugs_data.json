@@ -1656,6 +1656,15 @@
     "default_vol": 500.0
   },
   {
+    "id_name": "イスパロクト静注用[1500単位]",
+    "ph_raw": "6.9",
+    "ph_min": 6.9,
+    "ph_max": 6.9,
+    "osm_raw": "約2",
+    "osm_val": 2.0,
+    "default_vol": 500.0
+  },
+  {
     "id_name": "イスパロクト静注用[2000単位]",
     "ph_raw": "6.9",
     "ph_min": 6.9,
@@ -1699,5 +1708,221 @@
     "osm_raw": "約0.1",
     "osm_val": 0.1,
     "default_vol": 500.0
+  },
+  {
+    "id_name": "イデルビオン静注用[1000単位]",
+    "ph_raw": "6.6~7.2",
+    "ph_min": 6.6,
+    "ph_max": 7.2,
+    "osm_raw": "約0.7",
+    "osm_val": 0.7,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イデルビオン静注用[2000単位]",
+    "ph_raw": "6.6~7.2",
+    "ph_min": 6.6,
+    "ph_max": 7.2,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イデルビオン静注用[3500単位]",
+    "ph_raw": "6.6~7.2",
+    "ph_min": 6.6,
+    "ph_max": 7.2,
+    "osm_raw": "約0.7",
+    "osm_val": 0.7,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イデルビオン静注用[500単位]",
+    "ph_raw": "6.6~7.2",
+    "ph_min": 6.6,
+    "ph_max": 7.2,
+    "osm_raw": "約0.7",
+    "osm_val": 0.7,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イノバン注0.3%シリンジ[150mg_50mL]【DOA】",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 50.0
+  },
+  {
+    "id_name": "イバンドロン酸静注シリンジ「トーワ」[1mg_1mL]",
+    "ph_raw": "3.8~4.2",
+    "ph_min": 3.8,
+    "ph_max": 4.2,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "イブグリース皮下注オートインジェクター[250mg_2mL]",
+    "ph_raw": "5.4~6.0",
+    "ph_min": 5.4,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "イブリーフ静注[20mg_2mL]",
+    "ph_raw": "6.0~8.0",
+    "ph_min": 6.0,
+    "ph_max": 8.0,
+    "osm_raw": "約0.3",
+    "osm_val": 0.3,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "イベニティ皮下注シリンジ[105mg_1.17mL]",
+    "ph_raw": "5.2",
+    "ph_min": 5.2,
+    "ph_max": 5.2,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 1.17
+  },
+  {
+    "id_name": "イミフィンジ点滴静注[500mg_10mL]",
+    "ph_raw": "5.5~6.5",
+    "ph_min": 5.5,
+    "ph_max": 6.5,
+    "osm_raw": "約1.3",
+    "osm_val": 1.3,
+    "default_vol": 10.0
+  },
+  {
+    "id_name": "イムデトラ点滴静注用[10mg]",
+    "ph_raw": "2.1~10.0",
+    "ph_min": 2.1,
+    "ph_max": 10.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イムデトラ点滴静注用[1mg]",
+    "ph_raw": "0.42~1.0",
+    "ph_min": 0.42,
+    "ph_max": 1.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イモバックスポリオ皮下注[0.5mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 0.5
+  },
+  {
+    "id_name": "イラリス皮下注射液[150mg_1mL]",
+    "ph_raw": "6.2~6.8",
+    "ph_min": 6.2,
+    "ph_max": 6.8,
+    "osm_raw": "1.0",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "イリノテカン塩酸塩点滴静注液｢トーワ｣[100mg_5mL]",
+    "ph_raw": "3.0~4.0",
+    "ph_min": 3.0,
+    "ph_max": 4.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 5.0
+  },
+  {
+    "id_name": "イリノテカン塩酸塩点滴静注液｢トーワ｣[40mg_2mL]",
+    "ph_raw": "3.0~4.0",
+    "ph_min": 3.0,
+    "ph_max": 4.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 2.0
+  },
+  {
+    "id_name": "イルミア皮下注シリンジ[100mg_1mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 1.0
+  },
+  {
+    "id_name": "イロクテイト静注用[1000単位]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イロクテイト静注用[1500単位]",
+    "ph_raw": "6.5~7.5",
+    "ph_min": 6.5,
+    "ph_max": 7.5,
+    "osm_raw": "約1.3",
+    "osm_val": 1.3,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イロクテイト静注用[2000単位]",
+    "ph_raw": "6.5~7.5",
+    "ph_min": 6.5,
+    "ph_max": 7.5,
+    "osm_raw": "約1.3",
+    "osm_val": 1.3,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イロクテイト静注用[250単位]",
+    "ph_raw": "6.5~7.5",
+    "ph_min": 6.5,
+    "ph_max": 7.5,
+    "osm_raw": "約1.3",
+    "osm_val": 1.3,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イロクテイト静注用[3000単位]",
+    "ph_raw": "6.5~7.5",
+    "ph_min": 6.5,
+    "ph_max": 7.5,
+    "osm_raw": "約1.3",
+    "osm_val": 1.3,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "イロクテイト静注用[750単位]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 500.0
+  },
+  {
+    "id_name": "インジゴカルミン注[20mg_5mL]",
+    "ph_raw": "6.0",
+    "ph_min": 6.0,
+    "ph_max": 6.0,
+    "osm_raw": "約1",
+    "osm_val": 1.0,
+    "default_vol": 5.0
   }
 ]
