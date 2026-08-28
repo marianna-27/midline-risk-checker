@@ -73,8 +73,6 @@
         .ph-split-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
         .ph-calc-card { background: #0f172a; padding: 12px; border-radius: 8px; border: 1px solid #334155; }
         .code-line { background: #1e293b; padding: 6px 10px; border-radius: 6px; color: #a7f3d0; font-family: monospace; }
-        .result-pill-purple { background: rgba(168, 85, 247, 0.15); border: 1px solid #a855f7; color: #e9d5ff; padding: 10px 16px; border-radius: 20px; font-weight: 700; }
-        .result-pill-green { background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #a7f3d0; padding: 10px 16px; border-radius: 20px; font-weight: 700; }
     </style>
 </head>
 
@@ -162,11 +160,11 @@
                             <div id="dilutionAmountArea1" class="grid grid-cols-2 gap-3">
                                 <div>
                                     <label class="block text-[11px] font-bold text-slate-500 mb-1">薬剤原液 (mL)</label>
-                                    <input type="number" id="drugVol1" value="1" min="0.1" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
+                                    <input type="number" id="drugVol1" value="1" min="0" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-[11px] font-bold text-slate-500 mb-1">希釈液 (mL)</label>
-                                    <input type="number" id="diluentVol1" value="0" min="0" step="1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
+                                    <input type="number" id="diluentVol1" value="0" min="0" step="0.01" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
                                 </div>
                             </div>
                         </div>
@@ -225,11 +223,11 @@
                             <div id="dilutionAmountArea2" class="grid grid-cols-2 gap-3">
                                 <div>
                                     <label class="block text-[11px] font-bold text-slate-500 mb-1">薬剤原液 (mL)</label>
-                                    <input type="number" id="drugVol2" value="1" min="0.1" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
+                                    <input type="number" id="drugVol2" value="1" min="0" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-[11px] font-bold text-slate-500 mb-1">希釈液 (mL)</label>
-                                    <input type="number" id="diluentVol2" value="0" min="0" step="1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
+                                    <input type="number" id="diluentVol2" value="0" min="0" step="0.01" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
                                 </div>
                             </div>
                         </div>
@@ -244,7 +242,7 @@
 
         </div>
 
-        <!-- 判定・シグナル表示エリア (枠線を border-2 に強化) -->
+        <!-- 判定・シグナル表示エリア -->
         <div id="riskCard" class="glass-card p-8 rounded-3xl transition-all duration-500 mt-10 shadow-2xl bg-white/80 border-2 border-slate-300">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b-2 border-slate-200/80 pb-6">
                 <div>
@@ -258,7 +256,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- pHカード (枠線 border-2 化) -->
+                <!-- pHカード -->
                 <div id="phBox" class="bg-white/90 p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
                     <div class="text-sm text-slate-500 font-bold tracking-wider mb-2">合流部予測 pH</div>
                     <div id="phResult" class="text-5xl font-black text-slate-800 tracking-tighter transition-colors duration-300">--</div>
@@ -267,7 +265,7 @@
                     </div>
                 </div>
 
-                <!-- 浸透圧カード (枠線 border-2 化) -->
+                <!-- 浸透圧カード -->
                 <div id="osmBox" class="bg-white/90 p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
                     <div class="text-sm text-slate-500 font-bold tracking-wider mb-2">合流部予測 浸透圧比</div>
                     <div id="osmResult" class="text-5xl font-black text-slate-800 tracking-tighter transition-colors duration-300">--</div>
@@ -380,11 +378,34 @@
             if (side.drugSel.value !== 'none') {
                 const drug = allDrugsData.find(d => d.id_name === side.drugSel.value);
                 if (drug) {
-                    side.drugVol.value = getDrugDefaultVol(drug);
+                    if (drug.default_diluent) {
+                        side.dilSel.value = drug.default_diluent;
+                    } else {
+                        side.dilSel.value = 'none';
+                    }
+
+                    if (drug.default_drug_vol !== undefined && drug.default_drug_vol !== null) {
+                        side.drugVol.value = drug.default_drug_vol;
+                    } else {
+                        side.drugVol.value = getDrugDefaultVol(drug);
+                    }
+
+                    if (drug.default_diluent_vol !== undefined && drug.default_diluent_vol !== null) {
+                        side.dilVol.value = drug.default_diluent_vol;
+                    } else {
+                        side.dilVol.value = 0;
+                    }
+
                     if (parseFloat(side.flow.value) === 0) side.flow.value = 10;
                 }
-            } else { side.flow.value = 0; }
-            updateUIState(sideIdx); updateCalculation();
+            } else { 
+                side.flow.value = 0; 
+                side.dilSel.value = 'none';
+                side.drugVol.value = 1;
+                side.dilVol.value = 0;
+            }
+            updateUIState(sideIdx); 
+            updateCalculation();
         }
 
         function getDrugDefaultVol(drug) {
@@ -445,23 +466,43 @@
             const dilKey = side.dilSel.value, dilSpec = DILUENT_SPECS[dilKey];
             const drugVol = parseFloat(side.drugVol.value) || 0, dilVol = (dilKey === 'none') ? 0 : (parseFloat(side.dilVol.value) || 0);
             const totalVol = drugVol + dilVol;
-            if (totalVol === 0) return { flow: 0, name: drug.id_name };
+            if (totalVol === 0 && dilKey === 'none') return { flow: 0, name: drug.id_name };
 
-            const dPhMin = drug.ph_min !== undefined ? parseFloat(drug.ph_min) : 6.0, dPhMax = drug.ph_max !== undefined ? parseFloat(drug.ph_max) : 6.0;
+            const dPhMin = drug.ph_min !== undefined ? parseFloat(drug.ph_min) : 6.0;
+            const dPhMax = drug.ph_max !== undefined ? parseFloat(drug.ph_max) : 6.0;
             const osmSpec = getDrugOsmSpec(drug);
             const missingTag = osmSpec.isMissing ? '<span class="text-rose-500 font-bold ml-1">(※未定義:1.0で試算)</span>' : '';
-            
+
             let phMin, phMax, osm, hMin, hMax;
-            if (dilKey === 'none' || dilVol === 0) {
-                phMin = dPhMin; phMax = dPhMax; osm = osmSpec.osmVal; hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax);
+
+            const targetDiluent = drug.default_diluent || 'water';
+            const isReconstitutedMatch = (drug.reconstituted_ph !== undefined || drug.reconstituted_ph_min !== undefined) && dilKey === targetDiluent;
+
+            if (isReconstitutedMatch && dilVol > 0) {
+                phMin = drug.reconstituted_ph_min !== undefined ? parseFloat(drug.reconstituted_ph_min) : parseFloat(drug.reconstituted_ph);
+                phMax = drug.reconstituted_ph_max !== undefined ? parseFloat(drug.reconstituted_ph_max) : parseFloat(drug.reconstituted_ph);
+                osm = drug.reconstituted_osm !== undefined ? parseFloat(drug.reconstituted_osm) : osmSpec.osmVal;
+
+                hMin = Math.pow(10, -phMin);
+                hMax = Math.pow(10, -phMax);
+
+                const dilName = dilSpec ? dilSpec.name : "溶解液";
+                const phText = (phMin === phMax) ? phMin.toFixed(1) : `${phMin.toFixed(2)}～${phMax.toFixed(2)}`;
+                side.info.innerHTML = `<div class="text-blue-700 font-bold">溶解後 (${dilName} ${dilVol}mL): pH ${phText} | 浸透圧比 約${osm.toFixed(1)}</div>`;
+            } else if (dilKey === 'none' || dilVol === 0) {
+                phMin = dPhMin; phMax = dPhMax; osm = osmSpec.osmVal; 
+                hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax);
                 side.info.innerHTML = `<strong>原液:</strong> pH ${drug.ph_raw || `${dPhMin}～${dPhMax}`} | 浸透圧比 ${osmSpec.osmRaw}${missingTag}`;
             } else {
-                const hMixMax = (Math.pow(10, -dPhMin) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / totalVol;
-                const hMixMin = (Math.pow(10, -dPhMax) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / totalVol;
-                phMin = Math.min(-Math.log10(hMixMax), -Math.log10(hMixMin)); phMax = Math.max(-Math.log10(hMixMax), -Math.log10(hMixMin));
-                hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax); osm = (osmSpec.osmVal * drugVol + dilSpec.osm * dilVol) / totalVol;
+                const hMixMax = (Math.pow(10, -dPhMin) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / (totalVol || 1);
+                const hMixMin = (Math.pow(10, -dPhMax) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / (totalVol || 1);
+                phMin = Math.min(-Math.log10(hMixMax), -Math.log10(hMixMin)); 
+                phMax = Math.max(-Math.log10(hMixMax), -Math.log10(hMixMin));
+                hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax); 
+                osm = (osmSpec.osmVal * drugVol + dilSpec.osm * dilVol) / (totalVol || 1);
                 side.info.innerHTML = `<div><strong>原液:</strong> pH ${drug.ph_raw || `${dPhMin}～${dPhMax}`} | 浸透圧比 ${osmSpec.osmRaw}${missingTag}</div><div class="mt-1 pt-1 border-t border-slate-200 text-blue-700 font-medium">希釈後: pH ${phMin.toFixed(2)} ～ ${phMax.toFixed(2)} | 浸透圧比 ${osm.toFixed(2)}</div>`;
             }
+
             return { flow, phMin, phMax, hMin, hMax, osm, name: drug.id_name, isDiluted: (dilKey !== 'none' && dilVol > 0) };
         }
 
@@ -490,14 +531,12 @@
             const finalPhMax = Number(rawPhMax.toFixed(2));
             const finalOsm = Number(rawOsm.toFixed(2));
 
-            // pHと浸透圧のそれぞれのリスク判定
             let phDanger = finalPhMin < 4.1 || finalPhMax > 9.0;
             let phWarning = !phDanger && (finalPhMin < 5.0 || finalPhMax > 8.0);
             
             let osmDanger = finalOsm > 3.0;
             let osmWarning = !osmDanger && finalOsm > 2.0;
 
-            // 総合リスク判定
             let isD = phDanger || osmDanger;
             let isW = (!isD) && (phWarning || osmWarning);
 
@@ -511,11 +550,9 @@
             if (osmDanger) reasons.push(`高浸透圧 (${finalOsm.toFixed(2)})`);
             else if (osmWarning) reasons.push("浸透圧適正外");
 
-            // テキストの更新
             document.getElementById('phResult').textContent = (finalPhMin.toFixed(2) === finalPhMax.toFixed(2)) ? finalPhMin.toFixed(2) : `${finalPhMin.toFixed(2)} ～ ${finalPhMax.toFixed(2)}`;
             document.getElementById('osmResult').textContent = finalOsm.toFixed(2);
 
-            // リスクカード全体の更新 (動的な border-2 クラス追加)
             const rTitle = document.getElementById('riskTitle'), rBadge = document.getElementById('riskBadge'), rDesc = document.getElementById('riskDescription'), rCard = document.getElementById('riskCard');
             rCard.className = "glass-card p-8 rounded-3xl transition-all duration-500 mt-10 shadow-2xl ";
             
@@ -536,13 +573,11 @@
                 rCard.className += "bg-gradient-to-br from-emerald-50 to-teal-100/80 border-2 border-emerald-300";
             }
 
-            // 個別ボックス（pH, 浸透圧）の背景・枠線・文字色ダイナミック更新
             const phBox = document.getElementById('phBox');
             const phText = document.getElementById('phResult');
             const osmBox = document.getElementById('osmBox');
             const osmText = document.getElementById('osmResult');
 
-            // pHボックスの色設定 (border-2 と色濃度を均一化)
             if (phDanger) {
                 phText.className = "text-5xl font-black tracking-tighter text-rose-600";
                 phBox.className = "p-6 rounded-2xl border-2 border-red-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
@@ -552,18 +587,6 @@
             } else {
                 phText.className = "text-5xl font-black tracking-tighter text-emerald-600";
                 phBox.className = "p-6 rounded-2xl border-2 border-emerald-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
-            }
-
-            // 浸透圧ボックスの色設定 (border-2 と色濃度を均一化)
-            if (osmDanger) {
-                osmText.className = "text-5xl font-black tracking-tighter text-rose-600";
-                osmBox.className = "p-6 rounded-2xl border-2 border-red-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
-            } else if (osmWarning) {
-                osmText.className = "text-5xl font-black tracking-tighter text-amber-600";
-                osmBox.className = "p-6 rounded-2xl border-2 border-amber-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
-            } else {
-                osmText.className = "text-5xl font-black tracking-tighter text-emerald-600";
-                osmBox.className = "p-6 rounded-2xl border-2 border-emerald-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
             }
 
             renderModalDetails({ mainFlow, mainPh, mainOsm, hMain, s1, s2, totalFlow, finalPhMin, finalPhMax, finalOsm, totalHMixMax: tHMax, totalHMixMin: tHMin });
@@ -608,11 +631,11 @@
                         </div>
                         <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-700/60">
                             <div class="text-purple-400 font-bold mb-1">側管 1 (${data.s1.name})</div>
-                            ${data.s1.flow > 0 ? `<div>流量: <strong class="text-white">${data.s1.flow} mL/h</strong></div><div>pH: <strong class="text-white">${data.s1.phMin.toFixed(2)} ～ ${data.s1.phMax.toFixed(2)}</strong></div><div>浸透圧比: <strong class="text-white">${data.s1.osm.toFixed(2)}</strong> ${data.s1.isDiluted ? '<span class="text-purple-300">(※希釈後)</span>' : ''}</div>` : '<div class="text-slate-500 italic mt-2">停止 / 未使用</div>'}
+                            ${data.s1.flow > 0 ? `<div>流量: <strong class="text-white">${data.s1.flow} mL/h</strong></div><div>pH: <strong class="text-white">${data.s1.phMin.toFixed(2)} ～ ${data.s1.phMax.toFixed(2)}</strong></div><div>浸透圧比: <strong class="text-white">${data.s1.osm.toFixed(2)}</strong> ${data.s1.isDiluted ? '<span class="text-purple-300">(※溶解/希釈後)</span>' : ''}</div>` : '<div class="text-slate-500 italic mt-2">停止 / 未使用</div>'}
                         </div>
                         <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-700/60">
                             <div class="text-emerald-400 font-bold mb-1">側管 2 (${data.s2.name})</div>
-                            ${data.s2.flow > 0 ? `<div>流量: <strong class="text-white">${data.s2.flow} mL/h</strong></div><div>pH: <strong class="text-white">${data.s2.phMin.toFixed(2)} ～ ${data.s2.phMax.toFixed(2)}</strong></div><div>浸透圧比: <strong class="text-white">${data.s2.osm.toFixed(2)}</strong> ${data.s2.isDiluted ? '<span class="text-emerald-300">(※希釈後)</span>' : ''}</div>` : '<div class="text-slate-500 italic mt-2">停止 / 未使用</div>'}
+                            ${data.s2.flow > 0 ? `<div>流量: <strong class="text-white">${data.s2.flow} mL/h</strong></div><div>pH: <strong class="text-white">${data.s2.phMin.toFixed(2)} ～ ${data.s2.phMax.toFixed(2)}</strong></div><div>浸透圧比: <strong class="text-white">${data.s2.osm.toFixed(2)}</strong> ${data.s2.isDiluted ? '<span class="text-emerald-300">(※溶解/希釈後)</span>' : ''}</div>` : '<div class="text-slate-500 italic mt-2">停止 / 未使用</div>'}
                         </div>
                     </div>
                 </div>
