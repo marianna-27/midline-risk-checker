@@ -1702,13 +1702,17 @@
   },
   {
     "id_name": "イダマイシン静注用[5mg]",
-    "ph_raw": "5.0~7.0",
+    "is_freeze_dried": true,
+    "reconstitute_info": "日局注射用水 5mL",
+    "base_vol": 5.0,
     "ph_min": 5.0,
     "ph_max": 7.0,
-    "osm_raw": "約0.1",
+    "ph_raw": "5.0~7.0 (5mL溶解時)",
     "osm_val": 0.1,
-    "default_vol": 500.0
-  },
+    "osm_raw": "約0.1",
+    "default_diluent": "saline",
+    "default_diluent_vol": 50.0
+  }
   {
     "id_name": "イデルビオン静注用[1000単位]",
     "ph_raw": "6.6~7.2",
@@ -1800,23 +1804,31 @@
     "default_vol": 10.0
   },
   {
-    "id_name": "イムデトラ点滴静注用[10mg]",
-    "ph_raw": "2.1~10.0",
-    "ph_min": 2.1,
-    "ph_max": 10.0,
-    "osm_raw": "約1",
+    "id_name": "イムデトラ点滴静注用10mg",
+    "ph_min": 4.2,
+    "ph_max": 4.2,
+    "ph_raw": "4.2 (溶解後)",
     "osm_val": 1.0,
-    "default_vol": 500.0
+    "osm_raw": "約1",
+    "default_diluent": "water",      
+    "default_drug_vol": 0,         
+    "default_diluent_vol": 2.1,    
+    "reconstituted_ph": 4.2,       
+    "reconstituted_osm": 1.0       
   },
   {
-    "id_name": "イムデトラ点滴静注用[1mg]",
-    "ph_raw": "0.42~1.0",
-    "ph_min": 0.42,
-    "ph_max": 1.0,
-    "osm_raw": "約1",
+    "id_name": "イムデトラ点滴静注用1mg",
+    "ph_min": 4.2,
+    "ph_max": 4.2,
+    "ph_raw": "4.2 (溶解後)",
     "osm_val": 1.0,
-    "default_vol": 500.0
-  },
+    "osm_raw": "約1",
+    "default_diluent": "water",
+    "default_drug_vol": 0,
+    "default_diluent_vol": 0.42,
+    "reconstituted_ph": 4.2,
+    "reconstituted_osm": 1.0
+  }
   {
     "id_name": "イモバックスポリオ皮下注[0.5mL]",
     "ph_raw": "6.0",
