@@ -24,7 +24,7 @@
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
         }
 
-        /* 50音タブスタイル (Modernized) */
+        /* 50音タブスタイル */
         .tab-btn {
             padding: 4px 10px;
             font-size: 0.75rem;
@@ -35,16 +35,37 @@
             border: 1px solid #cbd5e1;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .tab-btn:hover { 
-            background-color: #e2e8f0; 
-            transform: translateY(-1px);
+        .tab-btn:hover { background-color: #e2e8f0; transform: translateY(-1px); }
+        .tab-btn.active { background-color: #3b82f6; color: #ffffff; border-color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+
+        /* 新規：希釈液・補液タブスタイル */
+        .dil-tab-btn {
+            padding: 8px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: #64748b;
+            border: 1px solid #cbd5e1;
+            transition: all 0.2s;
+            flex-grow: 1;
+            text-align: center;
         }
-        .tab-btn.active {
-            background-color: #3b82f6;
-            color: #ffffff;
-            border-color: #3b82f6;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        .dil-tab-btn:hover { background-color: #f8fafc; }
+        .dil-tab-btn.active { background-color: #8b5cf6; color: #ffffff; border-color: #8b5cf6; box-shadow: 0 4px 10px rgba(139, 92, 246, 0.2); }
+        
+        .vol-tab-btn {
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 6px;
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            transition: all 0.2s;
         }
+        .vol-tab-btn:hover { background-color: #e2e8f0; }
+        .vol-tab-btn.active { background-color: #10b981; color: #ffffff; border-color: #10b981; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2); }
 
         /* Custom Input Styling */
         .modern-input {
@@ -52,11 +73,7 @@
             border: 1.5px solid #cbd5e1;
             transition: all 0.2s;
         }
-        .modern-input:focus {
-            background-color: #ffffff;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
+        .modern-input:focus { background-color: #ffffff; border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
 
         /* --- モーダルCSS --- */
         .calc-modal-container { background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.15); color: #f8fafc; }
@@ -79,7 +96,6 @@
 <body class="text-slate-800 p-4 md:p-8 min-h-screen">
 
     <div class="max-w-7xl mx-auto space-y-8">
-        
         <!-- ヘッダー -->
         <header class="text-center py-6">
             <div class="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-wider mb-3">CLINICAL TOOL</div>
@@ -87,7 +103,7 @@
             <p class="text-slate-500 mt-3 font-medium">メイン輸液と側管2系統の合流部における pH・浸透圧変化をリアルタイム計算します</p>
         </header>
 
-        <!-- 入力エリア (3カラム) -->
+        <!-- 入力エリア -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
             <!-- メイン輸液設定 -->
@@ -97,7 +113,6 @@
                     <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-500 flex items-center justify-center text-xl shadow-inner">💧</div>
                     <h2 class="text-xl font-bold text-slate-800">メイン輸液</h2>
                 </div>
-                
                 <div class="space-y-5">
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">投与速度 (mL/h)</label>
@@ -129,7 +144,6 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">薬剤検索</label>
                         <input type="text" id="drugSearchInput1" placeholder="3文字以上で検索 (例: あせり)" oninput="filterDrugs(1)" class="modern-input w-full p-2.5 text-sm rounded-xl outline-none mb-3">
-                        
                         <div class="flex flex-wrap gap-1.5 mb-3" id="tabContainer1">
                             <button class="tab-btn active" onclick="switchTab(1, 'all', this)">すべて</button>
                             <button class="tab-btn" onclick="switchTab(1, 'ア', this)">ア</button>
@@ -148,30 +162,44 @@
 
                     <div id="sideDetail1" class="space-y-4 transition-all duration-300">
                         <div class="p-4 bg-slate-50/80 rounded-2xl border border-slate-200 space-y-4">
-                            <div>
-                                <label class="block text-xs font-bold text-purple-700 mb-1.5">溶解・希釈液</label>
-                                <select id="diluentSelect1" class="modern-input w-full p-2 rounded-lg outline-none text-xs">
-                                    <option value="none" selected>なし（原液）</option>
-                                    <option value="saline">生理食塩液 (pH 6.0 / 浸透圧比 1.0)</option>
-                                    <option value="glucose5">5%ブドウ糖 (pH 4.5 / 浸透圧比 1.0)</option>
-                                    <option value="water">注射用水 (pH 6.0 / 浸透圧比 0.0)</option>
-                                </select>
-                            </div>
                             
-                            <!-- 凍結乾燥製剤用 溶解ガイド -->
-                            <div id="freezeDriedGuide1" class="hidden p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700 font-bold flex items-center gap-2">
-                                <span class="text-base">💡</span>
-                                <span id="freezeDriedText1">規定量で溶解した状態をベースとします</span>
+                            <!-- 💡 溶解ガイド (一番上に配置) -->
+                            <div id="freezeDriedGuide1" class="hidden p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700 font-bold flex flex-col gap-1 shadow-sm">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-base">💡</span>
+                                    <span>溶解指示: <span id="freezeDriedText1" class="text-amber-900">日局注射用水 5mL</span></span>
+                                </div>
                             </div>
 
-                            <div id="dilutionAmountArea1" class="grid grid-cols-2 gap-3">
+                            <!-- 希釈液・補液選択 (タブ形式) -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">希釈液・補液の選択</label>
+                                <input type="hidden" id="diluentSelect1" value="none">
+                                <div class="flex flex-wrap gap-2 mb-2" id="diluentTypeTabs1">
+                                    <button class="dil-tab-btn active" onclick="setDiluentType(1, 'none')">なし(原液)</button>
+                                    <button class="dil-tab-btn" onclick="setDiluentType(1, 'saline')">生理食塩液</button>
+                                    <button class="dil-tab-btn" onclick="setDiluentType(1, 'glucose5')">5%ブドウ糖</button>
+                                </div>
+                                
+                                <div id="diluentVolTabsContainer1" class="hidden mt-3 p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                                    <label class="block text-[10px] font-bold text-slate-500 mb-2">補液の規格 (mL)</label>
+                                    <div class="flex flex-wrap gap-2" id="diluentVolTabs1">
+                                        <button class="vol-tab-btn" onclick="setDiluentVol(1, 50)">50</button>
+                                        <button class="vol-tab-btn" onclick="setDiluentVol(1, 100)">100</button>
+                                        <button class="vol-tab-btn" onclick="setDiluentVol(1, 250)">250</button>
+                                        <button class="vol-tab-btn" onclick="setDiluentVol(1, 500)">500</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="dilutionAmountArea1" class="grid grid-cols-2 gap-3 pt-3 border-t border-slate-200/60">
                                 <div>
                                     <label id="drugVolLabel1" class="block text-[11px] font-bold text-slate-500 mb-1">薬剤原液 (mL)</label>
-                                    <input type="number" id="drugVol1" value="1" min="0" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
+                                    <input type="number" id="drugVol1" value="1" min="0" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none font-medium text-slate-700 bg-slate-100">
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold text-slate-500 mb-1">希釈液 (mL)</label>
-                                    <input type="number" id="diluentVol1" value="0" min="0" step="0.01" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
+                                    <label class="block text-[11px] font-bold text-slate-500 mb-1">希釈液量 (mL)</label>
+                                    <input type="number" id="diluentVol1" value="0" min="0" step="0.01" class="modern-input w-full p-2 text-sm rounded-lg outline-none font-medium text-slate-700 bg-slate-100" oninput="updateVolTabUI(1, this.value); updateCalculation();">
                                 </div>
                             </div>
                         </div>
@@ -199,7 +227,6 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">薬剤検索</label>
                         <input type="text" id="drugSearchInput2" placeholder="3文字以上で検索" oninput="filterDrugs(2)" class="modern-input w-full p-2.5 text-sm rounded-xl outline-none mb-3">
-                        
                         <div class="flex flex-wrap gap-1.5 mb-3" id="tabContainer2">
                             <button class="tab-btn active" onclick="switchTab(2, 'all', this)">すべて</button>
                             <button class="tab-btn" onclick="switchTab(2, 'ア', this)">ア</button>
@@ -218,30 +245,44 @@
 
                     <div id="sideDetail2" class="space-y-4 transition-all duration-300">
                         <div class="p-4 bg-slate-50/80 rounded-2xl border border-slate-200 space-y-4">
-                            <div>
-                                <label class="block text-xs font-bold text-emerald-700 mb-1.5">溶解・希釈液</label>
-                                <select id="diluentSelect2" class="modern-input w-full p-2 rounded-lg outline-none text-xs">
-                                    <option value="none" selected>なし（原液）</option>
-                                    <option value="saline">生理食塩液 (pH 6.0 / 浸透圧比 1.0)</option>
-                                    <option value="glucose5">5%ブドウ糖 (pH 4.5 / 浸透圧比 1.0)</option>
-                                    <option value="water">注射用水 (pH 6.0 / 浸透圧比 0.0)</option>
-                                </select>
-                            </div>
                             
-                            <!-- 凍結乾燥製剤用 溶解ガイド -->
-                            <div id="freezeDriedGuide2" class="hidden p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700 font-bold flex items-center gap-2">
-                                <span class="text-base">💡</span>
-                                <span id="freezeDriedText2">規定量で溶解した状態をベースとします</span>
+                            <!-- 💡 溶解ガイド (一番上に配置) -->
+                            <div id="freezeDriedGuide2" class="hidden p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700 font-bold flex flex-col gap-1 shadow-sm">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-base">💡</span>
+                                    <span>溶解指示: <span id="freezeDriedText2" class="text-amber-900">日局注射用水 5mL</span></span>
+                                </div>
                             </div>
 
-                            <div id="dilutionAmountArea2" class="grid grid-cols-2 gap-3">
+                            <!-- 希釈液・補液選択 (タブ形式) -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">希釈液・補液の選択</label>
+                                <input type="hidden" id="diluentSelect2" value="none">
+                                <div class="flex flex-wrap gap-2 mb-2" id="diluentTypeTabs2">
+                                    <button class="dil-tab-btn active" onclick="setDiluentType(2, 'none')">なし(原液)</button>
+                                    <button class="dil-tab-btn" onclick="setDiluentType(2, 'saline')">生理食塩液</button>
+                                    <button class="dil-tab-btn" onclick="setDiluentType(2, 'glucose5')">5%ブドウ糖</button>
+                                </div>
+                                
+                                <div id="diluentVolTabsContainer2" class="hidden mt-3 p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                                    <label class="block text-[10px] font-bold text-slate-500 mb-2">補液の規格 (mL)</label>
+                                    <div class="flex flex-wrap gap-2" id="diluentVolTabs2">
+                                        <button class="vol-tab-btn" onclick="setDiluentVol(2, 50)">50</button>
+                                        <button class="vol-tab-btn" onclick="setDiluentVol(2, 100)">100</button>
+                                        <button class="vol-tab-btn" onclick="setDiluentVol(2, 250)">250</button>
+                                        <button class="vol-tab-btn" onclick="setDiluentVol(2, 500)">500</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="dilutionAmountArea2" class="grid grid-cols-2 gap-3 pt-3 border-t border-slate-200/60">
                                 <div>
                                     <label id="drugVolLabel2" class="block text-[11px] font-bold text-slate-500 mb-1">薬剤原液 (mL)</label>
-                                    <input type="number" id="drugVol2" value="1" min="0" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
+                                    <input type="number" id="drugVol2" value="1" min="0" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none font-medium text-slate-700 bg-slate-100">
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold text-slate-500 mb-1">希釈液 (mL)</label>
-                                    <input type="number" id="diluentVol2" value="0" min="0" step="0.01" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
+                                    <label class="block text-[11px] font-bold text-slate-500 mb-1">希釈液量 (mL)</label>
+                                    <input type="number" id="diluentVol2" value="0" min="0" step="0.01" class="modern-input w-full p-2 text-sm rounded-lg outline-none font-medium text-slate-700 bg-slate-100" oninput="updateVolTabUI(2, this.value); updateCalculation();">
                                 </div>
                             </div>
                         </div>
@@ -256,7 +297,7 @@
 
         </div>
 
-        <!-- 判定・シグナル表示エリア -->
+        <!-- 判定エリア (省略せず記載) -->
         <div id="riskCard" class="glass-card p-8 rounded-3xl transition-all duration-500 mt-10 shadow-2xl bg-white/80 border-2 border-slate-300">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 border-b-2 border-slate-200/80 pb-6">
                 <div>
@@ -264,31 +305,21 @@
                     <h2 id="riskTitle" class="text-3xl font-black mt-1 text-slate-700">判定中...</h2>
                     <p id="riskDescription" class="mt-2 text-sm text-slate-600">データを入力して計算を実行してください。</p>
                 </div>
-                <div id="riskBadge" class="px-6 py-3 rounded-2xl text-lg font-black shadow-lg text-center min-w-[120px] bg-slate-200 text-slate-500">
-                    -
-                </div>
+                <div id="riskBadge" class="px-6 py-3 rounded-2xl text-lg font-black shadow-lg text-center min-w-[120px] bg-slate-200 text-slate-500">-</div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- pHカード -->
                 <div id="phBox" class="bg-white/90 p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
                     <div class="text-sm text-slate-500 font-bold tracking-wider mb-2">合流部予測 pH</div>
                     <div id="phResult" class="text-5xl font-black text-slate-800 tracking-tighter transition-colors duration-300">--</div>
-                    <div class="text-xs text-slate-500 font-semibold mt-3 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
-                        推奨: 5.0～8.0 (限界 4.1～9.0)
-                    </div>
+                    <div class="text-xs text-slate-500 font-semibold mt-3 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">推奨: 5.0～8.0 (限界 4.1～9.0)</div>
                 </div>
-
-                <!-- 浸透圧カード -->
                 <div id="osmBox" class="bg-white/90 p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300">
                     <div class="text-sm text-slate-500 font-bold tracking-wider mb-2">合流部予測 浸透圧比</div>
                     <div id="osmResult" class="text-5xl font-black text-slate-800 tracking-tighter transition-colors duration-300">--</div>
-                    <div class="text-xs text-slate-500 font-semibold mt-3 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
-                        推奨: 2.0以下 (限界 3.0以下)
-                    </div>
+                    <div class="text-xs text-slate-500 font-semibold mt-3 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">推奨: 2.0以下 (限界 3.0以下)</div>
                 </div>
             </div>
-
             <div class="flex justify-center md:justify-end">
                 <button id="openCalcModal" class="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-xl transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 flex items-center space-x-2">
                     <span>📊 計算過程・内訳の詳細を見る</span>
@@ -321,8 +352,7 @@
         const DILUENT_SPECS = {
             none: { name: "なし", ph: null, osm: null },
             saline: { name: "生食", ph: 6.0, osm: 1.0 },
-            glucose5: { name: "5%ブドウ糖", ph: 4.5, osm: 1.0 },
-            water: { name: "注水", ph: 6.0, osm: 0.0 }
+            glucose5: { name: "5%ブドウ糖", ph: 4.5, osm: 1.0 }
         };
 
         function hiraToKata(str) { return str.replace(/[\u3041-\u3096]/g, ch => String.fromCharCode(ch.charCodeAt(0) + 0x60)); }
@@ -358,8 +388,7 @@
                     const name = drug.id_name.normalize('NFKC').toLowerCase();
                     return name.includes(queryNormalized.toLowerCase()) || hiraToKata(name).includes(queryKata) || kataToHira(name).includes(queryHira);
                 });
-                renderDrugOptions(sideIdx, filtered);
-                return;
+                renderDrugOptions(sideIdx, filtered); return;
             }
             applyTabFilter(sideIdx);
         }
@@ -387,46 +416,75 @@
             if (drugs.some(d => d.id_name === currentVal) || currentVal === 'none') selectEl.value = currentVal;
         }
 
+        // --- 新規：タブ操作関数 ---
+        function setDiluentType(idx, type) {
+            document.getElementById(`diluentSelect${idx}`).value = type;
+            
+            // タブのアクティブ状態を更新
+            document.querySelectorAll(`#diluentTypeTabs${idx} .dil-tab-btn`).forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${type}'`));
+            });
+
+            const volTabsContainer = document.getElementById(`diluentVolTabsContainer${idx}`);
+            const dilVolInput = document.getElementById(`diluentVol${idx}`);
+            
+            if (type === 'none') {
+                volTabsContainer.classList.add('hidden');
+                dilVolInput.value = 0;
+            } else {
+                volTabsContainer.classList.remove('hidden');
+                if (dilVolInput.value == 0) setDiluentVol(idx, 50); // デフォルト50mL
+                else updateVolTabUI(idx, dilVolInput.value);
+            }
+            updateUIState(idx); updateCalculation();
+        }
+
+        function setDiluentVol(idx, vol) {
+            document.getElementById(`diluentVol${idx}`).value = vol;
+            updateVolTabUI(idx, vol);
+            updateCalculation();
+        }
+
+        function updateVolTabUI(idx, vol) {
+            document.querySelectorAll(`#diluentVolTabs${idx} .vol-tab-btn`).forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.trim() == vol);
+            });
+        }
+        // -------------------------
+
         function onDrugChange(sideIdx) {
             const side = getSideElements(sideIdx);
             if (side.drugSel.value !== 'none') {
                 const drug = allDrugsData.find(d => d.id_name === side.drugSel.value);
                 if (drug) {
-                    if (drug.default_diluent) {
-                        side.dilSel.value = drug.default_diluent;
-                    } else {
-                        side.dilSel.value = 'none';
+                    // ★ 溶解後の液量 (mL) の自動抽出・設定
+                    let defaultDrugVol = 1; 
+                    if (drug.is_freeze_dried && drug.reconstitute_info) {
+                        // ガイドテキスト(例: "注射用水 5mL")から数値を正規表現で抽出
+                        const match = drug.reconstitute_info.match(/(\d+(?:\.\d+)?)\s*mL/i);
+                        if (match) defaultDrugVol = parseFloat(match[1]);
+                    } else if (drug.default_drug_vol !== undefined && drug.default_drug_vol !== null) {
+                        defaultDrugVol = drug.default_drug_vol;
                     }
+                    side.drugVol.value = defaultDrugVol;
 
-                    if (drug.default_drug_vol !== undefined && drug.default_drug_vol !== null) {
-                        side.drugVol.value = drug.default_drug_vol;
-                    } else {
-                        side.drugVol.value = getDrugDefaultVol(drug);
-                    }
+                    // 希釈液の自動設定
+                    let dilType = drug.default_diluent || 'none';
+                    setDiluentType(sideIdx, dilType);
 
-                    if (drug.default_diluent_vol !== undefined && drug.default_diluent_vol !== null) {
-                        side.dilVol.value = drug.default_diluent_vol;
-                    } else {
-                        side.dilVol.value = 0;
+                    if (dilType !== 'none') {
+                        let dilVol = drug.default_diluent_vol || 50;
+                        setDiluentVol(sideIdx, dilVol);
                     }
 
                     if (parseFloat(side.flow.value) === 0) side.flow.value = 10;
                 }
             } else { 
                 side.flow.value = 0; 
-                side.dilSel.value = 'none';
+                setDiluentType(sideIdx, 'none');
                 side.drugVol.value = 1;
-                side.dilVol.value = 0;
             }
-            updateUIState(sideIdx); 
-            updateCalculation();
-        }
-
-        function getDrugDefaultVol(drug) {
-            if (!drug) return 1;
-            if (drug.default_vol !== undefined && drug.default_vol !== null && !isNaN(drug.default_vol)) return parseFloat(drug.default_vol);
-            const match = (drug.id_name || '').match(/(\d+(?:\.\d+)?)\s*mL/i);
-            return match ? parseFloat(match[1]) : 1;
+            updateUIState(sideIdx); updateCalculation();
         }
 
         function getDrugOsmSpec(drug) {
@@ -439,7 +497,7 @@
         function getSideElements(idx) {
             return {
                 drugSel: document.getElementById(`drugSelect${idx}`), 
-                dilSel: document.getElementById(`diluentSelect${idx}`),
+                dilSel: document.getElementById(`diluentSelect${idx}`), // hidden inputとして機能
                 drugVol: document.getElementById(`drugVol${idx}`), 
                 dilVol: document.getElementById(`diluentVol${idx}`),
                 flow: document.getElementById(`sideFlow${idx}`), 
@@ -459,26 +517,25 @@
             side.detailArea.classList.toggle('pointer-events-none', isNoneDrug);
             
             const isNoneDiluent = side.dilSel.value === 'none';
-            side.area.classList.toggle('opacity-30', isNoneDiluent); 
-            side.area.classList.toggle('pointer-events-none', isNoneDiluent);
-            if (isNoneDiluent) { side.dilVol.value = 0; side.dilVol.disabled = true; } 
-            else { side.dilVol.disabled = false; }
+            if (isNoneDiluent) { side.dilVol.value = 0; side.dilVol.disabled = true; side.dilVol.classList.add('opacity-50'); } 
+            else { side.dilVol.disabled = false; side.dilVol.classList.remove('opacity-50'); }
 
-            // 凍結乾燥製剤向けの2段階UI（溶解 → 希釈）
             if (!isNoneDrug) {
                 const drug = allDrugsData.find(d => d.id_name === side.drugSel.value);
                 if (drug && drug.is_freeze_dried) {
                     side.volLabel.textContent = "溶解後液量 (mL)";
-                    // JSONからガイドテキストを取得（例："日局注射用水 5mL"）
                     side.guideText.textContent = drug.reconstitute_info || "規定量で溶解した状態をベースとします";
                     side.guideBox.classList.remove('hidden');
+                    side.guideBox.classList.add('flex');
                 } else {
                     side.volLabel.textContent = "薬剤原液 (mL)";
                     side.guideBox.classList.add('hidden');
+                    side.guideBox.classList.remove('flex');
                 }
             } else {
                 side.volLabel.textContent = "薬剤原液 (mL)";
                 side.guideBox.classList.add('hidden');
+                side.guideBox.classList.remove('flex');
             }
         }
 
@@ -492,13 +549,11 @@
 
         [1, 2].forEach(idx => {
             const side = getSideElements(idx);
-            side.dilSel.addEventListener('change', () => { updateUIState(idx); updateCalculation(); });
-            [side.drugVol, side.dilVol, side.flow].forEach(input => input.addEventListener('input', updateCalculation));
+            [side.drugVol, side.flow].forEach(input => input.addEventListener('input', updateCalculation));
             updateUIState(idx);
         });
         [mainFlowInput, mainPhInput, mainOsmInput].forEach(i => i.addEventListener('input', updateCalculation));
 
-        // ★ 2段階調製に対応したスペック計算ロジック
         function calcSideSpecs(side) {
             if (side.drugSel.value === 'none' || allDrugsData.length === 0) return { flow: 0, name: "未選択" };
             const drug = allDrugsData.find(d => d.id_name === side.drugSel.value);
@@ -512,18 +567,15 @@
             const totalVol = drugVol + dilVol;
             if (totalVol === 0 && dilKey === 'none') return { flow: 0, name: drug.id_name };
 
-            // 1. ベース（原液・溶解液）のプロパティを決定
             let basePhMin, basePhMax, baseOsm, basePhRaw, baseOsmRaw;
             
             if (drug.is_freeze_dried) {
-                // 凍結乾燥製剤の場合、JSON上の「reconstituted_〇〇」をベース（原液）として扱う
                 basePhMin = drug.reconstituted_ph_min !== undefined ? parseFloat(drug.reconstituted_ph_min) : parseFloat(drug.reconstituted_ph || 6.0);
                 basePhMax = drug.reconstituted_ph_max !== undefined ? parseFloat(drug.reconstituted_ph_max) : parseFloat(drug.reconstituted_ph || 6.0);
                 baseOsm = drug.reconstituted_osm !== undefined ? parseFloat(drug.reconstituted_osm) : 1.0;
                 basePhRaw = drug.reconstituted_ph_raw || `${basePhMin.toFixed(1)}～${basePhMax.toFixed(1)} (${drug.reconstitute_info_short || '溶解時'})`;
                 baseOsmRaw = drug.reconstituted_osm_raw || `約${baseOsm.toFixed(1)}`;
             } else {
-                // 通常製剤の場合
                 basePhMin = drug.ph_min !== undefined ? parseFloat(drug.ph_min) : 6.0;
                 basePhMax = drug.ph_max !== undefined ? parseFloat(drug.ph_max) : 6.0;
                 const osmSpec = getDrugOsmSpec(drug);
@@ -534,14 +586,11 @@
 
             let phMin, phMax, osm, hMin, hMax;
 
-            // 2. 希釈液（補液）との混注計算
             if (dilKey === 'none' || dilVol === 0) {
-                // 希釈なし（原液または溶解液のまま投与）
                 phMin = basePhMin; phMax = basePhMax; osm = baseOsm; 
                 hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax);
                 side.info.innerHTML = `<strong>原液:</strong> pH ${basePhRaw} | 浸透圧比 ${baseOsmRaw}`;
             } else {
-                // 希釈あり（生食 50mL などに混注）
                 const hMixMax = (Math.pow(10, -basePhMin) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / (totalVol || 1);
                 const hMixMin = (Math.pow(10, -basePhMax) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / (totalVol || 1);
                 
@@ -553,7 +602,6 @@
                 side.info.innerHTML = `<div><strong>原液:</strong> pH ${basePhRaw} | 浸透圧比 ${baseOsmRaw}</div>
                                        <div class="mt-1 pt-1 border-t border-slate-200 text-blue-700 font-medium">希釈後: pH ${phMin.toFixed(2)} ～ ${phMax.toFixed(2)} | 浸透圧比 ${osm.toFixed(2)}</div>`;
             }
-
             return { flow, phMin, phMax, hMin, hMax, osm, name: drug.id_name, isDiluted: (dilKey !== 'none' && dilVol > 0) };
         }
 
@@ -574,30 +622,21 @@
             if (s1.flow > 0) { tHMax += s1.hMin * s1.flow; tHMin += s1.hMax * s1.flow; tOsm += s1.osm * s1.flow; }
             if (s2.flow > 0) { tHMax += s2.hMin * s2.flow; tHMin += s2.hMax * s2.flow; tOsm += s2.osm * s2.flow; }
 
-            const rawPhMin = Math.min(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow));
-            const rawPhMax = Math.max(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow));
-            const rawOsm = tOsm / totalFlow;
-
-            const finalPhMin = Number(rawPhMin.toFixed(2));
-            const finalPhMax = Number(rawPhMax.toFixed(2));
-            const finalOsm = Number(rawOsm.toFixed(2));
+            const finalPhMin = Number(Math.min(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow)).toFixed(2));
+            const finalPhMax = Number(Math.max(-Math.log10(tHMax / totalFlow), -Math.log10(tHMin / totalFlow)).toFixed(2));
+            const finalOsm = Number((tOsm / totalFlow).toFixed(2));
 
             let phDanger = finalPhMin < 4.1 || finalPhMax > 9.0;
             let phWarning = !phDanger && (finalPhMin < 5.0 || finalPhMax > 8.0);
-            
             let osmDanger = finalOsm > 3.0;
             let osmWarning = !osmDanger && finalOsm > 2.0;
-
-            let isD = phDanger || osmDanger;
-            let isW = (!isD) && (phWarning || osmWarning);
+            let isD = phDanger || osmDanger, isW = (!isD) && (phWarning || osmWarning);
 
             let reasons = [];
             if (phDanger) {
                 if (finalPhMin < 4.1) reasons.push(`強酸性 (${finalPhMin.toFixed(2)})`);
                 if (finalPhMax > 9.0) reasons.push(`強アルカリ (${finalPhMax.toFixed(2)})`);
-            } else if (phWarning) {
-                reasons.push("pH適正外");
-            }
+            } else if (phWarning) reasons.push("pH適正外");
             if (osmDanger) reasons.push(`高浸透圧 (${finalOsm.toFixed(2)})`);
             else if (osmWarning) reasons.push("浸透圧適正外");
 
@@ -624,21 +663,10 @@
                 rCard.className += "bg-gradient-to-br from-emerald-50 to-teal-100/80 border-2 border-emerald-300";
             }
 
-            const phBox = document.getElementById('phBox');
-            const phText = document.getElementById('phResult');
-            const osmBox = document.getElementById('osmBox');
-            const osmText = document.getElementById('osmResult');
-
-            if (phDanger) {
-                phText.className = "text-5xl font-black tracking-tighter text-rose-600";
-                phBox.className = "p-6 rounded-2xl border-2 border-red-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
-            } else if (phWarning) {
-                phText.className = "text-5xl font-black tracking-tighter text-amber-600";
-                phBox.className = "p-6 rounded-2xl border-2 border-amber-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
-            } else {
-                phText.className = "text-5xl font-black tracking-tighter text-emerald-600";
-                phBox.className = "p-6 rounded-2xl border-2 border-emerald-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300";
-            }
+            const phBox = document.getElementById('phBox'), phText = document.getElementById('phResult'), osmBox = document.getElementById('osmBox');
+            if (phDanger) { phText.className = "text-5xl font-black tracking-tighter text-rose-600"; phBox.className = "p-6 rounded-2xl border-2 border-red-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300"; }
+            else if (phWarning) { phText.className = "text-5xl font-black tracking-tighter text-amber-600"; phBox.className = "p-6 rounded-2xl border-2 border-amber-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300"; }
+            else { phText.className = "text-5xl font-black tracking-tighter text-emerald-600"; phBox.className = "p-6 rounded-2xl border-2 border-emerald-300 bg-white/90 shadow-sm flex flex-col justify-center items-center text-center transition-all duration-300"; }
 
             renderModalDetails({ mainFlow, mainPh, mainOsm, hMain, s1, s2, totalFlow, finalPhMin, finalPhMax, finalOsm, totalHMixMax: tHMax, totalHMixMin: tHMin });
         }
@@ -648,8 +676,7 @@
             const flowTerms = [data.mainFlow];
             if (data.s1.flow > 0) flowTerms.push(data.s1.flow);
             if (data.s2.flow > 0) flowTerms.push(data.s2.flow);
-            const flowFormula = flowTerms.join(" + ");
-
+            
             const osmTerms = [`(${data.mainFlow} × ${data.mainOsm})`];
             if (data.s1.flow > 0) osmTerms.push(`(${data.s1.flow} × ${data.s1.osm.toFixed(2)})`);
             if (data.s2.flow > 0) osmTerms.push(`(${data.s2.flow} × ${data.s2.osm.toFixed(2)})`);
@@ -657,17 +684,8 @@
             const phMinTerms = [`${data.mainFlow} × 10<sup>-${data.mainPh}</sup>`];
             const phMaxTerms = [`${data.mainFlow} × 10<sup>-${data.mainPh}</sup>`];
 
-            if (data.s1.flow > 0) {
-                phMinTerms.push(`${data.s1.flow} × 10<sup>-${data.s1.phMin.toFixed(2)}</sup>`);
-                phMaxTerms.push(`${data.s1.flow} × 10<sup>-${data.s1.phMax.toFixed(2)}</sup>`);
-            }
-            if (data.s2.flow > 0) {
-                phMinTerms.push(`${data.s2.flow} × 10<sup>-${data.s2.phMin.toFixed(2)}</sup>`);
-                phMaxTerms.push(`${data.s2.flow} × 10<sup>-${data.s2.phMax.toFixed(2)}</sup>`);
-            }
-
-            const avgHMaxExp = (data.totalHMixMax / data.totalFlow).toExponential(3);
-            const avgHMinExp = (data.totalHMixMin / data.totalFlow).toExponential(3);
+            if (data.s1.flow > 0) { phMinTerms.push(`${data.s1.flow} × 10<sup>-${data.s1.phMin.toFixed(2)}</sup>`); phMaxTerms.push(`${data.s1.flow} × 10<sup>-${data.s1.phMax.toFixed(2)}</sup>`); }
+            if (data.s2.flow > 0) { phMinTerms.push(`${data.s2.flow} × 10<sup>-${data.s2.phMin.toFixed(2)}</sup>`); phMaxTerms.push(`${data.s2.flow} × 10<sup>-${data.s2.phMax.toFixed(2)}</sup>`); }
 
             container.innerHTML = `
                 <div class="calc-card">
@@ -693,7 +711,7 @@
                 <div class="calc-card">
                     <div class="card-step-badge">STEP 2</div>
                     <h4 class="font-bold text-sky-300 text-sm mb-2">合流部 全流量の算出</h4>
-                    <div class="math-box">全流量 Q<sub>total</sub> = ${flowFormula} = <span class="text-sky-400 font-bold">${data.totalFlow} mL/h</span></div>
+                    <div class="math-box">全流量 Q<sub>total</sub> = ${flowTerms.join(" + ")} = <span class="text-sky-400 font-bold">${data.totalFlow} mL/h</span></div>
                 </div>
                 <div class="calc-card gradient-border-purple">
                     <div class="card-step-badge purple">STEP 3</div>
@@ -710,14 +728,14 @@
                         <div class="ph-calc-card">
                             <div class="text-xs font-bold text-emerald-400 mb-1">■ 酸性側 (pH Low) 算出過程</div>
                             <div class="code-line text-[11px] mb-2">Σ([H⁺] × Q) = ${phMinTerms.join(" + ")}</div>
-                            <div class="text-xs text-slate-300">平均 [H⁺]: <span class="font-mono text-emerald-300">${avgHMaxExp} mol/L</span></div>
-                            <div class="text-xs text-slate-300 mt-1">pH = -log₁₀(${avgHMaxExp}) = <strong class="text-emerald-400 font-bold">${data.finalPhMin.toFixed(2)}</strong></div>
+                            <div class="text-xs text-slate-300">平均 [H⁺]: <span class="font-mono text-emerald-300">${(data.totalHMixMax / data.totalFlow).toExponential(3)} mol/L</span></div>
+                            <div class="text-xs text-slate-300 mt-1">pH = -log₁₀([H⁺]) = <strong class="text-emerald-400 font-bold">${data.finalPhMin.toFixed(2)}</strong></div>
                         </div>
                         <div class="ph-calc-card">
                             <div class="text-xs font-bold text-emerald-400 mb-1">■ アルカリ側 (pH High) 算出過程</div>
                             <div class="code-line text-[11px] mb-2">Σ([H⁺] × Q) = ${phMaxTerms.join(" + ")}</div>
-                            <div class="text-xs text-slate-300">平均 [H⁺]: <span class="font-mono text-emerald-300">${avgHMinExp} mol/L</span></div>
-                            <div class="text-xs text-slate-300 mt-1">pH = -log₁₀(${avgHMinExp}) = <strong class="text-emerald-400 font-bold">${data.finalPhMax.toFixed(2)}</strong></div>
+                            <div class="text-xs text-slate-300">平均 [H⁺]: <span class="font-mono text-emerald-300">${(data.totalHMixMin / data.totalFlow).toExponential(3)} mol/L</span></div>
+                            <div class="text-xs text-slate-300 mt-1">pH = -log₁₀([H⁺]) = <strong class="text-emerald-400 font-bold">${data.finalPhMax.toFixed(2)}</strong></div>
                         </div>
                     </div>
                 </div>
