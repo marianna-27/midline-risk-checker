@@ -158,10 +158,10 @@
                                 </select>
                             </div>
                             
-                            <!-- 凍結乾燥製剤用ガイド -->
+                            <!-- 凍結乾燥製剤用 溶解ガイド -->
                             <div id="freezeDriedGuide1" class="hidden p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700 font-bold flex items-center gap-2">
                                 <span class="text-base">💡</span>
-                                <span id="freezeDriedText1">凍結乾燥製剤: 規定量で溶解した状態をベースとします</span>
+                                <span id="freezeDriedText1">規定量で溶解した状態をベースとします</span>
                             </div>
 
                             <div id="dilutionAmountArea1" class="grid grid-cols-2 gap-3">
@@ -228,10 +228,10 @@
                                 </select>
                             </div>
                             
-                            <!-- 凍結乾燥製剤用ガイド -->
+                            <!-- 凍結乾燥製剤用 溶解ガイド -->
                             <div id="freezeDriedGuide2" class="hidden p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700 font-bold flex items-center gap-2">
                                 <span class="text-base">💡</span>
-                                <span id="freezeDriedText2">凍結乾燥製剤: 規定量で溶解した状態をベースとします</span>
+                                <span id="freezeDriedText2">規定量で溶解した状態をベースとします</span>
                             </div>
 
                             <div id="dilutionAmountArea2" class="grid grid-cols-2 gap-3">
@@ -321,7 +321,7 @@
         const DILUENT_SPECS = {
             none: { name: "なし", ph: null, osm: null },
             saline: { name: "生食", ph: 6.0, osm: 1.0 },
-            glucose5: { name: "5%ツッカー", ph: 4.5, osm: 1.0 },
+            glucose5: { name: "5%ブドウ糖", ph: 4.5, osm: 1.0 },
             water: { name: "注水", ph: 6.0, osm: 0.0 }
         };
 
@@ -464,12 +464,13 @@
             if (isNoneDiluent) { side.dilVol.value = 0; side.dilVol.disabled = true; } 
             else { side.dilVol.disabled = false; }
 
-            // 凍結乾燥製剤のUI切り替えロジック
+            // 凍結乾燥製剤向けの2段階UI（溶解 → 希釈）
             if (!isNoneDrug) {
                 const drug = allDrugsData.find(d => d.id_name === side.drugSel.value);
                 if (drug && drug.is_freeze_dried) {
                     side.volLabel.textContent = "溶解後液量 (mL)";
-                    side.guideText.textContent = drug.reconstitute_info || "凍結乾燥製剤: 規定量で溶解した状態をベースとします";
+                    // JSONからガイドテキストを取得（例："日局注射用水 5mL"）
+                    side.guideText.textContent = drug.reconstitute_info || "規定量で溶解した状態をベースとします";
                     side.guideBox.classList.remove('hidden');
                 } else {
                     side.volLabel.textContent = "薬剤原液 (mL)";
@@ -497,10 +498,12 @@
         });
         [mainFlowInput, mainPhInput, mainOsmInput].forEach(i => i.addEventListener('input', updateCalculation));
 
+        // ★ 2段階調製に対応したスペック計算ロジック
         function calcSideSpecs(side) {
             if (side.drugSel.value === 'none' || allDrugsData.length === 0) return { flow: 0, name: "未選択" };
             const drug = allDrugsData.find(d => d.id_name === side.drugSel.value);
             if (!drug) return { flow: 0, name: "未選択" };
+            
             const flow = parseFloat(side.flow.value) || 0;
             if (flow === 0) return { flow: 0, name: drug.id_name };
 
@@ -509,39 +512,46 @@
             const totalVol = drugVol + dilVol;
             if (totalVol === 0 && dilKey === 'none') return { flow: 0, name: drug.id_name };
 
-            const dPhMin = drug.ph_min !== undefined ? parseFloat(drug.ph_min) : 6.0;
-            const dPhMax = drug.ph_max !== undefined ? parseFloat(drug.ph_max) : 6.0;
-            const osmSpec = getDrugOsmSpec(drug);
-            const missingTag = osmSpec.isMissing ? '<span class="text-rose-500 font-bold ml-1">(※未定義:1.0で試算)</span>' : '';
+            // 1. ベース（原液・溶解液）のプロパティを決定
+            let basePhMin, basePhMax, baseOsm, basePhRaw, baseOsmRaw;
+            
+            if (drug.is_freeze_dried) {
+                // 凍結乾燥製剤の場合、JSON上の「reconstituted_〇〇」をベース（原液）として扱う
+                basePhMin = drug.reconstituted_ph_min !== undefined ? parseFloat(drug.reconstituted_ph_min) : parseFloat(drug.reconstituted_ph || 6.0);
+                basePhMax = drug.reconstituted_ph_max !== undefined ? parseFloat(drug.reconstituted_ph_max) : parseFloat(drug.reconstituted_ph || 6.0);
+                baseOsm = drug.reconstituted_osm !== undefined ? parseFloat(drug.reconstituted_osm) : 1.0;
+                basePhRaw = drug.reconstituted_ph_raw || `${basePhMin.toFixed(1)}～${basePhMax.toFixed(1)} (${drug.reconstitute_info_short || '溶解時'})`;
+                baseOsmRaw = drug.reconstituted_osm_raw || `約${baseOsm.toFixed(1)}`;
+            } else {
+                // 通常製剤の場合
+                basePhMin = drug.ph_min !== undefined ? parseFloat(drug.ph_min) : 6.0;
+                basePhMax = drug.ph_max !== undefined ? parseFloat(drug.ph_max) : 6.0;
+                const osmSpec = getDrugOsmSpec(drug);
+                baseOsm = osmSpec.osmVal;
+                basePhRaw = drug.ph_raw || `${basePhMin.toFixed(1)}～${basePhMax.toFixed(1)}`;
+                baseOsmRaw = osmSpec.osmRaw;
+            }
 
             let phMin, phMax, osm, hMin, hMax;
 
-            const targetDiluent = drug.default_diluent || 'water';
-            const isReconstitutedMatch = (drug.reconstituted_ph !== undefined || drug.reconstituted_ph_min !== undefined) && dilKey === targetDiluent;
-
-            if (isReconstitutedMatch && dilVol > 0) {
-                phMin = drug.reconstituted_ph_min !== undefined ? parseFloat(drug.reconstituted_ph_min) : parseFloat(drug.reconstituted_ph);
-                phMax = drug.reconstituted_ph_max !== undefined ? parseFloat(drug.reconstituted_ph_max) : parseFloat(drug.reconstituted_ph);
-                osm = drug.reconstituted_osm !== undefined ? parseFloat(drug.reconstituted_osm) : osmSpec.osmVal;
-
-                hMin = Math.pow(10, -phMin);
-                hMax = Math.pow(10, -phMax);
-
-                const dilName = dilSpec ? dilSpec.name : "溶解液";
-                const phText = (phMin === phMax) ? phMin.toFixed(1) : `${phMin.toFixed(2)}～${phMax.toFixed(2)}`;
-                side.info.innerHTML = `<div class="text-blue-700 font-bold">溶解後 (${dilName} ${dilVol}mL): pH ${phText} | 浸透圧比 約${osm.toFixed(1)}</div>`;
-            } else if (dilKey === 'none' || dilVol === 0) {
-                phMin = dPhMin; phMax = dPhMax; osm = osmSpec.osmVal; 
+            // 2. 希釈液（補液）との混注計算
+            if (dilKey === 'none' || dilVol === 0) {
+                // 希釈なし（原液または溶解液のまま投与）
+                phMin = basePhMin; phMax = basePhMax; osm = baseOsm; 
                 hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax);
-                side.info.innerHTML = `<strong>原液:</strong> pH ${drug.ph_raw || `${dPhMin}～${dPhMax}`} | 浸透圧比 ${osmSpec.osmRaw}${missingTag}`;
+                side.info.innerHTML = `<strong>原液:</strong> pH ${basePhRaw} | 浸透圧比 ${baseOsmRaw}`;
             } else {
-                const hMixMax = (Math.pow(10, -dPhMin) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / (totalVol || 1);
-                const hMixMin = (Math.pow(10, -dPhMax) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / (totalVol || 1);
+                // 希釈あり（生食 50mL などに混注）
+                const hMixMax = (Math.pow(10, -basePhMin) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / (totalVol || 1);
+                const hMixMin = (Math.pow(10, -basePhMax) * drugVol + Math.pow(10, -dilSpec.ph) * dilVol) / (totalVol || 1);
+                
                 phMin = Math.min(-Math.log10(hMixMax), -Math.log10(hMixMin)); 
                 phMax = Math.max(-Math.log10(hMixMax), -Math.log10(hMixMin));
                 hMin = Math.pow(10, -phMin); hMax = Math.pow(10, -phMax); 
-                osm = (osmSpec.osmVal * drugVol + dilSpec.osm * dilVol) / (totalVol || 1);
-                side.info.innerHTML = `<div><strong>原液:</strong> pH ${drug.ph_raw || `${dPhMin}～${dPhMax}`} | 浸透圧比 ${osmSpec.osmRaw}${missingTag}</div><div class="mt-1 pt-1 border-t border-slate-200 text-blue-700 font-medium">希釈後: pH ${phMin.toFixed(2)} ～ ${phMax.toFixed(2)} | 浸透圧比 ${osm.toFixed(2)}</div>`;
+                osm = (baseOsm * drugVol + dilSpec.osm * dilVol) / (totalVol || 1);
+                
+                side.info.innerHTML = `<div><strong>原液:</strong> pH ${basePhRaw} | 浸透圧比 ${baseOsmRaw}</div>
+                                       <div class="mt-1 pt-1 border-t border-slate-200 text-blue-700 font-medium">希釈後: pH ${phMin.toFixed(2)} ～ ${phMax.toFixed(2)} | 浸透圧比 ${osm.toFixed(2)}</div>`;
             }
 
             return { flow, phMin, phMax, hMin, hMax, osm, name: drug.id_name, isDiluted: (dilKey !== 'none' && dilVol > 0) };
@@ -672,11 +682,11 @@
                         </div>
                         <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-700/60">
                             <div class="text-purple-400 font-bold mb-1">側管 1 (${data.s1.name})</div>
-                            ${data.s1.flow > 0 ? `<div>流量: <strong class="text-white">${data.s1.flow} mL/h</strong></div><div>pH: <strong class="text-white">${data.s1.phMin.toFixed(2)} ～ ${data.s1.phMax.toFixed(2)}</strong></div><div>浸透圧比: <strong class="text-white">${data.s1.osm.toFixed(2)}</strong> ${data.s1.isDiluted ? '<span class="text-purple-300">(※溶解/希釈後)</span>' : ''}</div>` : '<div class="text-slate-500 italic mt-2">停止 / 未使用</div>'}
+                            ${data.s1.flow > 0 ? `<div>流量: <strong class="text-white">${data.s1.flow} mL/h</strong></div><div>pH: <strong class="text-white">${data.s1.phMin.toFixed(2)} ～ ${data.s1.phMax.toFixed(2)}</strong></div><div>浸透圧比: <strong class="text-white">${data.s1.osm.toFixed(2)}</strong> ${data.s1.isDiluted ? '<span class="text-purple-300">(※混注・希釈後)</span>' : ''}</div>` : '<div class="text-slate-500 italic mt-2">停止 / 未使用</div>'}
                         </div>
                         <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-700/60">
                             <div class="text-emerald-400 font-bold mb-1">側管 2 (${data.s2.name})</div>
-                            ${data.s2.flow > 0 ? `<div>流量: <strong class="text-white">${data.s2.flow} mL/h</strong></div><div>pH: <strong class="text-white">${data.s2.phMin.toFixed(2)} ～ ${data.s2.phMax.toFixed(2)}</strong></div><div>浸透圧比: <strong class="text-white">${data.s2.osm.toFixed(2)}</strong> ${data.s2.isDiluted ? '<span class="text-emerald-300">(※溶解/希釈後)</span>' : ''}</div>` : '<div class="text-slate-500 italic mt-2">停止 / 未使用</div>'}
+                            ${data.s2.flow > 0 ? `<div>流量: <strong class="text-white">${data.s2.flow} mL/h</strong></div><div>pH: <strong class="text-white">${data.s2.phMin.toFixed(2)} ～ ${data.s2.phMax.toFixed(2)}</strong></div><div>浸透圧比: <strong class="text-white">${data.s2.osm.toFixed(2)}</strong> ${data.s2.isDiluted ? '<span class="text-emerald-300">(※混注・希釈後)</span>' : ''}</div>` : '<div class="text-slate-500 italic mt-2">停止 / 未使用</div>'}
                         </div>
                     </div>
                 </div>

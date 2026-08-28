@@ -1701,17 +1701,18 @@
     "default_vol": 10.0
   },
   {
-    "id_name": "イダマイシン静注用[5mg]",
-    "is_freeze_dried": true,
-    "reconstitute_info": "日局注射用水 5mL",
-    "base_vol": 5.0,
-    "ph_min": 5.0,
-    "ph_max": 7.0,
-    "ph_raw": "5.0~7.0 (5mL溶解時)",
-    "osm_val": 0.1,
-    "osm_raw": "約0.1",
-    "default_diluent": "saline",
-    "default_diluent_vol": 50.0
+  "id_name": "イダマイシン静注用[5mg]",
+  "is_freeze_dried": true,
+  "reconstitute_info": "日局注射用水 5mL",
+  "reconstitute_info_short": "5mL溶解時",
+  "reconstituted_ph_min": 5.0,
+  "reconstituted_ph_max": 7.0,
+  "reconstituted_osm": 0.1,
+  "reconstituted_ph_raw": "5.0～7.0 (5mL溶解時)",
+  "reconstituted_osm_raw": "約0.1",
+  "default_diluent": "saline",
+  "default_drug_vol": 1,
+  "default_diluent_vol": 50
   },
   {
     "id_name": "イデルビオン静注用[1000単位]",
