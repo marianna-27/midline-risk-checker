@@ -157,9 +157,16 @@
                                     <option value="water">注射用水 (pH 6.0 / 浸透圧比 0.0)</option>
                                 </select>
                             </div>
+                            
+                            <!-- 凍結乾燥製剤用ガイド -->
+                            <div id="freezeDriedGuide1" class="hidden p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700 font-bold flex items-center gap-2">
+                                <span class="text-base">💡</span>
+                                <span id="freezeDriedText1">凍結乾燥製剤: 規定量で溶解した状態をベースとします</span>
+                            </div>
+
                             <div id="dilutionAmountArea1" class="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label class="block text-[11px] font-bold text-slate-500 mb-1">薬剤原液 (mL)</label>
+                                    <label id="drugVolLabel1" class="block text-[11px] font-bold text-slate-500 mb-1">薬剤原液 (mL)</label>
                                     <input type="number" id="drugVol1" value="1" min="0" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
                                 </div>
                                 <div>
@@ -220,9 +227,16 @@
                                     <option value="water">注射用水 (pH 6.0 / 浸透圧比 0.0)</option>
                                 </select>
                             </div>
+                            
+                            <!-- 凍結乾燥製剤用ガイド -->
+                            <div id="freezeDriedGuide2" class="hidden p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700 font-bold flex items-center gap-2">
+                                <span class="text-base">💡</span>
+                                <span id="freezeDriedText2">凍結乾燥製剤: 規定量で溶解した状態をベースとします</span>
+                            </div>
+
                             <div id="dilutionAmountArea2" class="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label class="block text-[11px] font-bold text-slate-500 mb-1">薬剤原液 (mL)</label>
+                                    <label id="drugVolLabel2" class="block text-[11px] font-bold text-slate-500 mb-1">薬剤原液 (mL)</label>
                                     <input type="number" id="drugVol2" value="1" min="0" step="0.1" class="modern-input w-full p-2 text-sm rounded-lg outline-none">
                                 </div>
                                 <div>
@@ -424,20 +438,47 @@
 
         function getSideElements(idx) {
             return {
-                drugSel: document.getElementById(`drugSelect${idx}`), dilSel: document.getElementById(`diluentSelect${idx}`),
-                drugVol: document.getElementById(`drugVol${idx}`), dilVol: document.getElementById(`diluentVol${idx}`),
-                flow: document.getElementById(`sideFlow${idx}`), info: document.getElementById(`drugSingleInfo${idx}`),
-                area: document.getElementById(`dilutionAmountArea${idx}`), detailArea: document.getElementById(`sideDetail${idx}`)
+                drugSel: document.getElementById(`drugSelect${idx}`), 
+                dilSel: document.getElementById(`diluentSelect${idx}`),
+                drugVol: document.getElementById(`drugVol${idx}`), 
+                dilVol: document.getElementById(`diluentVol${idx}`),
+                flow: document.getElementById(`sideFlow${idx}`), 
+                info: document.getElementById(`drugSingleInfo${idx}`),
+                area: document.getElementById(`dilutionAmountArea${idx}`), 
+                detailArea: document.getElementById(`sideDetail${idx}`),
+                volLabel: document.getElementById(`drugVolLabel${idx}`),
+                guideBox: document.getElementById(`freezeDriedGuide${idx}`),
+                guideText: document.getElementById(`freezeDriedText${idx}`)
             };
         }
 
         function updateUIState(idx) {
             const side = getSideElements(idx);
             const isNoneDrug = side.drugSel.value === 'none';
-            side.detailArea.classList.toggle('opacity-30', isNoneDrug); side.detailArea.classList.toggle('pointer-events-none', isNoneDrug);
+            side.detailArea.classList.toggle('opacity-30', isNoneDrug); 
+            side.detailArea.classList.toggle('pointer-events-none', isNoneDrug);
+            
             const isNoneDiluent = side.dilSel.value === 'none';
-            side.area.classList.toggle('opacity-30', isNoneDiluent); side.area.classList.toggle('pointer-events-none', isNoneDiluent);
-            if (isNoneDiluent) { side.dilVol.value = 0; side.dilVol.disabled = true; } else { side.dilVol.disabled = false; }
+            side.area.classList.toggle('opacity-30', isNoneDiluent); 
+            side.area.classList.toggle('pointer-events-none', isNoneDiluent);
+            if (isNoneDiluent) { side.dilVol.value = 0; side.dilVol.disabled = true; } 
+            else { side.dilVol.disabled = false; }
+
+            // 凍結乾燥製剤のUI切り替えロジック
+            if (!isNoneDrug) {
+                const drug = allDrugsData.find(d => d.id_name === side.drugSel.value);
+                if (drug && drug.is_freeze_dried) {
+                    side.volLabel.textContent = "溶解後液量 (mL)";
+                    side.guideText.textContent = drug.reconstitute_info || "凍結乾燥製剤: 規定量で溶解した状態をベースとします";
+                    side.guideBox.classList.remove('hidden');
+                } else {
+                    side.volLabel.textContent = "薬剤原液 (mL)";
+                    side.guideBox.classList.add('hidden');
+                }
+            } else {
+                side.volLabel.textContent = "薬剤原液 (mL)";
+                side.guideBox.classList.add('hidden');
+            }
         }
 
         const side1 = getSideElements(1), side2 = getSideElements(2);
